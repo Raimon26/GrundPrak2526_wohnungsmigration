@@ -1,5 +1,51 @@
 ---
-title: "presentation"
-format: html
+title: "Presentation"
+author: "Christian, Dennis, Harry, Heinz"
+format:
+   revealjs:
+     transition: slide
+editor: visual
 ---
 
+## Verzeichnis
+
+# 1. Einführung in Wohnungsmigration
+
+## 1.1 Fragestellung
+
+-   Was sollen wir tun
+-   Welche Fragen sind zu beantworten
+
+## 1.2 Hintergrundinformationen
+
+-   25 stadtbezirke
+
+-   Um- Zu- und Abzüge aus München
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+## Graphics
+
+```{r}
+library(ggplot2)
+ggplot(mtcars, aes(x = mpg, y = hp)) +
+  geom_point() +
+  theme_light()
+```
