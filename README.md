@@ -1,7 +1,7 @@
 # GrundPrak2526_wohnungsmigration
 
 ## 🚀 Projektrollen & Verantwortlichkeiten
-Grundlegendes Praxisprojekt: Migration in München
+### Grundlegendes Praxisprojekt: Migration in München
 
 🛠️ 1. Data Wrangler (Daten-Aufbereiter)
 **Mission**: Die Rohdaten bändigen. Das ist die Person, die sich mit NAs und Datumsformaten herumschlägt und dafür sorgt, dass die Struktur stimmt.
