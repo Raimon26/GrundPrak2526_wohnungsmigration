@@ -25,11 +25,11 @@
 
 ⚠️ Wichtiger Hinweis: Auch wenn wir die Hauptaufgaben so aufteilen, müssen wir alle vier den gesamten Prozess kennen und mündlich präsentieren. Diese Aufteilung dient nur dazu, dass wir uns beim Code nicht in die Quere kommen und klare Verantwortlichkeiten haben.
 
+---
 
-
-🛤️ Kritischer Pfad & Paralleles Arbeiten (Migration in München)
-Phase 1: Die parallele Basisarbeit (Tag 1–4)
-Ziel: Niemand wartet auf den anderen. Alle bereiten ihre Baustellen vor.
+# 🛤️ Kritischer Pfad & Paralleles Arbeiten (Migration in München)
+## Phase 1: Die parallele Basisarbeit (Tag 1–4)
+**Ziel: Niemand wartet auf den anderen. Alle bereiten ihre Baustellen vor.**
 
 🧹 Heinz (Data Wrangling): * Dateien: Die 22 Rohdateien + env_setup.R
 
@@ -59,8 +59,8 @@ Baut die Grundstruktur in der presentation.qmd auf und nutzt das PDF-Beispiel, u
 
 🚩 MEILENSTEIN 1: Der "Clean Dataframe" steht. Heinz übergibt die sauberen Daten an das Team.
 
-Phase 2: Analyse & Visualisierung (Tag 5–8)
-Ziel: Die echten Daten werden durch die vorbereiteten Schablonen gejagt.
+## Phase 2: Analyse & Visualisierung (Tag 5–8)
+**Ziel: Die echten Daten werden durch die vorbereiteten Schablonen gejagt.**
 
 🧮 Harry & 🧹 Heinz: * Wenden Harrys Formeln auf Heinz' Daten an. Identifizieren die tatsächlichen Ausreißer und checken die Plausibilität (Können diese Zahlen stimmen?).
 
@@ -74,8 +74,8 @@ Dennis beginnt, die Ergebnisse in die Story der .qmd-Präsentation (max. 15 Foli
 
 🚩 MEILENSTEIN 2: Alle Grafiken und statistischen Berechnungen sind final und fehlerfrei.
 
-Phase 3: Storytelling & Dokumentation (Tag 9–13)
-Ziel: Das Produkt wird abgabefertig gemacht.
+## Phase 3: Storytelling & Dokumentation (Tag 9–13)
+**Ziel: Das Produkt wird abgabefertig gemacht.**
 
 🎨 Christian: Schreibt den Text für das 1-seitige Executive Summary (orientiert sich strikt an der Executive Summary - KoCo19 Kinder.pdf Vorlage).
 
@@ -87,8 +87,8 @@ Ziel: Das Produkt wird abgabefertig gemacht.
 
 🚩 MEILENSTEIN 3: Slides und Summary sind fertig. Keine Änderungen mehr am Code.
 
-Phase 4: Proben (Tag 14–15)
-Ziel: Präsentationstechnik optimieren.
+## Phase 4: Proben (Tag 14–15)
+**Ziel: Präsentationstechnik optimieren.**
 
 Alle (Heinz, Harry, Christian, Dennis):
 
