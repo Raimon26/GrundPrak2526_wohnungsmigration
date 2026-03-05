@@ -15,7 +15,7 @@ saubere_namen <- c("von_bezirk", paste0("nach_bezirk_", 1:25), "muenchen_gesamt"
 umzuege_gesamt <- excel_pfade %>%
   set_names() %>% 
   map_dfr(~ read_excel(.x, 
-                       skip = 5,                  
+                       skip = 4,                  
                        col_names = FALSE,         # R vergibt automatisch ...1, ...2
                        col_types = "text"),       
           .id = "datei_pfad")
@@ -55,4 +55,3 @@ glimpse(umzuege_clean)
 
 # Das saubere Dataframe für den Rest des Teams speichern
 write_rds(umzuege_clean, "Data/umzuege_clean.rds")
-
