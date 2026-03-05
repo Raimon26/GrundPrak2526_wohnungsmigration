@@ -54,4 +54,53 @@ umzuege_clean <- umzuege_gesamt %>%
 glimpse(umzuege_clean) 
 
 # Das saubere Dataframe für den Rest des Teams speichern
-write_rds(umzuege_clean, "Data/umzuege_clean.rds")
+
+
+# 6. Datensätze von Dichte und Mobilität bereinigen
+
+glimpse(bevoelkerungsdichte)
+glimpse(mobilitaetsziffer)
+
+
+# --- 6.1. Bevölkerungsdichte und Einwohnerzahl (Forschungsfrage 3) ---
+dichte_clean <- bevoelkerungsdichte %>%
+  mutate(
+    jahr = Jahr,
+    von_bezirk = as.numeric(str_extract(Raumbezug, "^\\d{2}")),
+    dichte = Indikatorwert,
+    einwohner = Basiswert.1 # Gesamtbevölkerung (Hauptwohnsitz)
+  ) %>%
+  filter(Ausprägung == "insgesamt", !is.na(von_bezirk)) %>%
+  select(jahr, von_bezirk, dichte, einwohner)
+
+# --- 6.2. Mobilität und Nationalität (Forschungsfragen 1 und 2) ---
+mobilitaet_clean <- mobilitaetsziffer %>%
+  mutate(
+    jahr = Jahr,
+    von_bezirk = as.numeric(str_extract(Raumbezug, "^\\d{2}"))
+  ) %>%
+  filter(!is.na(von_bezirk)) %>%
+  # Spalten entsprechend der Projektanforderungen umbenennen
+  rename(
+    zuzuege_aussen = Basiswert.1,  # Zuzüge von außerhalb Münchens
+    umzuege_innen = Basiswert.2,   # Umzüge innerhalb Münchens
+    wegzuege_aussen = Basiswert.3, # Wegzüge nach außerhalb Münchens
+    wegzuege_innen = Basiswert.4   # Wegzüge in einen anderen Stadtbezirk
+  ) %>%
+  select(jahr, von_bezirk, Ausprägung, zuzuege_aussen, umzuege_innen, wegzuege_aussen, wegzuege_innen) %>%
+  # DIE MAGIE: Daten vom Long- ins Wide-Format transformieren (Pivot)
+  pivot_wider(
+    names_from = Ausprägung, 
+    values_from = c(zuzuege_aussen, umzuege_innen, wegzuege_aussen, wegzuege_innen),
+    names_sep = "_"
+  )
+
+
+# Umzugsmatrix (Von-Nach-Beziehungen der 25 Bezirke)
+write_rds(umzuege_clean, "Data/umzuege_matrix.rds")
+
+# Bevölkerungsdichte und Einwohnerentwicklung (Für Forschungsfrage 3)
+write_rds(dichte_clean, "Data/indikatoren_dichte.rds")
+
+# Mobilität nach Nationalität (Für Forschungsfragen 1 und 2)
+write_rds(mobilitaet_clean, "Data/indikatoren_mobilitaet.rds")
