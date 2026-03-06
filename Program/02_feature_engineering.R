@@ -49,7 +49,7 @@ umzuege_clean %>%
   filter(value < 0)
 
 # 4. Sind irgendwelche NAs vorhanden?
-sum(is.na(umzuege_clean2))
+sum(is.na(umzuege_clean))
 sum(is.na(indikatoren_mobilitaet))
 
 
