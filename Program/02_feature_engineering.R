@@ -34,21 +34,21 @@ write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
 message("✅ Feature Engineering abgeschlossen: Die Kategorie 'bezirk_typ' wurde in alle Datensätze integriert!")
 
 
-
-# 1. ¿Hay algún año fuera de lugar? (Debería ser 2005 a 2024)
+#Kleine Checks zur Überprüfung der Funktionalität unserer Datensätze
+# 1. Irgendein Jahr ausserhalb unseres Ranges? (Debería ser 2005 a 2024)
 range(indikatoren_dichte$jahr)
 
-# 2. ¿Hay alguna población o densidad negativa? (Deberían ser todas >= 0)
+# 2. Negative Bevölkerung oder Dichte? (Alle sollten >= 0)
 min(indikatoren_dichte$einwohner)
 min(indikatoren_dichte$dichte)
 
-# 3. ¿Alguien ha metido mudanzas negativas por error?
+# 3. Hat irgendjemand negative Umzüge hinzugefügt? 
 umzuege_clean %>% 
   summarise(across(starts_with("nach"), min)) %>% 
   pivot_longer(everything()) %>% 
   filter(value < 0)
 
-# 4. ¿Hay valores faltantes (NAs) que se nos hayan escapado en la matriz?
+# 4. Sind irgendwelche NAs vorhanden?
 sum(is.na(umzuege_clean2))
 sum(is.na(indikatoren_mobilitaet))
 
