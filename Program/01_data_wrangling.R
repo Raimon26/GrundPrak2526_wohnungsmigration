@@ -36,6 +36,7 @@ umzuege_clean <- umzuege_gesamt %>%
     jahr = as.numeric(str_extract(datei_pfad, "(?<=jt)\\d{2}")) + 1999,
     across(von_bezirk:muenchen_gesamt, as.numeric)
   ) %>%
+  mutate(muenchen_gesamt = rowSums(pick(starts_with("nach")))) %>% # 6. Spalten sinnvoll anordnen
   select(jahr, von_bezirk, starts_with("nach"), muenchen_gesamt)
 
 # Das finale, saubere Meisterwerk betrachten!
@@ -56,7 +57,7 @@ dichte_clean <- bevoelkerungsdichte %>%
     dichte = Indikatorwert,
     einwohner = Basiswert.1 # Gesamtbevölkerung (Hauptwohnsitz)
   ) %>%
-  filter(Ausprägung == "insgesamt", !is.na(von_bezirk)) %>%
+  filter(Ausprägung == "insgesamt", !is.na(von_bezirk), jahr >= 2005) %>%
   select(jahr, von_bezirk, dichte, einwohner)
 
 # --- 6.2. Mobilität und Nationalität (Forschungsfragen 1 und 2) ---
@@ -65,7 +66,7 @@ mobilitaet_clean <- mobilitaetsziffer %>%
     jahr = Jahr,
     von_bezirk = as.numeric(str_extract(Raumbezug, "^\\d{2}"))
   ) %>%
-  filter(!is.na(von_bezirk)) %>%
+  filter(!is.na(von_bezirk), jahr >= 2005) %>%
   rename(
     zuzuege_aussen = Basiswert.1,  # Zuzüge von außerhalb Münchens
     umzuege_innen = Basiswert.2,   # Umzüge innerhalb Münchens
@@ -82,10 +83,12 @@ mobilitaet_clean <- mobilitaetsziffer %>%
 
 
 # Umzugsmatrix (Von-Nach-Beziehungen der 25 Bezirke)
-write_rds(umzuege_clean, "Data/umzuege_matrix.rds")
+write_rds(umzuege_clean, "Data/umzuege_clean.rds")
 
 # Bevölkerungsdichte und Einwohnerentwicklung (Für Forschungsfrage 3)
 write_rds(dichte_clean, "Data/indikatoren_dichte.rds")
 
 # Mobilität nach Nationalität (Für Forschungsfragen 1 und 2)
 write_rds(mobilitaet_clean, "Data/indikatoren_mobilitaet.rds")
+
+# probe <- umzuege_clean |> select(-jahr, -von_bezirk,-muenchen_gesamt) |> mutate(hola = rowSums(across(everything())))
