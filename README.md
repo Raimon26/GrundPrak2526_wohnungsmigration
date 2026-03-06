@@ -1,5 +1,30 @@
 # GrundPrak2526_wohnungsmigration
 
+# 📊 Migration in München - Datenanalyse
+
+## 🛠️ Nutzung (How to run)
+Bevor Analysen oder Grafiken erstellt werden, muss immer das Skript `env_setup.R` im Hauptverzeichnis ausgeführt werden. (oder source("env_setup.R") aufrufen!)
+Dieses Skript:
+1. Installiert und lädt alle benötigten Pakete (tidyverse, readr, etc.).
+2. Lädt automatisch die sauberen, aufbereiteten Datensätze (`.rds`) aus dem `Data/`-Ordner in das R-Environment.
+
+## 📂 Ordnerstruktur
+* **`Data/`**: Enthält die rohen Excel-/CSV-Dateien des Rathauses sowie die sauberen `.rds`-Dateien (Tidy Data).
+* **`env_setup.R`**: Das Herzstück für den Datenimport. (s.o.)
+* **`01_datenbereinigung.R`**: Skript zur Bereinigung der 22 Rohdateien (NAs behandeln, fehlerhafte Summen korrigieren, Pivotierung).
+* **`02_feature_engineering.R`**: Skript zur Kategorisierung der 25 Stadtbezirke (Zentrum, Innenstadt-Rand, Peripherie).
+
+## 📖 Daten-Wörterbuch (Data Dictionary)
+Um Missverständnisse bei der Analyse zu vermeiden, hier die Definition der wichtigsten Variablen in unseren sauberen Datensätzen:
+* `zuzuege_aussen`: Personen, die von außerhalb Münchens in einen Bezirk gezogen sind.
+* `umzuege_innen`: Personen, die von einem anderen Münchner Bezirk in diesen Bezirk gezogen sind.
+* `wegzuege_aussen`: Personen, die den Bezirk verlassen haben und ganz aus München weggezogen sind.
+* `wegzuege_innen`: Personen, die den Bezirk verlassen haben, aber innerhalb Münchens geblieben sind.
+* `dichte`: Bevölkerungsdichte (Einwohner pro Quadratkilometer).
+* `bezirk_typ`: Geografische/Strukturelle Klassifizierung des Bezirks (Zentrum, Innenstadt-Rand, Peripherie).
+
+---
+
 ## 🚀 Projektrollen & Verantwortlichkeiten
 ### Grundlegendes Praxisprojekt: Migration in München
 
