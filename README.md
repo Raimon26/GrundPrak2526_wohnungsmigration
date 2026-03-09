@@ -13,6 +13,7 @@ Dieses Skript:
 * **`env_setup.R`**: Das Herzstück für den Datenimport. (s.o.)
 * **`01_datenbereinigung.R`**: Skript zur Bereinigung der 22 Rohdateien (NAs behandeln, fehlerhafte Summen korrigieren, Pivotierung).
 * **`02_feature_engineering.R`**: Skript zur Kategorisierung der 25 Stadtbezirke (Zentrum, Innenstadt-Rand, Peripherie).
+* **`03_eda_tabellen.R`**: Explorative Datenanalyse (EDA) zur ersten Auswertung von Basis-Statistiken und visuellen Identifikation von Ausreißern (Boxplots).
 
 ## 📖 Daten-Wörterbuch (Data Dictionary)
 Um Missverständnisse bei der Analyse zu vermeiden, hier die Definition der wichtigsten Variablen in unseren sauberen Datensätzen:
