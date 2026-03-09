@@ -55,3 +55,24 @@ sum(is.na(indikatoren_mobilitaet))
 
 umzuege_clean |> filter(if_any(everything(), is.na)) |> select(jahr, von_bezirk)
 
+
+# Dataset für Christian (gleiche Daten, aber in Long Format)
+
+# Wir filtern die "insgesamt" Spalten raus, da Chris nur deutsch/nichtdeutsch 
+# für sein facet_wrap braucht.
+indikatoren_mobilitaet_long_plot <- indikatoren_mobilitaet %>%
+  select(jahr, von_bezirk, bezirk_typ, matches("_(deutsch|nichtdeutsch)$")) %>%
+  pivot_longer(
+    cols = matches("_(deutsch|nichtdeutsch)$"),
+    names_to = c("bewegungsart", "nationalitaet"),
+    names_pattern = "(.*)_(deutsch|nichtdeutsch)",
+    values_to = "anzahl_personen"
+  ) %>%
+  # Kleine Kosmetik: Namen schöner machen für die Plot-Titel
+  mutate(
+    nationalitaet = str_to_title(nationalitaet)
+  )
+
+saveRDS(indikatoren_mobilitaet_long_plot, "Data/indikatoren_mobilitaet_long_plot.rds")
+
+message("✅ Datensatz für Christians facet_wrap erfolgreich als .rds gespeichert!")
