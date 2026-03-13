@@ -9,7 +9,8 @@
 packages <- c(
   "tidyverse",  # Datenmanipulation und ggplot2
   "readxl",     # Excel-Import
-  "readr"       # RDS- und CSV-Import
+  "readr",      # RDS- und CSV-Import
+  "sf"          # NEU: Für Geodaten und Karten!
 )
 
 # 2. Pakete automatisch installieren (falls nötig) und laden
