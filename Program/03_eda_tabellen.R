@@ -22,26 +22,38 @@ tab_bewegung_typ <- indikatoren_mobilitaet %>%
 print(tab_bewegung_typ)
 
 # --- C. Visuelle Ausreißer-Erkennung (Für Harrys "Bullshit-Check") ---
-# Ein simpler Boxplot für Harry. Dieser soll dir dabei helfen, die extremen Werte 
-# zu lokalisieren, 
-# BEVOR du die mathematische Formel (z.B. IQR) festlegst.
-boxplot_zuzuege <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_aussen_insgesamt, fill = bezirk_typ)) +
+# TEAM-INFO: Hier testen wir die drei verschiedenen Gruppierungen, 
+# um zu sehen, welche die Ausreißer und Trends am besten erklärt.
+
+# 1. Boxplot nach Zentrum/Peripherie (Unser Original)
+boxplot_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_aussen_insgesamt, fill = bezirk_typ)) +
   geom_boxplot(alpha = 0.7) +
   theme_minimal() +
-  labs(
-    title = "Verteilung der Zuzüge nach Bezirkstyp",
-    subtitle = "Die Punkte außerhalb der 'Antennen' (Whiskers) sind potenzielle Ausreißer",
-    y = "Anzahl Zuzüge von außen",
-    x = "Bezirkstyp"
-  ) +
+  labs(title = "Option 1: Zuzüge nach Bezirkstyp (Zentrum vs. Peripherie)", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
+# 2. Boxplot nach Dichte-Kategorie (Vorschlag der Betreuerin)
+boxplot_dichte <- ggplot(indikatoren_mobilitaet, aes(x = dichte_kategorie, y = zuzuege_aussen_insgesamt, fill = dichte_kategorie)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Option 2: Zuzüge nach Bevölkerungsdichte", y = "Zuzüge", x = "") +
+  theme(legend.position = "none")
 
-print(boxplot_zuzuege)
+# 3. Boxplot nach Himmelsrichtung (Nord/Süd/Ost/West/Mitte)
+boxplot_himmel <- ggplot(indikatoren_mobilitaet, aes(x = himmelsrichtung, y = zuzuege_aussen_insgesamt, fill = himmelsrichtung)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Option 3: Zuzüge nach Himmelsrichtung", y = "Zuzüge", x = "") +
+  theme(legend.position = "none")
+
+# Zeige alle drei an (Harry kann sie im 'Plots' Fenster von RStudio durchblättern)
+print(boxplot_typ)
+print(boxplot_dichte)
+print(boxplot_himmel)
 
 # --- D. PLATZHALTER FÜR HARRY FILTER-LOGIK ---
-# TODO für Harry: Wenn du dich für eine Methode entschieden hast (z.B. Mean + 2*SD), 
-# schreibe deinen Code hier rein, um die tatsächlichen Ausreißer zu extrahieren.
+# TODO für Harry: Schau dir die 3 Boxplots an. Welche Gruppierung erklärt die Daten am besten?
+# Wenn du dich entschieden hast, schreibe deine Filter-Formel hier rein (z.B. Mean + 2*SD).
 
 # ausreisser_tabelle <- indikatoren_mobilitaet %>%
 #   filter(zuzuege_aussen > DEINE_FORMEL_HIER)

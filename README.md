@@ -12,8 +12,9 @@ Dieses Skript:
 * **`Data/`**: Enthält die rohen Excel-/CSV-Dateien des Rathauses sowie die sauberen `.rds`-Dateien (Tidy Data).
 * **`env_setup.R`**: Das Herzstück für den Datenimport. (s.o.)
 * **`01_datenbereinigung.R`**: Skript zur Bereinigung der 22 Rohdateien (NAs behandeln, fehlerhafte Summen korrigieren, Pivotierung).
-* **`02_feature_engineering.R`**: Skript zur Kategorisierung der 25 Stadtbezirke (Zentrum, Innenstadt-Rand, Peripherie).
-* **`03_eda_tabellen.R`**: Explorative Datenanalyse (EDA) zur ersten Auswertung von Basis-Statistiken und visuellen Identifikation von Ausreißern (Boxplots).
+* **`02_feature_engineering.R`**: Skript zur Kategorisierung der 25 Stadtbezirke (Zentrum/Peripherie, Dichte-Kategorien, Himmelsrichtungen).
+* **`03_eda_tabellen.R`**: Explorative Datenanalyse (EDA) zur ersten Auswertung von Basis-Statistiken und visuellen Identifikation von Ausreißern (Vergleich von 3 verschiedenen Gruppierungen via Boxplots).
+* **`04_geodaten_vorbereitung.R`**: Bereinigung des GeoJSON-Kartenmaterials von München und Verknüpfung (Join) mit unseren sauberen Dichte-Daten für räumliche Visualisierungen (Choropleth Maps).
 
 ## 📖 Daten-Wörterbuch (Data Dictionary)
 Um Missverständnisse bei der Analyse zu vermeiden, hier die Definition der wichtigsten Variablen in unseren sauberen Datensätzen:
@@ -23,6 +24,8 @@ Um Missverständnisse bei der Analyse zu vermeiden, hier die Definition der wich
 * `wegzuege_innen`: Personen, die den Bezirk verlassen haben, aber innerhalb Münchens geblieben sind.
 * `dichte`: Bevölkerungsdichte (Einwohner pro Quadratkilometer).
 * `bezirk_typ`: Geografische/Strukturelle Klassifizierung des Bezirks (Zentrum, Innenstadt-Rand, Peripherie).
+* `dichte_kategorie`: Einteilung der Bezirke in tertiäre Gruppen basierend auf der Bevölkerungsdichte (Geringe, Mittlere, Hohe Dichte).
+* `himmelsrichtung`: Geografische Lage des Bezirks (Nord, Süd, Ost, West, Mitte).
 
 ---
 
