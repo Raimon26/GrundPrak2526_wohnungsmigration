@@ -1,0 +1,56 @@
+/*-- scss:defaults --*/
+// Variablen definieren (Farben, Schriften)
+$theme-blue: #005a94;
+$theme-orange: #e67e22;
+$body-bg: #ffffff;
+$body-color: #2c3e50;
+$font-family-sans-serif: "Segoe UI", Roboto, sans-serif;
+
+/*-- scss:rules --*/
+// Design Regeln
+
+.reveal {
+  // Alles innerhalb der präsentation...
+  
+  .slides {
+    background-color: $body-bg;
+  }
+
+  h1, h2 {
+    color: $theme-blue;
+    font-weight: 700;
+    text-transform: none;
+    border-bottom: 2px solid $theme-blue;
+    padding-bottom: 10px;
+  }
+
+  // Grafiken maximieren
+  section img {
+    max-width: 95%;
+    max-height: 75vh;
+    margin: 10px auto;
+    display: block;
+    border: none;
+    box-shadow: none;
+  }
+
+  // Footer Styling
+  .footer {
+    font-size: 0.5em;
+    color: #bdc3c7;
+  }
+  .slide-logo {
+  height: 100px !important;
+  width: 100px!important;
+  max-width: unset !important;
+  max-height: unset !important;
+  top: 14px !important;
+  right: 50px !important;
+}
+}
+
+// Eigene Hilfsklasse fuer den Lock-in-Effekt im Text
+.highlight {
+  color: $theme-orange;
+  font-weight: bold;
+}
