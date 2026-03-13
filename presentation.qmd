@@ -12,25 +12,35 @@ format:
      logo: "Images/LMU_Logo.svg"
 editor: visual
 ---
-
 ## Agenda
 
-- 1. Überblick
-- 2. Datenanalyse
-- 3. Zusammenfassung
+-   
 
+    1.  Überblick
+
+-   
+
+    2.  Datenanalyse
+
+-   
+
+    3.  Zusammenfassung
 
 ## 1.1 Fragestellung
-:::incremental
+
+::: incremental
 -   Was sollen wir tun
 -   Welche Fragen sind zu beantworten
 :::
+
 ## 1.2 Hintergrundinformationen
-:::incremental
+
+::: incremental
 -   25 stadtbezirke
 
 -   Um- Zu- und Abzüge aus München
 :::
+
 ## Quarto
 
 Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
