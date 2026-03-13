@@ -28,8 +28,8 @@ indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
 
 # Die angereicherten Datensätze speichern (überschreibt die alten Dateien im Data-Ordner)
 write_rds(umzuege_clean, "Data/umzuege_clean.rds")
-write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
+write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 
 message("✅ Feature Engineering abgeschlossen: Die Kategorie 'bezirk_typ' wurde in alle Datensätze integriert!")
 
@@ -76,3 +76,57 @@ indikatoren_mobilitaet_long_plot <- indikatoren_mobilitaet %>%
 saveRDS(indikatoren_mobilitaet_long_plot, "Data/indikatoren_mobilitaet_long_plot.rds")
 
 message("✅ Datensatz für Christians facet_wrap erfolgreich als .rds gespeichert!")
+
+# Neue Gruppierung: Wir teilen die Bezirke basierend auf ihrer Dichte in 3 gleich große Gruppen auf
+
+indikatoren_dichte <- indikatoren_dichte %>%
+  group_by(jahr) %>%
+  mutate(
+    # ntile(dichte, 3) teilt die Werte automatisch in 3 Gruppen (1=niedrig, 3=hoch)
+    dichte_level = ntile(dichte, 3), 
+    dichte_kategorie = case_when(
+      dichte_level == 1 ~ "Geringe Dichte",
+      dichte_level == 2 ~ "Mittlere Dichte",
+      dichte_level == 3 ~ "Hohe Dichte"
+    )
+  ) %>%
+  ungroup() %>% select(-dichte_level)
+
+# Neue Gruppierung: Himmelsrichtungen (Norden, Süden, Osten, Westen, Mitte) ---
+
+indikatoren_dichte <- indikatoren_dichte %>%
+  mutate(
+    himmelsrichtung = case_when(
+      # Mitte (Altstadt, Ludwigsvorstadt, Maxvorstadt, Schwabing-West, Au-Haidhausen, Schwanthalerhöhe)
+      von_bezirk %in% c(1, 2, 3, 4, 5, 8) ~ "Mitte",
+      # Nord (Moosach, Milbertshofen, Schwabing-Freimann, Feldmoching)
+      von_bezirk %in% c(10, 11, 12, 24) ~ "Nord",
+      # Ost (Bogenhausen, Berg am Laim, Trudering, Ramersdorf)
+      von_bezirk %in% c(13, 14, 15, 16) ~ "Ost",
+      # Süd (Sendling, Obergiesing, Untergiesing, Thalkirchen, Hadern)
+      von_bezirk %in% c(6, 17, 18, 19, 20) ~ "Süd",
+      # West (Sendling-Westpark, Neuhausen, Pasing, Aubing, Allach, Laim)
+      von_bezirk %in% c(7, 9, 21, 22, 23, 25) ~ "West",
+      TRUE ~ "Unbekannt" 
+    )
+  )
+
+# indikatoren_dichte |> filter(himmelsrichtung == "Unbekannt")
+
+
+# Übertragung der neuen Features auf die Mobilitätsdaten
+
+indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
+  left_join(
+    # Wir 'selecten' nur die Keys und die neuen Features, um keine doppelten Spalten zu erzeugen
+    indikatoren_dichte %>% select(jahr, von_bezirk, dichte_kategorie, himmelsrichtung), 
+    by = c("jahr", "von_bezirk")
+  )
+
+glimpse(indikatoren_mobilitaet)
+
+# Überschreiben BEIDER Master-Dateien
+write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
+write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
+
+message("✅ Feature Engineering komplett! Features wurden auf beide Datensätze angewendet und gespeichert.")
