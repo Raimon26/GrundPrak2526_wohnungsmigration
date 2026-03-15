@@ -53,7 +53,29 @@ print(boxplot_himmel)
 
 # --- D. PLATZHALTER FÜR HARRY FILTER-LOGIK ---
 # TODO für Harry: Schau dir die 3 Boxplots an. Welche Gruppierung erklärt die Daten am besten?
-# Wenn du dich entschieden hast, schreibe deine Filter-Formel hier rein (z.B. Mean + 2*SD).
+# Entscheidung zur Gruppierung:
+# Die Gruppierung nach Bezirkstyp (Zentrum / Peripherie / Innenstadt-Rand)
+# erscheint am sinnvollsten für die weitere Analyse.
+# In den Boxplots zeigen sich hier die klarsten Unterschiede in der Verteilung
+# der Zuzüge, und die Ergebnisse lassen sich auch inhaltlich gut interpretieren
+# (z.B. Unterschiede zwischen zentralen und peripheren Stadtlagen).
+#
+# Die Gruppierung nach Bevölkerungsdichte zeigt teilweise ein ähnliches Muster,
+# überschneidet sich jedoch stark mit der Peripherie.
+# Bei den Himmelsrichtungen sind dagegen keine klaren Unterschiede erkennbar.
+#
+# Daher verwenden wir den Bezirkstyp als Hauptstruktur für die weitere Analyse.
 
-# ausreisser_tabelle <- indikatoren_mobilitaet %>%
-#   filter(zuzuege_aussen > DEINE_FORMEL_HIER)
+# Wenn du dich entschieden hast, schreibe deine Filter-Formel hier rein (z.B. Mean + 2*SD).
+# Definition der Ausreißer:
+# Ausreißer werden anhand der IQR-Regel definiert (wie im Boxplot).
+# Werte größer als Q3 + 1.5 * IQR gelten als Ausreißer.
+Q1 <- quantile(indikatoren_mobilitaet$zuzuege_aussen_insgesamt, 0.25, na.rm = TRUE)
+Q3 <- quantile(indikatoren_mobilitaet$zuzuege_aussen_insgesamt, 0.75, na.rm = TRUE)
+IQR_value <- Q3 - Q1
+
+threshold <- Q3 + 1.5 * IQR_value
+
+ausreisser_tabelle <- indikatoren_mobilitaet %>%
+  filter(zuzuege_aussen_insgesamt > threshold)
+
