@@ -10,11 +10,13 @@ Dieses Skript:
 
 ## 📂 Ordnerstruktur
 * **`Data/`**: Enthält die rohen Excel-/CSV-Dateien des Rathauses sowie die sauberen `.rds`-Dateien (Tidy Data).
+* **`Output/`**: Speicherort für die finalen, hochauflösenden Präsentations-Grafiken (.png).
 * **`env_setup.R`**: Das Herzstück für den Datenimport. (s.o.)
 * **`01_datenbereinigung.R`**: Skript zur Bereinigung der 22 Rohdateien (NAs behandeln, fehlerhafte Summen korrigieren, Pivotierung).
 * **`02_feature_engineering.R`**: Skript zur Kategorisierung der 25 Stadtbezirke (Zentrum/Peripherie, Dichte-Kategorien, Himmelsrichtungen).
 * **`03_eda_tabellen.R`**: Explorative Datenanalyse (EDA) zur ersten Auswertung von Basis-Statistiken und visuellen Identifikation von Ausreißern (Vergleich von 3 verschiedenen Gruppierungen via Boxplots).
 * **`04_geodaten_vorbereitung.R`**: Bereinigung des GeoJSON-Kartenmaterials von München und Verknüpfung (Join) mit unseren sauberen Dichte-Daten für räumliche Visualisierungen (Choropleth Maps).
+* **`05_visualisierungen_final.R`**: Finale Generierung und automatischer Export der Zeitreihen-Plots und der Choropleth Maps mittels ggplot2.
 
 ## 📖 Daten-Wörterbuch (Data Dictionary)
 Um Missverständnisse bei der Analyse zu vermeiden, hier die Definition der wichtigsten Variablen in unseren sauberen Datensätzen:
