@@ -51,6 +51,32 @@ plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_
 
 print(plot_umzuege)
 
+# --- HIGHLIGHT-VERSION MIT DIREKTEN LABELS (Der "Direct Labeling" Trick) ---
+
+plot_zuzuege_highlight <- plot_zuzuege +
+  # Bezirk 12 (Schwabing-Freimann / Bayernkaserne) in Dunkelrot
+  geom_line(data = mobilitaet_long_plot %>% 
+              filter(bewegungsart == "zuzuege_aussen", von_bezirk == 12), 
+            aes(group = von_bezirk), color = "darkred", linewidth = 0.5) +
+  
+  # Bezirk 19 (Obersendling / Alte EAE) in Orange
+  geom_line(data = mobilitaet_long_plot %>% 
+              filter(bewegungsart == "zuzuege_aussen", von_bezirk == 19), 
+            aes(group = von_bezirk), color = "darkorange", linewidth = 0.5) +
+  
+  geom_text(data = data.frame(jahr = 2013, anzahl_personen = 13000, nationalitaet = "Nichtdeutsch"),
+            label = "Bezirk 19\n(Obersendling)", color = "darkorange", fontface = "bold", vjust = 0) +
+  
+  geom_text(data = data.frame(jahr = 2022, anzahl_personen = 12500, nationalitaet = "Nichtdeutsch"),
+            label = "Bezirk 12\n(Schwabing-Freimann)", color = "darkred", fontface = "bold", vjust = 0) +
+  labs(
+    title = "Der wandernde Schock: Zuzüge nach München (2005-2024)",
+    subtitle = "Grau: Einzelne Bezirke | Bunt: Durchschnitt | Hervorgehoben: EAE"
+  )
+
+print(plot_zuzuege_highlight)
+
+
 # --- FREE_Y VERSIONEN ERSTELLEN (Der "Zoom-In" Effekt) ---
 # Wir nehmen den fertigen Plot und überschreiben nur den Facet-Wrap!
 
@@ -230,6 +256,10 @@ dir.create("Output", showWarnings = FALSE)
 # 1. Zuzüge
 ggsave("Output/01a_zeitreihe_zuzuege.png", plot = plot_zuzuege, width = 12, height = 6, dpi = 300, bg = "white")
 ggsave("Output/01b_zeitreihe_zuzuege_free_y.png", plot = plot_zuzuege_free, width = 12, height = 6, dpi = 300, bg = "white")
+
+# Highlight-Plot exportieren
+ggsave("Output/01c_zeitreihe_zuzuege_HIGHLIGHT.png", plot = plot_zuzuege_highlight, 
+       width = 12, height = 6, dpi = 300, bg = "white")
 
 # 2. Umzüge
 ggsave("Output/02a_zeitreihe_umzuege.png", plot = plot_umzuege, width = 12, height = 6, dpi = 300, bg = "white")
