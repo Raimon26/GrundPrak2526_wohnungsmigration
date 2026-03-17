@@ -1,6 +1,4 @@
-# Frage 3
 
-# Zeitreihenplot zur Bevölkerungsentwicklung
 
 # --- Arbeitsumgebung laden ---
 source("env_setup.R")
@@ -8,16 +6,19 @@ library(ggplot2)
 library(tidyverse)
 library(scales)
 
+# Frage 3
 
-#1. Daten laden
+# 1. Zeitreihenplot zur Bevölkerungsentwicklung 
+
+# 1.1 Daten laden
 data_bev<- indikatoren_dichte
 
-# 2. Durchschnittswerte pro Jahr und Bezirkstyp berechnen
+# 1.2 Durchschnittswerte pro Jahr und Bezirkstyp berechnen
 typ_summary <- data_bev %>%
   group_by(jahr, bezirk_typ) %>%
   summarise(BEV_AVG = mean(einwohner, na.rm = TRUE), .groups = "drop")
 
-# 3. Der kombinierte Plot
+# 1.3 Der kombinierte Plot
 bev_entw_plot <- ggplot() +
   # Hintergrund: Alle 25 Bezirke als dezente graue Linien
   geom_line(data = data_bev, 
@@ -50,21 +51,22 @@ bev_entw_plot <- ggplot() +
     y = "Einwohner",
     color = "Bezirkstyp:"
   )
+
 print(bev_entw_plot)
 
 
-# Zeitreihenplot zur Dichtenentwicklung
+# 2.Zeitreihenplot zur Dichtenentwicklung
 
-# 1. Daten laden 
+# 2.1 Daten laden 
 data_dichte <- indikatoren_dichte
 
-# 2. Daten aggregieren für die Durchschnittslinien der Dichte
+# 2.2 Daten aggregieren für die Durchschnittslinien der Dichte
 
 typ_dichte_summary <- data_dichte %>%
   group_by(jahr, bezirk_typ) %>%
   summarise(DICHTE_AVG = mean(dichte, na.rm = TRUE), .groups = "drop")
 
-# 2. Der Plot
+# 2.3 Der Plot
 dichte_entw_plot <- ggplot() +
   # Hintergrund: Alle Bezirke (Cloud)
   geom_line(data = data_dichte, 
@@ -85,7 +87,7 @@ dichte_entw_plot <- ggplot() +
   
   theme_lockin() +
   labs(
-    title = "Entwicklung der Siedlungsdichte in München",
+    title = "Entwicklung der Siedlungsdichte in München(2005-2024)",
     subtitle = "Einwohner pro km²(: Zentrum verdichtet sich am stärksten)",
     x = "Jahr",
     y = "Einwohner / km²",
@@ -93,5 +95,17 @@ dichte_entw_plot <- ggplot() +
   )
 
 print(dichte_entw_plot)
+
+# --- BILDER EXPORTIEREN ---
+
+
+# 1. Zeitreihenplot zur Bevölkerungsentwicklung
+ggsave("Output/07_zeitreihe_Bevoelkerungs_entwicklung.png", plot = bev_entw_plot, 
+       width = 10, height = 6, dpi = 300, bg = "white")
+
+# 2.Zeitreihenplot zur Dichtenentwicklung
+ggsave("Output/08_zeitreihe_Dichte_entwicklung.png", plot = dichte_entw_plot, 
+       width = 10, height = 6, dpi = 300, bg = "white")
+
 
 
