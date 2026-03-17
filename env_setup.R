@@ -12,7 +12,8 @@ packages <- c(
   "readr",      # RDS- und CSV-Import
   "sf",         # NEU: Für Geodaten und Karten!
   "dplyr",
-  "tidyr"
+  "tidyr",
+  "scales"
 )
 
 # 2. Pakete automatisch installieren (falls nötig) und laden
