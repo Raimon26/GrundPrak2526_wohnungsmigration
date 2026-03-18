@@ -1,25 +1,13 @@
 # --- 05_visualisierungen_final.R ---
 source("env_setup.R")
+library(dplyr)
+library(tidyr)
 library(ggplot2)
+library(scales)
 library(sf)
 
-# 1. CHOROPLETH-KARTE (Dichte 2024)
-karte_mit_daten <- readRDS("Data/muenchen_karte_fertig.rds")
 
-plot_karte <- ggplot(karte_mit_daten) +
-  geom_sf(aes(fill = dichte), color = "white", linewidth = 0.3) +
-  # Eine schöne Farbpalette wählen (viridis ist perfekt für Dichte)
-  scale_fill_viridis_c(option = "magma", direction = -1) + 
-  theme_void() +
-  labs(
-    title = "Bevölkerungsdichte in München (2024)",
-    subtitle = "Je dunkler, desto dichter besiedelt",
-    fill = "Einw. pro km²"
-  )
-
-print(plot_karte)
-
-# 2. ZEITREIHEN: ZU- UND UMZÜGE (Facet nach Nationalität)
+# 1 & 2. ZEITREIHEN: ZU- UND UMZÜGE (Facet nach Nationalität)
 # Wir nutzen unser erstelltes Long-Format!
 mobilitaet_long_plot <- readRDS("Data/indikatoren_mobilitaet_long_plot.rds")
 
@@ -31,7 +19,7 @@ plot_zuzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "zuzuege_
   stat_summary(aes(color = bezirk_typ), fun = mean, geom = "line", linewidth = 1.2) +
   facet_wrap(~nationalitaet) + # scales = "free_y" (zum Einzoomen) setzen!
   theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
+  scale_color_viridis_d(option = "D", end = 0.8) +
   labs(
     title = "Entwicklung der Zuzüge nach München (2005-2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
@@ -51,7 +39,7 @@ plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_
   stat_summary(aes(color = bezirk_typ), fun = mean, geom = "line", linewidth = 1.2) +
   facet_wrap(~nationalitaet) + # scales = "free_y" (zum Einzoomen) setzen!
   theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
+  scale_color_viridis_d(option = "D", end = 0.8) +
   labs(
     title = "Entwicklung der Umzüge innerhalb München (2005-2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
@@ -74,28 +62,192 @@ plot_umzuege_free <- plot_umzuege +
   facet_wrap(~nationalitaet, scales = "free_y") +
   labs(subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt (Zoom / Free Y-Achse)")
 
-# (Für die Wegzüge / Plot 2 kannst du, Harry, exakt denselben Code-Block kopieren 
-# und einfach den Filter auf bewegungsart == "wegzuege_aussen" ändern!)
+
+# 3. BOXPLOT: Verteilung der Zuzüge (Zentrum vs. Peripherie)
+plot_zuzuege_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_aussen_insgesamt, fill = bezirk_typ)) +
+  geom_boxplot(alpha = 0.8, outlier.color = "red", outlier.size = 2) +
+  theme_minimal() +
+  scale_fill_viridis_d(option = "D") + # Paleta accesible (Viridis)
+  labs(
+    title = "Verteilung der Zuzüge nach Bezirkstyp",
+    subtitle = "Zentrum, Innenstadtrand und Peripherie im Vergleich",
+    x = "Bezirkstyp",
+    y = "Anzahl der Zuzüge (von außerhalb)"
+  ) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold")
+  )
+
+print(plot_zuzuege_typ)
+
+# Berechnung der Ausreißer (IQR-Methode) für den Bericht
+Q1 <- quantile(indikatoren_mobilitaet$zuzuege_aussen_insgesamt, 0.25, na.rm = TRUE)
+Q3 <- quantile(indikatoren_mobilitaet$zuzuege_aussen_insgesamt, 0.75, na.rm = TRUE)
+IQR_value <- Q3 - Q1
+threshold <- Q3 + 1.5 * IQR_value
+
+ausreisser_tabelle <- indikatoren_mobilitaet %>%
+  filter(zuzuege_aussen_insgesamt > threshold) %>%
+  select(jahr, von_bezirk, bezirk_typ, zuzuege_aussen_insgesamt) %>%
+  arrange(desc(zuzuege_aussen_insgesamt))
+
+# Print der Tabelle zur Kontrolle
+print(ausreisser_tabelle)
+
+
+# 4. ZEITREIHEN: WEGZÜGE (Facet nach Bewegungsart)
+
+indikatoren_mobilitaet_long <- indikatoren_mobilitaet %>%
+  pivot_longer(
+    cols = c(wegzuege_innen_insgesamt, wegzuege_aussen_insgesamt),
+    names_to = "bewegungsart",
+    values_to = "anzahl_personen"
+  )
+
+plot_wegzuege <- ggplot(
+  indikatoren_mobilitaet_long,
+  aes(x = jahr, y = anzahl_personen)
+) +
+  
+  geom_line(aes(group = von_bezirk), color = "grey80", alpha = 0.5, linewidth = 0.5) +
+  
+  stat_summary(aes(color = bezirk_typ), fun = mean, geom = "line", linewidth = 1.2) +
+  
+  facet_wrap(
+    ~bewegungsart,
+    labeller = labeller(
+      bewegungsart = c(
+        wegzuege_innen_insgesamt = "Innerhalb München",
+        wegzuege_aussen_insgesamt = "Außerhalb München"
+      )
+    )
+  ) +
+  
+  theme_minimal() +
+  scale_color_viridis_d(option = "D", end = 0.8) +
+  
+  labs(
+    title = "Entwicklung der Wegzüge aus den Münchner Stadtbezirken (2005–2024)",
+    subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
+    x = "Jahr",
+    y = "Anzahl Personen",
+    color = "Bezirkstyp"
+  ) +
+  
+  theme(legend.position = "bottom")
+
+print(plot_wegzuege)
+
+
+# 5. BEVÖLKERUNGSENTWICKLUNG über die ZEIT (Chris)
+
+# Durchschnittswerte pro Jahr und Bezirkstyp berechnen
+typ_summary <- indikatoren_dichte %>%
+  group_by(jahr, bezirk_typ) %>%
+  summarise(BEV_AVG = mean(einwohner, na.rm = TRUE), .groups = "drop")
+
+plot_entwicklung <- ggplot() +
+  # Hintergrund: Alle 25 Bezirke als dezente graue Linien
+  geom_line(data = indikatoren_dichte, 
+            aes(x = jahr, y = einwohner, group = von_bezirk), 
+            color = "grey85", linewidth = 0.5, alpha = 0.5) +
+  # Vordergrund: Die 3 Durchschnittslinien für die Bezirkstypen
+  geom_line(data = typ_summary, 
+            aes(x = jahr, y = BEV_AVG, color = bezirk_typ), 
+            linewidth = 1.2) +
+  # Achsen-Formatierung (Tausender-Punkte)
+  scale_y_continuous(labels = label_number(big.mark = ".", decimal.mark = ",")) +
+  # Unser Projekt-Theme & barrierefreie Farben
+  theme_minimal() +
+  scale_color_viridis_d(option = "D", end = 0.8) + 
+  labs(
+    title = "Bevölkerungsentwicklung in München (2005-2024)",
+    subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
+    x = "Jahr",
+    y = "Einwohner",
+    color = "Bezirkstyp"
+  ) +
+  theme(legend.position = "bottom")
+
+print(plot_entwicklung)
+
+# 6. BEVÖLKERUNGSDICHTE
+# Daten aggregieren für die Durchschnittslinien der Dichte
+typ_dichte_summary <- indikatoren_dichte %>%
+  group_by(jahr, bezirk_typ) %>%
+  summarise(DICHTE_AVG = mean(dichte, na.rm = TRUE), .groups = "drop")
+
+plot_dichte <- ggplot() +
+  # Hintergrund: Alle Bezirke
+  geom_line(data = indikatoren_dichte, 
+            aes(x = jahr, y = dichte, group = von_bezirk), 
+            color = "grey85", linewidth = 0.4, alpha = 0.5) +
+  # Vordergrund: Durchschnittliche Dichte pro Typ
+  geom_line(data = typ_dichte_summary, 
+            aes(x = jahr, y = DICHTE_AVG, color = bezirk_typ), 
+            linewidth = 1.2) +
+  theme_minimal() +
+  scale_color_viridis_d(option = "D", end = 0.8) +
+  labs(
+    title = "Entwicklung der Siedlungsdichte in München (2005-2024)",
+    subtitle = "Einwohner pro km² (Zentrum verdichtet sich am stärksten)",
+    x = "Jahr",
+    y = "Einwohner / km²",
+    color = "Bezirkstyp"
+  ) +
+  theme(legend.position = "bottom")
+
+print(plot_dichte)
+
+# 7. CHOROPLETH-KARTE (Dichte 2024)
+karte_mit_daten <- readRDS("Data/muenchen_karte_fertig.rds")
+
+plot_karte <- ggplot(karte_mit_daten) +
+  geom_sf(aes(fill = dichte), color = "white", linewidth = 0.3) +
+  # Eine schöne Farbpalette wählen (viridis ist perfekt für Dichte)
+  scale_fill_viridis_c(option = "magma", direction = -1) + 
+  theme_void() +
+  labs(
+    title = "Bevölkerungsdichte in München (2024)",
+    subtitle = "Je dunkler, desto dichter besiedelt",
+    fill = "Einw. pro km²"
+  )
+
+print(plot_karte)
+
+
 
 
 # --- BILDER EXPORTIEREN ---
 
+# ==============================================================================
+# 8. PLOTS SPEICHERN (In der von Harry gewünschten Reihenfolge)
+# ==============================================================================
+
 dir.create("Output", showWarnings = FALSE)
 
-# 1. Choropleth-Karte
-ggsave("Output/01_karte_dichte_2024.png", plot = plot_karte, 
-       width = 10, height = 6, dpi = 300, bg = "white")
+# 1. Zuzüge
+ggsave("Output/01a_zeitreihe_zuzuege.png", plot = plot_zuzuege, width = 12, height = 6, dpi = 300, bg = "white")
+ggsave("Output/01b_zeitreihe_zuzuege_free_y.png", plot = plot_zuzuege_free, width = 12, height = 6, dpi = 300, bg = "white")
 
-# 2. Zeitreihen (Feste Skala für den Vergleich der Magnitude)
-ggsave("Output/02_zeitreihe_zuzuege.png", plot = plot_zuzuege, 
-       width = 12, height = 6, dpi = 300, bg = "white")
-ggsave("Output/03_zeitreihe_umzuege.png", plot = plot_umzuege, 
-       width = 12, height = 6, dpi = 300, bg = "white")
+# 2. Umzüge
+ggsave("Output/02a_zeitreihe_umzuege.png", plot = plot_umzuege, width = 12, height = 6, dpi = 300, bg = "white")
+ggsave("Output/02b_zeitreihe_umzuege_free_y.png", plot = plot_umzuege_free, width = 12, height = 6, dpi = 300, bg = "white")
 
-# 3. Zeitreihen ("Free Y" für den "Zoom" auf interne Trends)
-ggsave("Output/04_zeitreihe_zuzuege_free_y.png", plot = plot_zuzuege_free, 
-       width = 12, height = 6, dpi = 300, bg = "white")
-ggsave("Output/05_zeitreihe_umzuege_free_y.png", plot = plot_umzuege_free, 
-       width = 12, height = 6, dpi = 300, bg = "white")
+# 3. Boxplots
+ggsave("Output/03_boxplot_zuzuege_typ.png", plot = plot_zuzuege_typ, width = 8, height = 5, dpi = 300, bg = "white")
 
-message("📸 BÄM! Alle 5 Plots (inklusive Free-Y Zoom) wurden im Ordner 'Output' gespeichert.")
+# 4. Wegzüge
+ggsave("Output/04_zeitreihe_wegzuege.png", plot = plot_wegzuege, width = 12, height = 6, dpi = 300, bg = "white")
+
+# 5. Bevölkerungsentwicklung über die Zeit (Chris - Vorübergehend deaktiviert)
+ggsave("Output/05_bevoelkerungsentwicklung.png", plot = plot_entwicklung, width = 10, height = 6, dpi = 300, bg = "white")
+
+# 6. Bevölkerungsdichte (Chris - Vorübergehend deaktiviert)
+ggsave("Output/06_bevoelkerungsdichte.png", plot = plot_dichte, width = 10, height = 6, dpi = 300, bg = "white")
+
+# 7. Choropleth Map
+ggsave("Output/07_karte_dichte_2024.png", plot = plot_karte, width = 10, height = 6, dpi = 300, bg = "white")
+
+message("📸 BÄM! Alle bereiten Plots wurden im Ordner 'Output' gespeichert.")
