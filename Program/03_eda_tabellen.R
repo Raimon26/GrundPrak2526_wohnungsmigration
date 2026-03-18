@@ -21,35 +21,41 @@ tab_bewegung_typ <- indikatoren_mobilitaet %>%
 
 print(tab_bewegung_typ)
 
-# --- C. Visuelle Ausreißer-Erkennung (Für Harrys "Bullshit-Check") ---
-# TEAM-INFO: Hier testen wir die drei verschiedenen Gruppierungen, 
-# um zu sehen, welche die Ausreißer und Trends am besten erklärt.
+# --- C. Visuelle Ausreißer-Erkennung (Für Methodik & Anhang) ---
 
 # 1. Boxplot nach Zentrum/Peripherie (Unser Original)
 boxplot_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_aussen_insgesamt, fill = bezirk_typ)) +
   geom_boxplot(alpha = 0.7) +
+  scale_fill_viridis_d(option = "D") +
   theme_minimal() +
-  labs(title = "Option 1: Zuzüge nach Bezirkstyp (Zentrum vs. Peripherie)", y = "Zuzüge", x = "") +
+  labs(title = "Zuzüge nach Bezirkstyp (Zentrum vs. Peripherie)", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
 # 2. Boxplot nach Dichte-Kategorie (Vorschlag der Betreuerin)
 boxplot_dichte <- ggplot(indikatoren_mobilitaet, aes(x = dichte_kategorie, y = zuzuege_aussen_insgesamt, fill = dichte_kategorie)) +
   geom_boxplot(alpha = 0.7) +
+  scale_fill_viridis_d(option = "D") +
   theme_minimal() +
-  labs(title = "Option 2: Zuzüge nach Bevölkerungsdichte", y = "Zuzüge", x = "") +
+  labs(title = "Zuzüge nach Bevölkerungsdichte", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
 # 3. Boxplot nach Himmelsrichtung (Nord/Süd/Ost/West/Mitte)
 boxplot_himmel <- ggplot(indikatoren_mobilitaet, aes(x = himmelsrichtung, y = zuzuege_aussen_insgesamt, fill = himmelsrichtung)) +
   geom_boxplot(alpha = 0.7) +
+  scale_fill_viridis_d(option = "D") +
   theme_minimal() +
-  labs(title = "Option 3: Zuzüge nach Himmelsrichtung", y = "Zuzüge", x = "") +
+  labs(title = "Zuzüge nach Himmelsrichtung", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
-# Zeige alle drei an (Harry kann sie im 'Plots' Fenster von RStudio durchblättern)
+# Zeige alle drei an
 print(boxplot_typ)
 print(boxplot_dichte)
 print(boxplot_himmel)
+
+# --- BILDER EXPORTIEREN (FÜR DEN ANHANG / DOKUMENTATION) ---
+ggsave("Output/EDA_boxplot_bezirkstyp.png", plot = boxplot_typ, width = 8, height = 5, dpi = 300, bg = "white")
+ggsave("Output/EDA_boxplot_dichte.png", plot = boxplot_dichte, width = 8, height = 5, dpi = 300, bg = "white")
+ggsave("Output/EDA_boxplot_himmelsrichtung.png", plot = boxplot_himmel, width = 8, height = 5, dpi = 300, bg = "white")
 
 # --- D. PLATZHALTER FÜR HARRY FILTER-LOGIK ---
 # TODO für Harry: Schau dir die 3 Boxplots an. Welche Gruppierung erklärt die Daten am besten?
