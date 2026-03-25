@@ -14,6 +14,7 @@ packages <- c(
   "dplyr",
   "tidyr",
   "scales"
+
 )
 
 # 2. Pakete automatisch installieren (falls nötig) und laden
@@ -33,6 +34,10 @@ for (file in rds_files) {
   var_name <- gsub("\\.rds$", "", basename(file), ignore.case = TRUE)
   assign(var_name, read_rds(file))
 }
+
+ 
+
+
 
 # Erfolgsmeldung in der Konsole ausgeben
 message("✅ Environment erfolgreich eingerichtet! Alle Pakete und sauberen Daten sind geladen. Viel Spaß beim Analysieren!")

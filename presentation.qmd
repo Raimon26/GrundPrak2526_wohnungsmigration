@@ -9,9 +9,10 @@ format:
      footer: "WS 25/26 Grundlegendes Praxisprojekt"
      transition: slide
      slide-number: c
-     logo: "Images/LMU_Logo.svg"
+     logo: "Output/LMU_Logo.svg"
 editor: visual
 ---
+
 ## Agenda
 
 -   

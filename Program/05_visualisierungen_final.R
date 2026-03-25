@@ -2,6 +2,7 @@
 source("env_setup.R")
 library(dplyr)
 library(tidyr)
+library(tidyverse)
 library(ggplot2)
 library(scales)
 library(sf)
@@ -20,6 +21,10 @@ plot_zuzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "zuzuege_
   facet_wrap(~nationalitaet) + # scales = "free_y" (zum Einzoomen) setzen!
   theme_minimal() +
   scale_color_viridis_d(option = "D", end = 0.8) +
+  
+  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  
   labs(
     title = "Entwicklung der Zuzüge nach München (2005-2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
@@ -40,6 +45,10 @@ plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_
   facet_wrap(~nationalitaet) + # scales = "free_y" (zum Einzoomen) setzen!
   theme_minimal() +
   scale_color_viridis_d(option = "D", end = 0.8) +
+  
+  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  
   labs(
     title = "Entwicklung der Umzüge innerhalb München (2005-2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
@@ -56,13 +65,13 @@ print(plot_umzuege)
 
 plot_zuzuege_free <- plot_zuzuege + 
   facet_wrap(~nationalitaet, scales = "free_y") +
-  labs(subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt (Zoom / Free Y-Achse)")
-
+  labs(subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt (Zoom / Free Y-Achse)") 
+ 
 plot_umzuege_free <- plot_umzuege + 
   facet_wrap(~nationalitaet, scales = "free_y") +
-  labs(subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt (Zoom / Free Y-Achse)")
+  labs(subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt (Zoom / Free Y-Achse)") 
 
-
+  
 # 3. BOXPLOT: Verteilung der Zuzüge (Zentrum vs. Peripherie)
 plot_zuzuege_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_aussen_insgesamt, fill = bezirk_typ)) +
   geom_boxplot(alpha = 0.8, outlier.color = "red", outlier.size = 2) +
@@ -127,6 +136,9 @@ plot_wegzuege <- ggplot(
   theme_minimal() +
   scale_color_viridis_d(option = "D", end = 0.8) +
   
+  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  
   labs(
     title = "Entwicklung der Wegzüge aus den Münchner Stadtbezirken (2005–2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
@@ -140,39 +152,62 @@ plot_wegzuege <- ggplot(
 print(plot_wegzuege)
 
 
-# 5. BEVÖLKERUNGSENTWICKLUNG über die ZEIT (Chris)
 
-# Durchschnittswerte pro Jahr und Bezirkstyp berechnen
-typ_summary <- indikatoren_dichte %>%
+# NEU!!
+# 5. Relative BEVÖLKERUNGSENTWICKLUNG über die ZEIT (Chris)
+
+# Index berechnen: Jeder Bezirk startet bei 100 im Jahr 2005
+indikatoren_index <- indikatoren_dichte %>%
+  group_by(von_bezirk) %>%
+  mutate(
+    einwohner_index = (einwohner / einwohner[jahr == min(jahr)]) * 100,
+    dichte_index = (dichte / dichte[jahr == min(jahr)]) * 100
+  ) %>%
+  ungroup()
+
+# Durchschnittswerte der Indizes pro Bezirkstyp berechnen
+typ_summary_index <- indikatoren_index %>%
   group_by(jahr, bezirk_typ) %>%
-  summarise(BEV_AVG = mean(einwohner, na.rm = TRUE), .groups = "drop")
+  summarise(
+    BEV_INDEX_AVG = mean(einwohner_index, na.rm = TRUE),
+    DICHTE_INDEX_AVG = mean(dichte_index, na.rm = TRUE),
+    .groups = "drop"
+  )
 
-plot_entwicklung <- ggplot() +
-  # Hintergrund: Alle 25 Bezirke als dezente graue Linien
-  geom_line(data = indikatoren_dichte, 
-            aes(x = jahr, y = einwohner, group = von_bezirk), 
+plot_entwicklung_index <- ggplot() +
+  # Hintergrund: Alle Bezirke als Index-Linien
+  geom_line(data = indikatoren_index, 
+            aes(x = jahr, y = einwohner_index, group = von_bezirk), 
             color = "grey85", linewidth = 0.5, alpha = 0.5) +
-  # Vordergrund: Die 3 Durchschnittslinien für die Bezirkstypen
-  geom_line(data = typ_summary, 
-            aes(x = jahr, y = BEV_AVG, color = bezirk_typ), 
+  
+  # Vordergrund: Durchschnittlicher Index nach Typ
+  geom_line(data = typ_summary_index, 
+            aes(x = jahr, y = BEV_INDEX_AVG, color = bezirk_typ), 
             linewidth = 1.2) +
-  # Achsen-Formatierung (Tausender-Punkte)
-  scale_y_continuous(labels = label_number(big.mark = ".", decimal.mark = ",")) +
-  # Unser Projekt-Theme & barrierefreie Farben
+  
+  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  
+  # Y-Achse: Start bei 100 (Basisjahr)
+  scale_y_continuous(labels = label_number(suffix =  "%")) +
+  
   theme_minimal() +
   scale_color_viridis_d(option = "D", end = 0.8) + 
   labs(
-    title = "Bevölkerungsentwicklung in München (2005-2024)",
-    subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
+    title = "Relatives Bevölkerungswachstum München (2005-2024) (Basis 2005 = 100%)",
+    subtitle =  "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
-    y = "Einwohner",
+    y = "Wachstum in %",
     color = "Bezirkstyp"
   ) +
   theme(legend.position = "bottom")
 
-print(plot_entwicklung)
+print(plot_entwicklung_index)
 
-# 6. BEVÖLKERUNGSDICHTE
+
+# NEU!! 
+# 6. BEVÖLKERUNGSDICHTE über die Zeit(Chris)
+# 
 # Daten aggregieren für die Durchschnittslinien der Dichte
 typ_dichte_summary <- indikatoren_dichte %>%
   group_by(jahr, bezirk_typ) %>%
@@ -181,17 +216,21 @@ typ_dichte_summary <- indikatoren_dichte %>%
 plot_dichte <- ggplot() +
   # Hintergrund: Alle Bezirke
   geom_line(data = indikatoren_dichte, 
-            aes(x = jahr, y = dichte, group = von_bezirk), 
-            color = "grey85", linewidth = 0.4, alpha = 0.5) +
+            aes(x = jahr, y = dichte, group = von_bezirk, 
+            color = bezirk_typ), linewidth = 0.5, alpha = 0.2) +
   # Vordergrund: Durchschnittliche Dichte pro Typ
   geom_line(data = typ_dichte_summary, 
             aes(x = jahr, y = DICHTE_AVG, color = bezirk_typ), 
             linewidth = 1.2) +
   theme_minimal() +
+  
+  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  
   scale_color_viridis_d(option = "D", end = 0.8) +
   labs(
     title = "Entwicklung der Siedlungsdichte in München (2005-2024)",
-    subtitle = "Einwohner pro km² (Zentrum verdichtet sich am stärksten)",
+    subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Einwohner / km²",
     color = "Bezirkstyp"
@@ -241,8 +280,8 @@ ggsave("Output/03_boxplot_zuzuege_typ.png", plot = plot_zuzuege_typ, width = 8, 
 # 4. Wegzüge
 ggsave("Output/04_zeitreihe_wegzuege.png", plot = plot_wegzuege, width = 12, height = 6, dpi = 300, bg = "white")
 
-# 5. Bevölkerungsentwicklung über die Zeit (Chris - Vorübergehend deaktiviert)
-ggsave("Output/05_bevoelkerungsentwicklung.png", plot = plot_entwicklung, width = 10, height = 6, dpi = 300, bg = "white")
+# 5. Relative Bevölkerungsentwicklung über die Zeit (Chris - Vorübergehend deaktiviert)
+ggsave("Output/05_bevoelkerungsentwicklung.png", plot = plot_entwicklung_index, width = 10, height = 6, dpi = 300, bg = "white")
 
 # 6. Bevölkerungsdichte (Chris - Vorübergehend deaktiviert)
 ggsave("Output/06_bevoelkerungsdichte.png", plot = plot_dichte, width = 10, height = 6, dpi = 300, bg = "white")
