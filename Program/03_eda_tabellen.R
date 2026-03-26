@@ -47,16 +47,54 @@ boxplot_himmel <- ggplot(indikatoren_mobilitaet, aes(x = himmelsrichtung, y = zu
   labs(title = "Zuzüge nach Himmelsrichtung", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
+
+
 # Zeige alle drei an
 print(boxplot_typ)
 print(boxplot_dichte)
 print(boxplot_himmel)
+
+# Umzüge
+# 1. Boxplot nach Zentrum/Peripherie (Unser Original)
+boxplot_typ_um <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = umzuege_innen_insgesamt, fill = bezirk_typ)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_fill_viridis_d(option = "D") +
+  theme_minimal() +
+  labs(title = "Umzüge nach Bezirkstyp (Zentrum vs. Peripherie)", y = "Umzüge", x = "") +
+  theme(legend.position = "none")
+
+# 2. Boxplot nach Dichte-Kategorie (Vorschlag der Betreuerin)
+boxplot_dichte_um <- ggplot(indikatoren_mobilitaet, aes(x = dichte_kategorie, y = umzuege_innen_insgesamt, fill = dichte_kategorie)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_fill_viridis_d(option = "D") +
+  theme_minimal() +
+  labs(title = "Umzüge nach Bevölkerungsdichte", y = "Umzüge", x = "") +
+  theme(legend.position = "none")
+
+# 3. Boxplot nach Himmelsrichtung (Nord/Süd/Ost/West/Mitte)
+boxplot_himmel_um <- ggplot(indikatoren_mobilitaet, aes(x = himmelsrichtung, y = umzuege_innen_insgesamt, fill = himmelsrichtung)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_fill_viridis_d(option = "D") +
+  theme_minimal() +
+  labs(title = "Umzüge nach Himmelsrichtung", y = "Umzüge", x = "") +
+  theme(legend.position = "none")
+
+# Zeige alle drei an
+print(boxplot_typ_um)
+print(boxplot_dichte_um)
+print(boxplot_himmel_um)
+
+
 
 # --- BILDER EXPORTIEREN (FÜR DEN ANHANG / DOKUMENTATION) ---
 ggsave("Output/EDA_boxplot_bezirkstyp.png", plot = boxplot_typ, width = 8, height = 5, dpi = 300, bg = "white")
 ggsave("Output/EDA_boxplot_dichte.png", plot = boxplot_dichte, width = 8, height = 5, dpi = 300, bg = "white")
 ggsave("Output/EDA_boxplot_himmelsrichtung.png", plot = boxplot_himmel, width = 8, height = 5, dpi = 300, bg = "white")
 
+# NEU: Interne Umzüge
+ggsave("Output/EDA_boxplot_bezirkstyp_um.png", plot = boxplot_typ_um, width = 8, height = 5, dpi = 300, bg = "white")
+ggsave("Output/EDA_boxplot_dichte_um.png", plot = boxplot_dichte_um, width = 8, height = 5, dpi = 300, bg = "white")
+ggsave("Output/EDA_boxplot_himmelsrichtung_um.png", plot = boxplot_himmel_um, width = 8, height = 5, dpi = 300, bg = "white")
 # --- D. PLATZHALTER FÜR HARRY FILTER-LOGIK ---
 # TODO für Harry: Schau dir die 3 Boxplots an. Welche Gruppierung erklärt die Daten am besten?
 # Entscheidung zur Gruppierung:

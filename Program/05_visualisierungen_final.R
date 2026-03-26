@@ -71,10 +71,10 @@ plot_zuzuege_highlight <- plot_zuzuege +
   # Bezirk 19 (Obersendling / Alte EAE) in Orange
   geom_line(data = mobilitaet_long_plot %>% 
               filter(bewegungsart == "zuzuege_aussen", von_bezirk == 19), 
-            aes(group = von_bezirk), color = "darkorange", linewidth = 0.5) +
+            aes(group = von_bezirk), color = "black", linewidth = 0.5) +
   
   geom_text(data = data.frame(jahr = 2013, anzahl_personen = 13000, nationalitaet = "Nichtdeutsch"),
-            label = "Bezirk 19\n(Obersendling)", color = "darkorange", fontface = "bold", vjust = 0) +
+            label = "Bezirk 19\n(Obersendling)", color = "black", fontface = "bold", vjust = 0) +
   
   geom_text(data = data.frame(jahr = 2022, anzahl_personen = 12500, nationalitaet = "Nichtdeutsch"),
             label = "Bezirk 12\n(Schwabing-Freimann)", color = "darkred", fontface = "bold", vjust = 0) +
@@ -84,6 +84,32 @@ plot_zuzuege_highlight <- plot_zuzuege +
   )
 
 print(plot_zuzuege_highlight)
+
+# --- HIGHLIGHT-VERSION FÜR UMZÜGE (Der "Direct Labeling" Trick) ---
+
+plot_umzuege_highlight <- plot_umzuege +
+  # Bezirk 12 (Schwabing-Freimann / Bayernkaserne) in Dunkelrot
+  geom_line(data = mobilitaet_long_plot %>% 
+              filter(bewegungsart == "umzuege_innen", von_bezirk == 12), 
+            aes(group = von_bezirk), color = "darkred", linewidth = 0.5) +
+  
+  # Bezirk 19 (Obersendling / Alte EAE) in Orange
+  geom_line(data = mobilitaet_long_plot %>% 
+              filter(bewegungsart == "umzuege_innen", von_bezirk == 19), 
+            aes(group = von_bezirk), color = "black", linewidth = 0.5) +
+  
+  # Achtung: Y-Koordinaten an die Umzüge-Skala (max ~8000) angepasst!
+  geom_text(data = data.frame(jahr = 2013, anzahl_personen = 5000, nationalitaet = "Nichtdeutsch"),
+            label = "Bezirk 19\n(Obersendling)", color = "black", fontface = "bold", vjust = 0) +
+  
+  geom_text(data = data.frame(jahr = 2016, anzahl_personen = 7500, nationalitaet = "Nichtdeutsch"),
+            label = "Bezirk 12\n(Schwabing-Freimann)", color = "darkred", fontface = "bold", vjust = 0) +
+  labs(
+    title = "Umzüge innerhalb Münchens (2005-2024)",
+    subtitle = "Grau: Einzelne Bezirke | Farbige Linien: Durchschnitt | Hervorgehoben: Erstaufnahmeeinrichtung (EAE)"
+  )
+
+print(plot_umzuege_highlight)
 
 
 # --- FREE_Y VERSIONEN ERSTELLEN (Der "Zoom-In" Effekt) ---
