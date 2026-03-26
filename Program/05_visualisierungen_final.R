@@ -79,8 +79,8 @@ plot_zuzuege_highlight <- plot_zuzuege +
   geom_text(data = data.frame(jahr = 2022, anzahl_personen = 12500, nationalitaet = "Nichtdeutsch"),
             label = "Bezirk 12\n(Schwabing-Freimann)", color = "darkred", fontface = "bold", vjust = 0) +
   labs(
-    title = "Der wandernde Schock: Zuzüge nach München (2005-2024)",
-    subtitle = "Grau: Einzelne Bezirke | Bunt: Durchschnitt | Hervorgehoben: EAE"
+    title = "Zuzüge nach München (2005-2024)",
+    subtitle = "Grau: Einzelne Bezirke | Farbige Linien: Durchschnitt | Hervorgehoben: Erstaufnahmeeinrichtung (EAE)"
   )
 
 print(plot_zuzuege_highlight)
@@ -319,4 +319,5 @@ ggsave("Output/06_bevoelkerungsdichte.png", plot = plot_dichte, width = 10, heig
 # 7. Choropleth Map
 ggsave("Output/07_karte_dichte_2024.png", plot = plot_karte, width = 10, height = 6, dpi = 300, bg = "white")
 
-message("📸 BÄM! Alle bereiten Plots wurden im Ordner 'Output' gespeichert.")
+message("Alle bereiten Plots wurden im Ordner 'Output' gespeichert.")
+
