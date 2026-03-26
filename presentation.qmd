@@ -1,40 +1,32 @@
 ---
 title: "Wohnungsmigration in München"
-subtitle: "Analyse des Lock-In Effekts"
-author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang, "
-date: "2026-03-30"
+author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang"
 format:
    revealjs:
      theme: [default, customstyle.css]
-     footer: "WS 25/26 Grundlegendes Praxisprojekt"
      transition: slide
      slide-number: c
-     logo: "Output/LMU_Logo.svg"
+     logo: "Output/PresentationBilder/LMU_Logo.svg"
 editor: visual
 ---
 
 ## Agenda
 
--   
-
-    1.  Überblick
-
--   
-
-    2.  Datenanalyse
-
--   
-
-    3.  Zusammenfassung
-
-## 1.1 Fragestellung
-
 ::: incremental
--   Was sollen wir tun
--   Welche Fragen sind zu beantworten
+1.  Datenüberblick
+
+2.  Datenanalyse
+
+    Zuzüge & Umzüge
+
+    Wegzüge
+
+    Bevölkerungsentwicklung
+
+3.  Zusammenfassung
 :::
 
-## 1.2 Hintergrundinformationen
+## Datenüberblick
 
 ::: incremental
 -   25 stadtbezirke
@@ -42,30 +34,15 @@ editor: visual
 -   Um- Zu- und Abzüge aus München
 :::
 
-## Quarto
+## Agenda
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+::: incremental
+1.  \[Datenüberblick\]{style="opacity: 0.25;"}
+2.  **Datenanalyse**
+    -   Zuzüge & Umzüge
 
-## Bullets
+    -   Wegzüge
 
-When you click the **Render** button a document will be generated that includes:
-
--   Content authored with markdown
--   Output from executable code
-
-## Code
-
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
-
-## Graphics
-
-```{r}
-library(ggplot2)
-ggplot(mtcars, aes(x = mpg, y = hp)) +
-  geom_point() +
-  theme_light()
-```
+    -   Bevölkerungsentwicklung
+3.  \[Zusammenfassung\]{style="opacity: 0.25;"}
+:::
