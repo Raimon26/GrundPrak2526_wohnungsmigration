@@ -21,5 +21,5 @@ karte_mit_daten <- karte_sauber %>%
 
 saveRDS(karte_mit_daten, "Data/muenchen_karte_fertig.rds")
 
-message("🗺️ BÄM! Geodaten erfolgreich bereinigt (25 Bezirke) und gespeichert!")
+message("Geodaten erfolgreich bereinigt (25 Bezirke) und gespeichert!")
 

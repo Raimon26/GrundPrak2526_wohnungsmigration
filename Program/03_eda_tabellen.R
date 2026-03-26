@@ -5,7 +5,7 @@
 # --- A. Arbeitsumgebung laden ---
 source("env_setup.R")
 
-message("📊 Basis-Statistiken der Umzüge (zur Orientierung für Ausreißer):")
+message("Basis-Statistiken der Umzüge (zur Orientierung für Ausreißer):")
 summary(umzuege_clean)
 
 # --- B. (Zentrum vs. Peripherie) ---

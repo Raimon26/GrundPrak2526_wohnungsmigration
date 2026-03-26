@@ -129,4 +129,4 @@ glimpse(indikatoren_mobilitaet)
 write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
 
-message("✅ Feature Engineering komplett! Features wurden auf beide Datensätze angewendet und gespeichert.")
+message("Features wurden auf beide Datensätze angewendet und gespeichert.")
