@@ -40,4 +40,4 @@ for (file in rds_files) {
 
 
 # Erfolgsmeldung in der Konsole ausgeben
-message("✅ Environment erfolgreich eingerichtet! Alle Pakete und sauberen Daten sind geladen. Viel Spaß beim Analysieren!")
+message("Environment erfolgreich eingerichtet! Alle Pakete und sauberen Daten sind geladen. Viel Spaß beim Analysieren!")
