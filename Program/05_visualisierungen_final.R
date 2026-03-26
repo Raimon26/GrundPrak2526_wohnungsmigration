@@ -325,6 +325,8 @@ ggsave("Output/01b_zeitreihe_zuzuege_free_y.png", plot = plot_zuzuege_free, widt
 # Highlight-Plot exportieren
 ggsave("Output/01c_zeitreihe_zuzuege_HIGHLIGHT.png", plot = plot_zuzuege_highlight, 
        width = 12, height = 6, dpi = 300, bg = "white")
+ggsave("Output/02c_zeitreihe_umzuege_HIGHLIGHT.png", plot = plot_umzuege_highlight, 
+       width = 12, height = 6, dpi = 300, bg = "white")
 
 # 2. Umzüge
 ggsave("Output/02a_zeitreihe_umzuege.png", plot = plot_umzuege, width = 12, height = 6, dpi = 300, bg = "white")
