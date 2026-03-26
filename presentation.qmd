@@ -10,6 +10,14 @@ format:
 editor: visual
 ---
 
+```{r setup, include=FALSE}
+#| include: false
+#| message: false
+#| warning: false
+
+source("Program/05_visualisierungen_final.R")
+```
+
 ## Agenda
 
 ::: incremental
@@ -36,13 +44,40 @@ editor: visual
 
 ## Agenda
 
-::: incremental
-1.  \[Datenüberblick\]{style="opacity: 0.25;"}
+1.  [Datenüberblick]{style="opacity: 0.25;"}
 2.  **Datenanalyse**
     -   Zuzüge & Umzüge
 
-    -   Wegzüge
+    -   [Wegzüge]{style="opacity: 0.25;"}
 
-    -   Bevölkerungsentwicklung
-3.  \[Zusammenfassung\]{style="opacity: 0.25;"}
-:::
+    -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
+3.  [Zusammenfassung]{style="opacity: 0.25;"}
+
+## Zuzüge
+
+```{r plot_zuzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_zuzuege
+```
+
+## Zuzüge
+```{r plot_zuzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_zuzuege_highlight
+```
+
+## Umzüge
+
+```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_umzuege
+```
+
+## Umzüge
+
+```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
+```
+
+
+
+
+
+

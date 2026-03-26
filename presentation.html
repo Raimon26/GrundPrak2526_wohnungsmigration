@@ -159,17 +159,25 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <section id="agenda-1" class="slide level2">
 <h2>Agenda</h2>
 <ol type="1">
-<li class="fragment">[Datenüberblick]{style=“opacity: 0.25;”}</li>
-<li class="fragment"><strong>Datenanalyse</strong>
+<li><span style="opacity: 0.25;">Datenüberblick</span></li>
+<li><strong>Datenanalyse</strong>
 <ul>
-<li class="fragment"><p>Zuzüge &amp; Umzüge</p></li>
-<li class="fragment"><p>Wegzüge</p></li>
-<li class="fragment"><p>Bevölkerungsentwicklung</p></li>
+<li><p>Zuzüge &amp; Umzüge</p></li>
+<li><p><span style="opacity: 0.25;">Wegzüge</span></p></li>
+<li><p><span style="opacity: 0.25;">Bevölkerungsentwicklung</span></p></li>
 </ul></li>
-<li class="fragment">[Zusammenfassung]{style=“opacity: 0.25;”}</li>
+<li><span style="opacity: 0.25;">Zusammenfassung</span></li>
 </ol>
-
 </section>
+<section id="zuzüge" class="slide level2">
+<h2>Zuzüge</h2>
+
+<img data-src="presentation_files/figure-revealjs/plot_zuzuege-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
+<section id="highlights" class="slide level2">
+<h2>Highlights</h2>
+
+
+<img data-src="presentation_files/figure-revealjs/plot_zuzuege_highlight-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="Output/PresentationBilder/LMU_Logo.svg" class="slide-logo"></p>
@@ -386,6 +394,82 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
