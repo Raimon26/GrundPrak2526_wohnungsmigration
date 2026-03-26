@@ -79,7 +79,7 @@ plot_zuzuege_highlight <- plot_zuzuege +
   geom_text(data = data.frame(jahr = 2022, anzahl_personen = 12500, nationalitaet = "Nichtdeutsch"),
             label = "Bezirk 12\n(Schwabing-Freimann)", color = "darkred", fontface = "bold", vjust = 0) +
   labs(
-    title = "Der wandernde Schock: Zuzüge nach München (2005-2024)",
+    title = "Zuzüge nach München (2005-2024)",
     subtitle = "Grau: Einzelne Bezirke | Bunt: Durchschnitt | Hervorgehoben: EAE"
   )
 
