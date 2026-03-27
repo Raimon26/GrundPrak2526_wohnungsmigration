@@ -50,3 +50,40 @@ ggsave("Output/07_karte_vergleich_2000_2024.png", plot = plot_vergleich,
        width = 12, height = 6, dpi = 300, bg = "white")
 
 message("Der statische Vergleich 2000 vs 2024 liegt im Output-Ordner. Deine 04_Variablen blieben unangetastet!")
+
+
+# 8. CHOROPLETH-KARTE: BEZIRKSTYPEN (Zentrum, Innenstadt-Rand, Peripherie)
+
+# 1. Wir laden die fertige Karte (die bereits 'bezirk_typ' enthält)
+karte_mit_daten_temp2 <- readRDS("Data/muenchen_karte_fertig.rds")
+
+# 2. WICHTIG: Wir machen 'bezirk_typ' zu einem Faktor und sortieren ihn logisch.
+# So taucht die Legende nicht alphabetisch auf, sondern von innen nach außen!
+karte_mit_daten_temp2 <- karte_mit_daten_temp2 %>%
+  mutate(bezirk_typ = factor(bezirk_typ, levels = c("Zentrum", "Innenstadt-Rand", "Peripherie")))
+
+# 3. Den Plot erstellen
+plot_bezirkstypen <- ggplot(karte_mit_daten_temp2) +
+  geom_sf(aes(fill = bezirk_typ), color = "white", linewidth = 0.5) +
+  
+  scale_fill_viridis_d(option = "D", end = 0.8) +
+  
+  theme_void() +
+  labs(
+    title = "Strukturelle Gliederung der Münchner Stadtbezirke",
+    subtitle = "Räumliche Kategorisierung für die Mobilitäts- und Dichteanalyse",
+    fill = "Bezirkstyp"
+  ) +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold", size = 16)
+  )
+
+print(plot_bezirkstypen)
+
+# 4. Speichern
+ggsave("Output/08_karte_bezirkstypen.png", plot = plot_bezirkstypen, 
+       width = 10, height = 6, dpi = 300, bg = "white")
+
+message("Die Karte der Bezirkstypen wurde erfolgreich gespeichert!")
