@@ -8,9 +8,28 @@ library(scales)
 library(sf)
 
 
-# 1 & 2. ZEITREIHEN: ZU- UND UMZÜGE (Facet nach Nationalität)
 # Wir nutzen unser erstelltes Long-Format!
 mobilitaet_long_plot <- readRDS("Data/indikatoren_mobilitaet_long_plot.rds")
+
+# Faktor-Variable erstellen für die richtige Anordung in der Legende
+# Die Reihenfolge der Faktor-Level definiert die Reihenfolge in der Legende
+indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
+  mutate(bezirk_typ = factor(bezirk_typ, 
+                             levels = c("Zentrum", "Innenstadt-Rand", "Peripherie")))
+
+# WICHTIG: Falls du indikatoren_mobil_long schon erstellt hast, 
+# musst du es dort ebenfalls machen oder das Long-Format neu erstellen.
+mobilitaet_long_plot <- mobilitaet_long_plot %>%
+  mutate(bezirk_typ = factor(bezirk_typ, 
+                             levels = c("Zentrum", "Innenstadt-Rand", "Peripherie")))
+
+indikatoren_dichte <- indikatoren_dichte %>%
+  mutate(bezirk_typ = factor(bezirk_typ, 
+                             levels = c("Zentrum", "Innenstadt-Rand", "Peripherie")))
+  
+
+
+# 1 & 2. ZEITREIHEN: ZU- UND UMZÜGE (Facet nach Nationalität)
 
 plot_zuzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "zuzuege_aussen"), 
                        aes(x = jahr, y = anzahl_personen)) +
@@ -203,6 +222,7 @@ print(plot_wegzuege)
 
 # NEU!!
 # 5. Relative BEVÖLKERUNGSENTWICKLUNG über die ZEIT (Chris)
+
 
 # Index berechnen: Jeder Bezirk startet bei 100 im Jahr 2000
 indikatoren_index <- indikatoren_dichte %>%

@@ -23,6 +23,11 @@ print(tab_bewegung_typ)
 
 # --- C. Visuelle Ausreißer-Erkennung (Für Methodik & Anhang) ---
 
+# Die Reihenfolge der Faktor-Level definiert die Reihenfolge in der Legende
+indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
+  mutate(bezirk_typ = factor(bezirk_typ, 
+                             levels = c("Zentrum", "Innenstadt-Rand", "Peripherie")))
+
 # 1. Boxplot nach Zentrum/Peripherie (Unser Original)
 boxplot_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_aussen_insgesamt, fill = bezirk_typ)) +
   geom_boxplot(alpha = 0.7) +
