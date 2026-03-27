@@ -2,3 +2,11 @@
 .Rhistory
 .RData
 .Ruserdata
+
+
+# Quarto / RStudio generierte Dateien
+/.quarto/
+/_freeze/
+*_files/
+*.html
+*.pdf
