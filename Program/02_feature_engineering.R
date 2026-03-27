@@ -31,11 +31,11 @@ write_rds(umzuege_clean, "Data/umzuege_clean.rds")
 write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
 write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 
-message("✅ Feature Engineering abgeschlossen: Die Kategorie 'bezirk_typ' wurde in alle Datensätze integriert!")
+message("Feature Engineering abgeschlossen: Die Kategorie 'bezirk_typ' wurde in alle Datensätze integriert!")
 
 
 #Kleine Checks zur Überprüfung der Funktionalität unserer Datensätze
-# 1. Irgendein Jahr ausserhalb unseres Ranges? (Debería ser 2005 a 2024)
+# 1. Irgendein Jahr ausserhalb unseres Ranges? (Sollte zw. 2000 und 2024)
 range(indikatoren_dichte$jahr)
 
 # 2. Negative Bevölkerung oder Dichte? (Alle sollten >= 0)
@@ -75,7 +75,7 @@ indikatoren_mobilitaet_long_plot <- indikatoren_mobilitaet %>%
 
 saveRDS(indikatoren_mobilitaet_long_plot, "Data/indikatoren_mobilitaet_long_plot.rds")
 
-message("✅ Datensatz für Christians facet_wrap erfolgreich als .rds gespeichert!")
+message("Datensatz für Christians facet_wrap erfolgreich als .rds gespeichert!")
 
 # Neue Gruppierung: Wir teilen die Bezirke basierend auf ihrer Dichte in 3 gleich große Gruppen auf
 

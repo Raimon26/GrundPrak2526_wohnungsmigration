@@ -23,10 +23,10 @@ plot_zuzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "zuzuege_
   scale_color_viridis_d(option = "D", end = 0.8) +
   
   # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
-  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   labs(
-    title = "Entwicklung der Zuzüge nach München (2005-2024)",
+    title = "Entwicklung der Zuzüge nach München (2000-2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Anzahl Personen",
@@ -47,10 +47,10 @@ plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_
   scale_color_viridis_d(option = "D", end = 0.8) +
   
   # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
-  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   labs(
-    title = "Entwicklung der Umzüge innerhalb München (2005-2024)",
+    title = "Entwicklung der Umzüge innerhalb München (2000-2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Anzahl Personen",
@@ -79,7 +79,7 @@ plot_zuzuege_highlight <- plot_zuzuege +
   geom_text(data = data.frame(jahr = 2022, anzahl_personen = 12500, nationalitaet = "Nichtdeutsch"),
             label = "Bezirk 12\n(Schwabing-Freimann)", color = "darkred", fontface = "bold", vjust = 0) +
   labs(
-    title = "Zuzüge nach München (2005-2024)",
+    title = "Zuzüge nach München (2000-2024)",
     subtitle = "Grau: Einzelne Bezirke | Farbige Linien: Durchschnitt | Hervorgehoben: Erstaufnahmeeinrichtung (EAE)"
   )
 
@@ -105,7 +105,7 @@ plot_umzuege_highlight <- plot_umzuege +
   geom_text(data = data.frame(jahr = 2016, anzahl_personen = 7500, nationalitaet = "Nichtdeutsch"),
             label = "Bezirk 12\n(Schwabing-Freimann)", color = "darkred", fontface = "bold", vjust = 0) +
   labs(
-    title = "Umzüge innerhalb Münchens (2005-2024)",
+    title = "Umzüge innerhalb Münchens (2000-2024)",
     subtitle = "Grau: Einzelne Bezirke | Farbige Linien: Durchschnitt | Hervorgehoben: Erstaufnahmeeinrichtung (EAE)"
   )
 
@@ -189,10 +189,10 @@ plot_wegzuege <- ggplot(
   scale_color_viridis_d(option = "D", end = 0.8) +
   
   # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
-  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   labs(
-    title = "Entwicklung der Wegzüge aus den Münchner Stadtbezirken (2005–2024)",
+    title = "Entwicklung der Wegzüge aus den Münchner Stadtbezirken (2000–2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Anzahl Personen",
@@ -208,7 +208,7 @@ print(plot_wegzuege)
 # NEU!!
 # 5. Relative BEVÖLKERUNGSENTWICKLUNG über die ZEIT (Chris)
 
-# Index berechnen: Jeder Bezirk startet bei 100 im Jahr 2005
+# Index berechnen: Jeder Bezirk startet bei 100 im Jahr 2000
 indikatoren_index <- indikatoren_dichte %>%
   group_by(von_bezirk) %>%
   mutate(
@@ -238,7 +238,7 @@ plot_entwicklung_index <- ggplot() +
             linewidth = 1.2) +
   
   # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
-  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   # Y-Achse: Start bei 100 (Basisjahr)
   scale_y_continuous(labels = label_number(suffix =  "%")) +
@@ -246,7 +246,7 @@ plot_entwicklung_index <- ggplot() +
   theme_minimal() +
   scale_color_viridis_d(option = "D", end = 0.8) + 
   labs(
-    title = "Relatives Bevölkerungswachstum München (2005-2024) (Basis 2005 = 100%)",
+    title = "Relatives Bevölkerungswachstum München (2000-2024) (Basis 2000 = 100%)",
     subtitle =  "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Wachstum in %",
@@ -277,11 +277,11 @@ plot_dichte <- ggplot() +
   theme_minimal() +
   
   # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
-  scale_x_continuous(breaks = c(seq(2005, 2024, by = 5), 2024), limits = c(2005, 2024)) +
+  scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   scale_color_viridis_d(option = "D", end = 0.8) +
   labs(
-    title = "Entwicklung der Siedlungsdichte in München (2005-2024)",
+    title = "Entwicklung der Siedlungsdichte in München (2000-2024)",
     subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Einwohner / km²",
