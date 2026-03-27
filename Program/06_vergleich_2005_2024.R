@@ -1,4 +1,4 @@
-# Skript 06: Vorher-Nachher-Vergleich (2005 vs 2024) - Sicherer Plan B
+# Skript 06: Vorher-Nachher-Vergleich (2000 vs 2024) - Sicherer Plan B
 
 source("env_setup.R")
 library(sf)
@@ -17,30 +17,36 @@ karte_sauber_temp <- karte_muenchen_temp %>%
 karte_alle_jahre_temp <- karte_sauber_temp %>%
   left_join(indikatoren_dichte, by = c("bezirk_nr" = "von_bezirk"))
 
-# 3. DATEN FILTERN: Nur Startjahr (2005) und Endjahr (2024)
+# 3. DATEN FILTERN: Nur Startjahr (2000) und Endjahr (2024)
 karte_vergleich_daten <- karte_alle_jahre_temp %>% 
-  filter(jahr %in% c(2005, 2024))
+  filter(jahr %in% c(2000, 2024))
 
 # 4. PLOT ERSTELLEN
 plot_vergleich <- ggplot(karte_vergleich_daten) +
-  geom_sf(aes(fill = dichte), color = "white", linewidth = 0.2) +
-  facet_wrap(~jahr) + # Teilt den Plot in zwei nebeneinanderliegende Karten
-  scale_fill_viridis_c(option = "magma", direction = -1) +
+  geom_sf(aes(fill = as.numeric(dichte)), color = "white", linewidth = 0.2) + # <-- LA CORRECCIÓN ESTÁ AQUÍ
+  facet_wrap(~jahr) + 
+  scale_fill_viridis_c(
+    option = "magma", 
+    direction = -1,
+    limits = c(0, 16000),
+    breaks = c(0, 4000, 8000, 12000, 16000), 
+    guide = guide_colorbar(barwidth = 20)    
+  ) +
   theme_void() +
   labs(
-    title = "Verdichtung der Stadt München (2005 vs. 2024)",
+    title = "Verdichtung der Stadt München (2000 vs. 2024)",
     subtitle = "Vergleich der Bevölkerungsdichte (Einw./km²)",
     fill = "Dichte"
   ) +
   theme(
     legend.position = "bottom",
-    strip.text = element_text(size = 14, face = "bold") # Macht die Jahreszahlen (2005 / 2024) groß
+    strip.text = element_text(size = 14, face = "bold")
   )
 
 print(plot_vergleich)
 
 # 5. SICHER SPEICHERN
-ggsave("Output/07_karte_vergleich_2005_2024.png", plot = plot_vergleich, 
+ggsave("Output/07_karte_vergleich_2000_2024.png", plot = plot_vergleich, 
        width = 12, height = 6, dpi = 300, bg = "white")
 
-message("Der statische Vergleich 2005 vs 2024 liegt im Output-Ordner. Deine 04_Variablen blieben unangetastet!")
+message("Der statische Vergleich 2000 vs 2024 liegt im Output-Ordner. Deine 04_Variablen blieben unangetastet!")

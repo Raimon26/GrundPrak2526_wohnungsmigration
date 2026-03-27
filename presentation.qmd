@@ -1,223 +1,71 @@
 ---
 title: "Wohnungsmigration in München"
-author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang"
+subtitle: "Analyse des Lock-In Effekts"
+author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang, "
+date: "2026-03-30"
 format:
    revealjs:
      theme: [default, customstyle.css]
-     title-slide-attributes:
-      data-background-image: "Output/PresentationBilder/lmu_siegel.jpg"
-      data-background-size: cover
-      data-background-opacity: "0.5"
+     footer: "WS 25/26 Grundlegendes Praxisprojekt"
      transition: slide
      slide-number: c
-     logo: "Output/PresentationBilder/LMU_Logo.svg"
-     
+     logo: "Output/LMU_Logo.svg"
 editor: visual
-
 ---
-```{r setup, include=FALSE}
-#| include: false
-#| message: false
-#| warning: false
-
-source("Program/05_visualisierungen_final.R")
-source("Program/06_vergleich_2005_2024.R")
-source("Program/03_eda_tabellen.R")
-```
 
 ## Agenda
+
+-   
+
+    1.  Überblick
+
+-   
+
+    2.  Datenanalyse
+
+-   
+
+    3.  Zusammenfassung
+
+## 1.1 Fragestellung
 
 ::: incremental
-1.  Datenüberblick
-
-2.  Datenanalyse
-
-    - Zuzüge
-
-    - Wegzüge
-
-    - Bevölkerungsentwicklung
-
-3.  Zusammenfassung und Fazit
+-   Was sollen wir tun
+-   Welche Fragen sind zu beantworten
 :::
 
-## Datenüberblick {.smaller}
+## 1.2 Hintergrundinformationen
+
+::: incremental
+-   25 stadtbezirke
+
+-   Um- Zu- und Abzüge aus München
+:::
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-# --- 1. DATENSATZ: MOBILITÄT ---
-daten_preview_mob <- indikatoren_mobilitaet %>%
-  dplyr::select(jahr, von_bezirk, bezirk_typ, zuzuege_aussen_insgesamt, umzuege_innen_insgesamt)
-
-mob_ends <- dplyr::bind_rows(head(daten_preview_mob, 1), tail(daten_preview_mob, 1))
-
-knitr::kable(
-  mob_ends, 
-  col.names = c("Jahr", "Bezirk-Nr.", "Kategorie", "Zuzüge (Außen)", "Umzüge (Innen)"),
-  caption = "Säule 1: Mobilitätsdaten (Auszug)",
-  format = "html",
-  align = "c" 
-)
-# --- 2. DATENSATZ: DICHTE ---
-daten_preview_dichte <- indikatoren_dichte %>%
-  dplyr::select(jahr, von_bezirk, bezirk_typ, einwohner, dichte)
-
-dichte_ends <- dplyr::bind_rows(head(daten_preview_dichte, 1), tail(daten_preview_dichte, 1))
-
-knitr::kable(
-  dichte_ends, 
-  col.names = c("Jahr", "Bezirk-Nr.", "Kategorie", "Einwohner", "Dichte (Einw./km²)"),
-  caption = "Säule 2: Bevölkerungsdichte (Auszug)",
-  format = "html",
-  align = "c" 
-)
+1 + 1
 ```
 
+## Graphics
 
-## Datenüberblick
-
-```{r boxplot_typ, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-#| echo: false
-
-boxplot_typ
-
-
+```{r}
+library(ggplot2)
+ggplot(mtcars, aes(x = mpg, y = hp)) +
+  geom_point() +
+  theme_light()
 ```
-
-## Datenüberblick
-
-```{r boxplot_dichte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-#| echo: false
-
-boxplot_dichte
-```
-
-## Datenüberblick
-
-```{r boxplot_himmel, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-#| echo: false
-
-boxplot_himmel
-```
-
-## Agenda
-
-1.  [Datenüberblick]{style="opacity: 0.25;"}
-2.  **Datenanalyse**
-    -   Zuzüge
-
-    -   [Wegzüge]{style="opacity: 0.25;"}
-
-    -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
-3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
-
-## Zuzüge
-
-```{r plot_zuzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_zuzuege
-```
-
-## Zuzüge
-```{r plot_zuzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_zuzuege_highlight
-```
-
-## Umzüge
-
-```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_umzuege
-```
-
-## Umzüge
-
-```{r plot_umzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_umzuege_highlight
-```
-
-## Agenda
-
-1.  [Datenüberblick]{style="opacity: 0.25;"}
-2.  **Datenanalyse**
-    -   [Zuzüge]{style="opacity: 0.25;"}
-
-    -   Wegzüge
-
-    -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
-3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
-
-## Wegzüge
-
-```{r plot_wegzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_wegzuege
-```
-
-## Agenda
-
-1.  [Datenüberblick]{style="opacity: 0.25;"}
-2.  **Datenanalyse**
-    -   [Zuzüge]{style="opacity: 0.25;"}
-
-    -   [Wegzüge]{style="opacity: 0.25;"}
-
-    -   Bevölkerungsentwicklung
-3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
-
-## Bevölkerungsentwicklung
-
-```{r plot_entwicklung_index, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_entwicklung_index
-```
-
-## Bevölkerungsentwicklung
-
-```{r plot_dichte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_dichte
-```
-
-## Bevölkerungsentwicklung
-
-```{r plot_karte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_karte
-```
-
-## Bevölkerungsentwicklung
-
-```{r plot_vergleich, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-plot_vergleich
-```
-
-## Agenda
-
-1.  [Datenüberblick]{style="opacity: 0.25;"}
-2.  [Datenanalyse]{style="opacity: 0.25;"}
-    -   [Zuzüge]{style="opacity: 0.25;"}
-
-    -   [Wegzüge]{style="opacity: 0.25;"}
-
-    -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
-3.  **Zusammenfassung und Fazit**
-
-## Zusammenfassung und Fazit
-
-Limitation: Nur Daten ab 2000 für die Bevölkerungsentwicklung ist gegeben
-Wechselmatrix ab 2005 und Bevölkerungsdichte ab 2002
-
-
-## Ausblick
-Aktuelle Projekte und Vorhaben: 
-
-- **Freiham**: neuer Stadtteil für über 25.000 Menschen
-
-- **Neufreimann**: 5.500 Wohnungen für 15.000 Menschen
-
-- **Münchener Nordosten**: ab 2030 neues Zukunftsquartier für bis zu 30.000 Menschen
-
-**Herausforderungen**: Trotz dieser Bemühungen ist der Immobilienmarkt sehr angespannt. **Steigende Baukosten**, **hohe Zinsen**, **komplizierte Vorschriften** und **Fachkräftemangel** führen zu langsame Umsetzung.
-
-
-
-
-

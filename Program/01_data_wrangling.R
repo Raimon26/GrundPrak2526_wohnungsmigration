@@ -49,46 +49,84 @@ glimpse(bevoelkerungsdichte)
 glimpse(mobilitaetsziffer)
 
 
-# --- 6.1. Bevölkerungsdichte und Einwohnerzahl (Forschungsfrage 3) ---
-dichte_clean <- bevoelkerungsdichte %>%
-  mutate(
-    jahr = Jahr,
-    von_bezirk = as.numeric(str_extract(Raumbezug, "^\\d{2}")),
-    dichte = Indikatorwert,
-    einwohner = Basiswert.1 # Gesamtbevölkerung (Hauptwohnsitz)
-  ) %>%
-  filter(Ausprägung == "insgesamt", !is.na(von_bezirk), jahr >= 2005) %>%
-  select(jahr, von_bezirk, dichte, einwohner)
+# NEU
+# ==============================================================================
+# 6. DATEN BEREINIGEN UND ZUSAMMENFÜHREN (2000-2024)
+# ==============================================================================
 
-# --- 6.2. Mobilität und Nationalität (Forschungsfragen 1 und 2) ---
-mobilitaet_clean <- mobilitaetsziffer %>%
+# --- 6.1. Mobilität und Nationalität (Jetzt ab dem Jahr 2000!) ---
+
+# Wir laden die Rohdaten und retten die Einwohnerzahl (Basiswert.5)
+mobilitaet_roh <- mobilitaetsziffer %>%
   mutate(
     jahr = Jahr,
     von_bezirk = as.numeric(str_extract(Raumbezug, "^\\d{2}"))
   ) %>%
-  filter(!is.na(von_bezirk), jahr >= 2005) %>%
+  # ÄNDERUNG 1: Wir öffnen das Zeitfenster bis 2000
+  filter(!is.na(von_bezirk), jahr >= 2000) %>%
   rename(
-    zuzuege_aussen = Basiswert.1,  # Zuzüge von außerhalb Münchens
-    umzuege_innen = Basiswert.2,   # Umzüge innerhalb Münchens
-    wegzuege_aussen = Basiswert.3, # Wegzüge nach außerhalb Münchens
-    wegzuege_innen = Basiswert.4   # Wegzüge in einen anderen Stadtbezirk
+    zuzuege_aussen = Basiswert.1,  
+    umzuege_innen = Basiswert.2,   
+    wegzuege_aussen = Basiswert.3, 
+    wegzuege_innen = Basiswert.4,
+    einwohner_mob = Basiswert.5    # ÄNDERUNG 2: Wir retten die Bevölkerung!
   ) %>%
-  select(jahr, von_bezirk, Ausprägung, zuzuege_aussen, umzuege_innen, wegzuege_aussen, wegzuege_innen) %>%
-  # DIE MAGIE: Daten vom Long- ins Wide-Format transformieren (Pivot)
+  select(jahr, von_bezirk, Ausprägung, zuzuege_aussen, umzuege_innen, wegzuege_aussen, wegzuege_innen, einwohner_mob)
+
+# Einwohner für die verlorenen Jahre 2000-2004 isolieren (Für den Dichte-Trick)
+pop_2000_2004 <- mobilitaet_roh %>%
+  filter(Ausprägung == "insgesamt", jahr >= 2000, jahr <= 2004) %>%
+  select(jahr, von_bezirk, einwohner = einwohner_mob)
+
+# Den originalen mobilitaet_clean für deinen Pivot vorbereiten 
+# (Wir werfen einwohner_mob hier weg, damit dein restlicher Code 1:1 funktioniert)
+mobilitaet_clean <- mobilitaet_roh %>%
+  select(-einwohner_mob)
+
+# DIE MAGIE: Daten vom Long- ins Wide-Format transformieren (Pivot)
+indikatoren_mobilitaet <- mobilitaet_clean %>%
   pivot_wider(
     names_from = Ausprägung, 
-    values_from = c(zuzuege_aussen, umzuege_innen, wegzuege_aussen, wegzuege_innen),
-    names_sep = "_"
+    values_from = c(zuzuege_aussen, umzuege_innen, wegzuege_aussen, wegzuege_innen)
   )
+
+# --- 6.2. Bevölkerungsdichte (Der Flächen-Trick für 2000-2004) ---
+
+# 1. Die sicheren Dichte-Daten ab 2005 (wie in deinem originalen Code)
+dichte_ab_2005 <- bevoelkerungsdichte %>%
+  mutate(
+    jahr = Jahr,
+    von_bezirk = as.numeric(str_extract(Raumbezug, "^\\d{2}")),
+    dichte = Indikatorwert,
+    einwohner = Basiswert.1
+  ) %>%
+  filter(Ausprägung == "insgesamt", !is.na(von_bezirk), jahr >= 2005) %>%
+  select(jahr, von_bezirk, dichte, einwohner)
+
+# 2. Konstante Fläche berechnen (Fläche = Einwohner / Dichte, basierend auf dem Jahr 2005)
+flaeche_konstant <- dichte_ab_2005 %>%
+  filter(jahr == 2005) %>%
+  mutate(flaeche = einwohner / dichte) %>%
+  select(von_bezirk, flaeche)
+
+# 3. Dichte für 2000-2004 berechnen (Dichte = Einwohner aus Mobilität / Konstante Fläche)
+dichte_2000_2004 <- pop_2000_2004 %>%
+  left_join(flaeche_konstant, by = "von_bezirk") %>%
+  mutate(dichte = einwohner / flaeche) %>%
+  select(jahr, von_bezirk, dichte, einwohner)
+
+# 4. Die rekonstruierten Jahre (2000-2004) mit den ab 2005er Daten verschmelzen
+indikatoren_dichte <- bind_rows(dichte_2000_2004, dichte_ab_2005) %>%
+  arrange(von_bezirk, jahr)
 
 
 # Umzugsmatrix (Von-Nach-Beziehungen der 25 Bezirke)
 write_rds(umzuege_clean, "Data/umzuege_clean.rds")
 
 # Bevölkerungsdichte und Einwohnerentwicklung (Für Forschungsfrage 3)
-write_rds(dichte_clean, "Data/indikatoren_dichte.rds")
+write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 
 # Mobilität nach Nationalität (Für Forschungsfragen 1 und 2)
-write_rds(mobilitaet_clean, "Data/indikatoren_mobilitaet.rds")
+write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
 
 # probe <- umzuege_clean |> select(-jahr, -von_bezirk,-muenchen_gesamt) |> mutate(hola = rowSums(across(everything())))
