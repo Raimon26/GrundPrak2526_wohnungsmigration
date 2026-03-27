@@ -4,18 +4,25 @@ author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang"
 format:
    revealjs:
      theme: [default, customstyle.css]
+     title-slide-attributes:
+      data-background-image: "Output/PresentationBilder/lmu_siegel.jpg"
+      data-background-size: cover
+      data-background-opacity: "0.5"
      transition: slide
      slide-number: c
      logo: "Output/PresentationBilder/LMU_Logo.svg"
+     
 editor: visual
----
 
+---
 ```{r setup, include=FALSE}
 #| include: false
 #| message: false
 #| warning: false
 
 source("Program/05_visualisierungen_final.R")
+source("Program/06_vergleich_2005_2024.R")
+source("Program/03_eda_tabellen.R")
 ```
 
 ## Agenda
@@ -31,17 +38,73 @@ source("Program/05_visualisierungen_final.R")
 
     Bevölkerungsentwicklung
 
-3.  Zusammenfassung
+3.  Zusammenfassung und Fazit
 :::
+
+## Datenüberblick {.smaller}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# --- 1. DATENSATZ: MOBILITÄT ---
+daten_preview_mob <- indikatoren_mobilitaet %>%
+  dplyr::select(jahr, von_bezirk, bezirk_typ, zuzuege_aussen_insgesamt, umzuege_innen_insgesamt)
+
+mob_ends <- dplyr::bind_rows(head(daten_preview_mob, 1), tail(daten_preview_mob, 1))
+
+knitr::kable(
+  mob_ends, 
+  col.names = c("Jahr", "Bezirk-Nr.", "Kategorie", "Zuzüge (Außen)", "Umzüge (Innen)"),
+  caption = "Säule 1: Mobilitätsdaten (Auszug)",
+  format = "html",
+  align = "c" 
+)
+# --- 2. DATENSATZ: DICHTE ---
+daten_preview_dichte <- indikatoren_dichte %>%
+  dplyr::select(jahr, von_bezirk, bezirk_typ, einwohner, dichte)
+
+dichte_ends <- dplyr::bind_rows(head(daten_preview_dichte, 1), tail(daten_preview_dichte, 1))
+
+knitr::kable(
+  dichte_ends, 
+  col.names = c("Jahr", "Bezirk-Nr.", "Kategorie", "Einwohner", "Dichte (Einw./km²)"),
+  caption = "Säule 2: Bevölkerungsdichte (Auszug)",
+  format = "html",
+  align = "c" 
+)
+```
+
 
 ## Datenüberblick
+:::: {.columns}
 
-::: incremental
--   25 stadtbezirke
+::: {.column}
+```{r}
+#| echo: false
+#| fig-height: 6
+boxplot_typ
 
--   Um- Zu- und Abzüge aus München
+
+```
 :::
-
+::: {.column}
+```{r}
+#| echo: false
+#| fig-height: 6
+boxplot_dichte
+```
+:::
+::: {.column}
+```{r}
+#| echo: false
+#| fig-height: 6
+#| fig-width: 10
+boxplot_himmel
+```
+:::
+::::
 ## Agenda
 
 1.  [Datenüberblick]{style="opacity: 0.25;"}
@@ -51,7 +114,7 @@ source("Program/05_visualisierungen_final.R")
     -   [Wegzüge]{style="opacity: 0.25;"}
 
     -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
-3.  [Zusammenfassung]{style="opacity: 0.25;"}
+3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
 
 ## Zuzüge
 
@@ -72,12 +135,87 @@ plot_umzuege
 
 ## Umzüge
 
-```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-
+```{r plot_umzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_umzuege_highlight
 ```
 
+## Agenda
+
+1.  [Datenüberblick]{style="opacity: 0.25;"}
+2.  **Datenanalyse**
+    -   [Zuzüge & Umzüge]{style="opacity: 0.25;"}
+
+    -   Wegzüge
+
+    -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
+3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
+
+## Wegzüge
+
+```{r plot_wegzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_wegzuege
+```
+
+## Agenda
+
+1.  [Datenüberblick]{style="opacity: 0.25;"}
+2.  **Datenanalyse**
+    -   [Zuzüge & Umzüge]{style="opacity: 0.25;"}
+
+    -   [Wegzüge]{style="opacity: 0.25;"}
+
+    -   Bevölkerungsentwicklung
+3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
+
+## Bevölkerungsentwicklung
+
+```{r plot_entwicklung_index, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_entwicklung_index
+```
+
+## Bevölkerungsentwicklung
+
+```{r plot_dichte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_dichte
+```
+
+## Bevölkerungsentwicklung
+
+```{r plot_karte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_karte
+```
+
+## Bevölkerungsentwicklung
+
+```{r plot_vergleich, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_vergleich
+```
+
+## Agenda
+
+1.  [Datenüberblick]{style="opacity: 0.25;"}
+2.  [Datenanalyse]{style="opacity: 0.25;"}
+    -   [Zuzüge & Umzüge]{style="opacity: 0.25;"}
+
+    -   [Wegzüge]{style="opacity: 0.25;"}
+
+    -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
+3.  **Zusammenfassung und Fazit**
+
+## Zusammenfassung und Fazit
+
+Limitation: Nur Daten ab 2000 für die Bevölkerungsentwicklung ist gegeben
+
+Aktuelle Zahlen (2025/2026): Für 2026 ist geplant, den Bau von rund 8.500 Wohnungen zu ermöglichen. Im Jahr 2024 wurden Genehmigungen für ca. 8.300 Wohnungen erteilt, rund 6.500 wurden fertiggestellt.
+
+Stadtwerke München (SWM) bauen im Rahmen einer Offensive rund 3.000 Werkswohnungen
+
+## Ausblick
 
 
+Herausforderungen: Trotz dieser Bemühungen ist der Immobilienmarkt sehr angespannt. Steigende Baukosten, hohe Zinsen und Fachkräftemangel führen zu einem Bauüberhang, bei dem genehmigte Projekte nicht oder nur langsam umgesetzt werden.
+
+Bedarf vs. Zuzug: Die Einwohnerzahl wächst weiter (Ende 2025: über 1,6 Millionen), was zu einem prognostizierten Bedarf an Wohnraum für über 200.000 weitere Menschen führt.
 
 
 
