@@ -6,8 +6,8 @@
 <script src="presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang">
   <title>Wohnungsmigration in München</title>
@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto-97e690a65df25032e636c45403dbb044.css">
+  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto-60426cfa0718c280d4a950e35f176248.css">
   <link href="presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="presentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -155,7 +155,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <h2>Datenüberblick</h2>
 <div class="cell">
 <div class="cell-output-display">
-<table class="caption-top">
+<table class="caption-top" data-quarto-postprocess="true">
 <caption>Säule 1: Mobilitätsdaten (Auszug)</caption>
 <thead>
 <tr class="header">
@@ -175,17 +175,17 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <td style="text-align: center;">1523</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">2005</td>
+<td style="text-align: center;">2000</td>
 <td style="text-align: center;">25</td>
 <td style="text-align: center;">Innenstadt-Rand</td>
-<td style="text-align: center;">2585</td>
-<td style="text-align: center;">3968</td>
+<td style="text-align: center;">2776</td>
+<td style="text-align: center;">3828</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="cell-output-display">
-<table class="caption-top">
+<table class="caption-top" data-quarto-postprocess="true">
 <caption>Säule 2: Bevölkerungsdichte (Auszug)</caption>
 <thead>
 <tr class="header">
@@ -198,18 +198,18 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">2024</td>
+<td style="text-align: center;">2000</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">Zentrum</td>
-<td style="text-align: center;">20876</td>
-<td style="text-align: center;">6636</td>
+<td style="text-align: center;">18228.9</td>
+<td style="text-align: center;">5761.902</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">2005</td>
+<td style="text-align: center;">2024</td>
 <td style="text-align: center;">25</td>
 <td style="text-align: center;">Innenstadt-Rand</td>
-<td style="text-align: center;">48927</td>
-<td style="text-align: center;">9255</td>
+<td style="text-align: center;">57116.0</td>
+<td style="text-align: center;">10805.000</td>
 </tr>
 </tbody>
 </table>
@@ -521,7 +521,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -671,14 +671,13 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
