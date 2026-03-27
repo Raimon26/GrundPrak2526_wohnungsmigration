@@ -27,7 +27,6 @@ plot_zuzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "zuzuege_
   
   labs(
     title = "Entwicklung der Zuzüge nach München (2000-2024)",
-    subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Anzahl Personen",
     color = "Bezirkstyp"
@@ -51,7 +50,6 @@ plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_
   
   labs(
     title = "Entwicklung der Umzüge innerhalb München (2000-2024)",
-    subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Anzahl Personen",
     color = "Bezirkstyp"
@@ -82,8 +80,7 @@ plot_zuzuege_highlight <- plot_zuzuege +
             hjust = 0.2, size = 3) +
   labs(
     title = "Zuzüge nach München (2000-2024)",
-    subtitle = "Grau: Einzelne Bezirke | Farbige Linien: Durchschnitt | Hervorgehoben: Erstaufnahmeeinrichtung (EAE)"
-  )
+)
 
 print(plot_zuzuege_highlight)
 
@@ -109,8 +106,7 @@ plot_umzuege_highlight <- plot_umzuege +
             label = "Schwabing-\nFreimann", color = "darkred", fontface = "bold", vjust = 0,
             hjust = 0, size = 3) +
   labs(
-    title = "Umzüge innerhalb Münchens (2000-2024)",
-    subtitle = "Grau: Einzelne Bezirke | Farbige Linien: Durchschnitt | Hervorgehoben: Erstaufnahmeeinrichtung (EAE)"
+    title = "Umzüge innerhalb Münchens (2000-2024)"
   )
 
 print(plot_umzuege_highlight)
@@ -120,12 +116,10 @@ print(plot_umzuege_highlight)
 # Wir nehmen den fertigen Plot und überschreiben nur den Facet-Wrap!
 
 plot_zuzuege_free <- plot_zuzuege + 
-  facet_wrap(~nationalitaet, scales = "free_y") +
-  labs(subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt (Zoom / Free Y-Achse)") 
+  facet_wrap(~nationalitaet, scales = "free_y") 
  
 plot_umzuege_free <- plot_umzuege + 
-  facet_wrap(~nationalitaet, scales = "free_y") +
-  labs(subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt (Zoom / Free Y-Achse)") 
+  facet_wrap(~nationalitaet, scales = "free_y")
 
   
 # 3. BOXPLOT: Verteilung der Zuzüge (Zentrum vs. Peripherie)
@@ -135,7 +129,6 @@ plot_zuzuege_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzue
   scale_fill_viridis_d(option = "D") + # Paleta accesible (Viridis)
   labs(
     title = "Verteilung der Zuzüge nach Bezirkstyp",
-    subtitle = "Zentrum, Innenstadtrand und Peripherie im Vergleich",
     x = "Bezirkstyp",
     y = "Anzahl der Zuzüge (von außerhalb)"
   ) +
@@ -197,7 +190,6 @@ plot_wegzuege <- ggplot(
   
   labs(
     title = "Entwicklung der Wegzüge aus den Münchner Stadtbezirken (2000–2024)",
-    subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Anzahl Personen",
     color = "Bezirkstyp"
@@ -251,7 +243,6 @@ plot_entwicklung_index <- ggplot() +
   scale_color_viridis_d(option = "D", end = 0.8) + 
   labs(
     title = "Relatives Bevölkerungswachstum München (2000-2024) (Basis 2000 = 100%)",
-    subtitle =  "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Wachstum in %",
     color = "Bezirkstyp"
@@ -286,7 +277,6 @@ plot_dichte <- ggplot() +
   scale_color_viridis_d(option = "D", end = 0.8) +
   labs(
     title = "Entwicklung der Siedlungsdichte in München (2000-2024)",
-    subtitle = "Graue Linien: Einzelne Bezirke | Farbige Linien: Durchschnitt nach Bezirkstyp",
     x = "Jahr",
     y = "Einwohner / km²",
     color = "Bezirkstyp"
