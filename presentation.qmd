@@ -1,5 +1,6 @@
 ---
 title: "Wohnungsmigration in München"
+subtitle: "31.03.2026 | Betreuer: Christina Sauer"
 author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang"
 format:
    revealjs:
@@ -25,6 +26,13 @@ source("Program/06_vergleich_2005_2024.R")
 source("Program/03_eda_tabellen.R")
 ```
 
+## Fragen unserer Analyse
+1. Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
+
+2. Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs. Außen)
+
+3. Entwicklung der Bevölkerungsdichte <br> (Einwohner pro $km^2$)
+
 ## Agenda
 
 ::: incremental
@@ -38,7 +46,7 @@ source("Program/03_eda_tabellen.R")
 
     -   Bevölkerungsentwicklung
 
-3.  Zusammenfassung und Fazit
+3.  Zusammenfassung und Ausblick
 :::
 
 ## Datenüberblick {.smaller}
@@ -80,16 +88,12 @@ knitr::kable(
 
 ```{r boxplot_typ, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 
-
 boxplot_typ
-
-
 ```
 
 ## Datenüberblick
 
 ```{r boxplot_dichte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-
 
 boxplot_dichte
 ```
@@ -97,7 +101,6 @@ boxplot_dichte
 ## Datenüberblick
 
 ```{r boxplot_himmel, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-
 
 boxplot_himmel
 ```
@@ -119,29 +122,33 @@ plot_bezirkstypen
     -   [Wegzüge]{style="opacity: 0.25;"}
 
     -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
-3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
+3.  [Zusammenfassung und Ausblick]{style="opacity: 0.25;"}
 
 ## Zuzüge
 
 ```{r plot_zuzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_zuzuege
 ```
 
 ## Zuzüge
 
 ```{r plot_zuzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_zuzuege_highlight
 ```
 
 ## Umzüge
 
 ```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_umzuege
 ```
 
 ## Umzüge
 
 ```{r plot_umzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_umzuege_highlight
 ```
 
@@ -154,11 +161,12 @@ plot_umzuege_highlight
     -   Wegzüge
 
     -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
-3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
+3.  [Zusammenfassung und Ausblick]{style="opacity: 0.25;"}
 
 ## Wegzüge
 
 ```{r plot_wegzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_wegzuege
 ```
 
@@ -171,29 +179,33 @@ plot_wegzuege
     -   [Wegzüge]{style="opacity: 0.25;"}
 
     -   Bevölkerungsentwicklung
-3.  [Zusammenfassung und Fazit]{style="opacity: 0.25;"}
+3.  [Zusammenfassung und Ausblick]{style="opacity: 0.25;"}
 
 ## Bevölkerungsentwicklung
 
 ```{r plot_entwicklung_index, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_entwicklung_index
 ```
 
 ## Bevölkerungsentwicklung
 
 ```{r plot_dichte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_dichte
 ```
 
 ## Bevölkerungsentwicklung
 
 ```{r plot_karte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_karte
 ```
 
 ## Bevölkerungsentwicklung
 
 ```{r plot_vergleich, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
 plot_vergleich
 ```
 
@@ -206,11 +218,21 @@ plot_vergleich
     -   [Wegzüge]{style="opacity: 0.25;"}
 
     -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
-3.  **Zusammenfassung und Fazit**
+3.  **Zusammenfassung und Ausblick**
 
-## Zusammenfassung und Fazit
+## Zusammenfassung
 
-Limitation: Nur Daten ab 2000 für die Bevölkerungsentwicklung ist gegeben Wechselmatrix ab 2005 und Bevölkerungsdichte ab 2002
+**Limitation**: Daten ab Jahr 2000 zur Analyse verfügbar
+
+***Deutsche Staatsangehörige***: Weitestgehend stabiles Niveau mit leicht degressiver Tendenz.\
+**Nicht-deutsche Staatsangehörige**: Hohe Volatilität bei gleichzeitigem Anstieg des durchschnittlichen Zuzugsniveaus. \
+**Wegzüge**: Höhere Abwanderungsdynamik (binnen und außen) in der Peripherie im Vergleich zu zentralen Lagen.
+
+## Zusammenfassung
+
+**Trend-Konsistenz**: Gleichbleibendes Verteilungsmuster bei Umzügen innerhalb Münchens und Fortzügen aus der Stadt.\
+**Bevölkerungswachstum**: Kontinuierlicher Anstieg in der Peripherie bei gleichzeitiger Stagnation im Zentrum und Innenstadt-Rand.\
+**Besiedlungsdichte**: Flächendeckender Anstieg der Einwohner pro $km^2$ über den gesamten Untersuchungszeitraum.
 
 ## Ausblick
 
