@@ -13,8 +13,8 @@ format:
      logo: "Output/PresentationBilder/LMU_Logo.svg"
      
 editor: visual
-
 ---
+
 ```{r setup, include=FALSE}
 #| include: false
 #| message: false
@@ -32,11 +32,11 @@ source("Program/03_eda_tabellen.R")
 
 2.  Datenanalyse
 
-    - Zuzüge
+    -   Zuzüge
 
-    - Wegzüge
+    -   Wegzüge
 
-    - Bevölkerungsentwicklung
+    -   Bevölkerungsentwicklung
 
 3.  Zusammenfassung und Fazit
 :::
@@ -75,7 +75,6 @@ knitr::kable(
   align = "c" 
 )
 ```
-
 
 ## Datenüberblick
 
@@ -121,6 +120,7 @@ plot_zuzuege
 ```
 
 ## Zuzüge
+
 ```{r plot_zuzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 plot_zuzuege_highlight
 ```
@@ -202,22 +202,16 @@ plot_vergleich
 
 ## Zusammenfassung und Fazit
 
-Limitation: Nur Daten ab 2000 für die Bevölkerungsentwicklung ist gegeben
-Wechselmatrix ab 2005 und Bevölkerungsdichte ab 2002
-
+Limitation: Nur Daten ab 2000 für die Bevölkerungsentwicklung ist gegeben Wechselmatrix ab 2005 und Bevölkerungsdichte ab 2002
 
 ## Ausblick
-Aktuelle Projekte und Vorhaben: 
 
-- **Freiham**: neuer Stadtteil für über 25.000 Menschen
+Aktuelle Projekte und Vorhaben:
 
-- **Neufreimann**: 5.500 Wohnungen für 15.000 Menschen
+-   **Freiham**: neuer Stadtteil für über 25.000 Menschen
 
-- **Münchener Nordosten**: ab 2030 neues Zukunftsquartier für bis zu 30.000 Menschen
+-   **Neufreimann**: 5.500 Wohnungen für 15.000 Menschen
+
+-   **Münchener Nordosten**: ab 2030 neues Zukunftsquartier für bis zu 30.000 Menschen
 
 **Herausforderungen**: Trotz dieser Bemühungen ist der Immobilienmarkt sehr angespannt. **Steigende Baukosten**, **hohe Zinsen**, **komplizierte Vorschriften** und **Fachkräftemangel** führen zu langsame Umsetzung.
-
-
-
-
-
