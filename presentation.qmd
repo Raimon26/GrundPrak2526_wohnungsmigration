@@ -32,11 +32,11 @@ source("Program/03_eda_tabellen.R")
 
 2.  Datenanalyse
 
-    Zuzüge & Umzüge
+    - Zuzüge
 
-    Wegzüge
+    - Wegzüge
 
-    Bevölkerungsentwicklung
+    - Bevölkerungsentwicklung
 
 3.  Zusammenfassung und Fazit
 :::
@@ -109,7 +109,7 @@ boxplot_himmel
 
 1.  [Datenüberblick]{style="opacity: 0.25;"}
 2.  **Datenanalyse**
-    -   Zuzüge & Umzüge
+    -   Zuzüge
 
     -   [Wegzüge]{style="opacity: 0.25;"}
 
@@ -143,7 +143,7 @@ plot_umzuege_highlight
 
 1.  [Datenüberblick]{style="opacity: 0.25;"}
 2.  **Datenanalyse**
-    -   [Zuzüge & Umzüge]{style="opacity: 0.25;"}
+    -   [Zuzüge]{style="opacity: 0.25;"}
 
     -   Wegzüge
 
@@ -160,7 +160,7 @@ plot_wegzuege
 
 1.  [Datenüberblick]{style="opacity: 0.25;"}
 2.  **Datenanalyse**
-    -   [Zuzüge & Umzüge]{style="opacity: 0.25;"}
+    -   [Zuzüge]{style="opacity: 0.25;"}
 
     -   [Wegzüge]{style="opacity: 0.25;"}
 
@@ -195,7 +195,7 @@ plot_vergleich
 
 1.  [Datenüberblick]{style="opacity: 0.25;"}
 2.  [Datenanalyse]{style="opacity: 0.25;"}
-    -   [Zuzüge & Umzüge]{style="opacity: 0.25;"}
+    -   [Zuzüge]{style="opacity: 0.25;"}
 
     -   [Wegzüge]{style="opacity: 0.25;"}
 
@@ -206,16 +206,20 @@ plot_vergleich
 
 Limitation: Nur Daten ab 2000 für die Bevölkerungsentwicklung ist gegeben
 
-Aktuelle Zahlen (2025/2026): Für 2026 ist geplant, den Bau von rund 8.500 Wohnungen zu ermöglichen. Im Jahr 2024 wurden Genehmigungen für ca. 8.300 Wohnungen erteilt, rund 6.500 wurden fertiggestellt.
 
-Stadtwerke München (SWM) bauen im Rahmen einer Offensive rund 3.000 Werkswohnungen
 
 ## Ausblick
+Aktuelle Projekte und Vorhaben: 
+
+- **Freiham**: neuer Stadtteil für über 25.000 Menschen
+
+- **Neufreimann**: 5.500 Wohnungen für 15.000 Menschen
+
+- **Münchener Nordosten**: ab 2030 neues Zukunftsquartier für bis zu 30.000 Menschen
+
+**Herausforderungen**: Trotz dieser Bemühungen ist der Immobilienmarkt sehr angespannt. **Steigende Baukosten**, **hohe Zinsen**, **komplizierte Vorschriften** und **Fachkräftemangel** führen zu langsam Umsetzung.
 
 
-Herausforderungen: Trotz dieser Bemühungen ist der Immobilienmarkt sehr angespannt. Steigende Baukosten, hohe Zinsen und Fachkräftemangel führen zu einem Bauüberhang, bei dem genehmigte Projekte nicht oder nur langsam umgesetzt werden.
-
-Bedarf vs. Zuzug: Die Einwohnerzahl wächst weiter (Ende 2025: über 1,6 Millionen), was zu einem prognostizierten Bedarf an Wohnraum für über 200.000 weitere Menschen führt.
 
 
 
