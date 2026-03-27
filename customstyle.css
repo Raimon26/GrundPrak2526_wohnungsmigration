@@ -12,10 +12,23 @@ $font-family-sans-serif: "Segoe UI", Roboto, sans-serif;
 .reveal {
   // Alles innerhalb der präsentation...
   
+
   .slides {
-    background-color: $body-bg;
+    background-color: transparent !important;
+    z-index: 2 !important;
   }
 
+/* 2. Sicherstellen, dass die Titelseite keinen eigenen Hintergrund hat */
+  .reveal section.title-slide {
+    background: transparent !important;
+  }
+
+  
+  .reveal .slide-background {
+    z-index: 1 !important;
+  }
+  
+  
   h1, h2 {
     color: $theme-blue;
     font-weight: 700;
@@ -40,12 +53,10 @@ $font-family-sans-serif: "Segoe UI", Roboto, sans-serif;
     color: #bdc3c7;
   }
   .slide-logo {
-  height: 100px !important;
-  width: 100px!important;
-  max-width: unset !important;
-  max-height: unset !important;
-  top: 14px !important;
-  right: 50px !important;
+  bottom: 20px !important; /* Abstand von unten */
+  right: 20px !important;  /* Abstand von rechts */
+  top: unset !important;   /* Deaktiviert die Positionierung oben */
+  max-height: 50px;            /* Größe anpassen */
 }
 }
 
