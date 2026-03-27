@@ -79,7 +79,7 @@ knitr::kable(
 ## Datenüberblick
 
 ```{r boxplot_typ, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-#| echo: false
+
 
 boxplot_typ
 
@@ -89,7 +89,7 @@ boxplot_typ
 ## Datenüberblick
 
 ```{r boxplot_dichte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-#| echo: false
+
 
 boxplot_dichte
 ```
@@ -97,10 +97,18 @@ boxplot_dichte
 ## Datenüberblick
 
 ```{r boxplot_himmel, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-#| echo: false
+
 
 boxplot_himmel
 ```
+
+## Datenüberblick
+
+```{r plot_bezirkstypen, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
+plot_bezirkstypen
+```
+
 
 ## Agenda
 
