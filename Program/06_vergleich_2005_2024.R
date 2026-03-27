@@ -23,14 +23,14 @@ karte_vergleich_daten <- karte_alle_jahre_temp %>%
 
 # 4. PLOT ERSTELLEN
 plot_vergleich <- ggplot(karte_vergleich_daten) +
-  geom_sf(aes(fill = dichte), color = "white", linewidth = 0.2) +
-  facet_wrap(~jahr) + # Teilt den Plot in zwei nebeneinanderliegende Karten
+  geom_sf(aes(fill = as.numeric(dichte)), color = "white", linewidth = 0.2) + # <-- LA CORRECCIÓN ESTÁ AQUÍ
+  facet_wrap(~jahr) + 
   scale_fill_viridis_c(
     option = "magma", 
     direction = -1,
     limits = c(0, 16000),
-    breaks = c(0, 4000, 8000, 12000, 16000), # Setzt gezielte Zahlen, 16000 ist der schwarze Bereich
-    guide = guide_colorbar(barwidth = 20)    # Optional: Macht den Farbbalken breiter, damit die Zahlen Platz haben
+    breaks = c(0, 4000, 8000, 12000, 16000), 
+    guide = guide_colorbar(barwidth = 20)    
   ) +
   theme_void() +
   labs(
@@ -40,7 +40,7 @@ plot_vergleich <- ggplot(karte_vergleich_daten) +
   ) +
   theme(
     legend.position = "bottom",
-    strip.text = element_text(size = 14, face = "bold") # Macht die Jahreszahlen (2000 / 2024) groß
+    strip.text = element_text(size = 14, face = "bold")
   )
 
 print(plot_vergleich)
