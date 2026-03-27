@@ -78,33 +78,31 @@ knitr::kable(
 
 
 ## Datenüberblick
-:::: {.columns}
 
-::: {.column}
-```{r}
+```{r boxplot_typ, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 #| echo: false
-#| fig-height: 6
+
 boxplot_typ
 
 
 ```
-:::
-::: {.column}
-```{r}
+
+## Datenüberblick
+
+```{r boxplot_dichte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 #| echo: false
-#| fig-height: 6
+
 boxplot_dichte
 ```
-:::
-::: {.column}
-```{r}
+
+## Datenüberblick
+
+```{r boxplot_himmel, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 #| echo: false
-#| fig-height: 6
-#| fig-width: 10
+
 boxplot_himmel
 ```
-:::
-::::
+
 ## Agenda
 
 1.  [Datenüberblick]{style="opacity: 0.25;"}
@@ -205,7 +203,7 @@ plot_vergleich
 ## Zusammenfassung und Fazit
 
 Limitation: Nur Daten ab 2000 für die Bevölkerungsentwicklung ist gegeben
-
+Wechselmatrix ab 2005 und Bevölkerungsdichte ab 2002
 
 
 ## Ausblick
@@ -217,7 +215,7 @@ Aktuelle Projekte und Vorhaben:
 
 - **Münchener Nordosten**: ab 2030 neues Zukunftsquartier für bis zu 30.000 Menschen
 
-**Herausforderungen**: Trotz dieser Bemühungen ist der Immobilienmarkt sehr angespannt. **Steigende Baukosten**, **hohe Zinsen**, **komplizierte Vorschriften** und **Fachkräftemangel** führen zu langsam Umsetzung.
+**Herausforderungen**: Trotz dieser Bemühungen ist der Immobilienmarkt sehr angespannt. **Steigende Baukosten**, **hohe Zinsen**, **komplizierte Vorschriften** und **Fachkräftemangel** führen zu langsame Umsetzung.
 
 
 
