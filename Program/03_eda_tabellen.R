@@ -31,7 +31,7 @@ indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
 # 1. Boxplot nach Zentrum/Peripherie (Unser Original)
 boxplot_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_aussen_insgesamt, fill = bezirk_typ)) +
   geom_boxplot(alpha = 0.7) +
-  scale_fill_viridis_d(option = "D") +
+  scale_fill_viridis_d(option = "D", end = 0.8) +
   theme_minimal() +
   labs(title = "Zuzüge nach Bezirkstyp (Zentrum vs. Peripherie)", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
