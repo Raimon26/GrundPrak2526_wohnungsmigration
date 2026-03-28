@@ -47,7 +47,7 @@ plot_zuzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "zuzuege_
   labs(
     title = "Entwicklung der Zuzüge nach München (2000-2024)",
     x = "Jahr",
-    y = "Anzahl Personen",
+    y = "Anzahl der Zuzüge",
     color = "Bezirkstyp"
   ) +
   theme(legend.position = "bottom")
@@ -70,7 +70,7 @@ plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_
   labs(
     title = "Entwicklung der Umzüge innerhalb München (2000-2024)",
     x = "Jahr",
-    y = "Anzahl Personen",
+    y = "Anzahl der Wegzüge",
     color = "Bezirkstyp"
   ) +
   theme(legend.position = "bottom")
@@ -210,7 +210,7 @@ plot_wegzuege <- ggplot(
   labs(
     title = "Entwicklung der Wegzüge aus den Münchner Stadtbezirken (2000–2024)",
     x = "Jahr",
-    y = "Anzahl Personen",
+    y = "Anzahl der Wegzüge",
     color = "Bezirkstyp"
   ) +
   

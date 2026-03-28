@@ -77,7 +77,8 @@ plot_bezirkstypen <- ggplot(karte_mit_daten_temp2) +
   theme(
     legend.position = "bottom",
     legend.title = element_text(face = "bold"),
-    plot.title = element_text(face = "bold", size = 16)
+    plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
   )
 
 print(plot_bezirkstypen)
