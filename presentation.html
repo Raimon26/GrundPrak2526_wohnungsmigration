@@ -6,8 +6,13 @@
 <script src="presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<<<<<<< HEAD
 <link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.27">
+=======
+<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
+>>>>>>> 28ab1464d0315950ffe7dcfc29206b9381c110dd
 
   <meta name="author" content="Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang">
   <title>Wohnungsmigration in München</title>
@@ -29,7 +34,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto-97e690a65df25032e636c45403dbb044.css">
+  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto-60426cfa0718c280d4a950e35f176248.css">
   <link href="presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="presentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -165,42 +170,55 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
-<caption>Säule 1: Mobilitätsdaten (Auszug)</caption>
+<caption>Säule 1: Mobilität</caption>
 <thead>
 <tr class="header">
-<th style="text-align: center;" data-quarto-table-cell-role="th">Jahr</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Bezirk-Nr.</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Kategorie</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Zuzüge (Außen)</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Umzüge (Innen)</th>
+<th style="text-align: center;">Jahr</th>
+<th style="text-align: center;">Bezirk</th>
+<th style="text-align: center;">Bewegung</th>
+<th style="text-align: center;">Nationalität</th>
+<th style="text-align: center;">Anzahl</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">2024</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">Zentrum</td>
-<td style="text-align: center;">1822</td>
-<td style="text-align: center;">1523</td>
+<td style="text-align: center;">Zuzug (Außen)</td>
+<td style="text-align: center;">Deutsch</td>
+<td style="text-align: center;">811</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2023</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">Zuzug (Außen)</td>
+<td style="text-align: center;">Nichtdeutsch</td>
+<td style="text-align: center;">1011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">2000</td>
 <td style="text-align: center;">25</td>
-<td style="text-align: center;">Innenstadt-Rand</td>
-<td style="text-align: center;">2776</td>
-<td style="text-align: center;">3828</td>
+<td style="text-align: center;">Wegzug (Innen)</td>
+<td style="text-align: center;">Nichtdeutsch</td>
+<td style="text-align: center;">747</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="cell-output-display">
-<table class="caption-top">
+<table class="caption-top" data-quarto-postprocess="true">
 <caption>Säule 2: Bevölkerungsdichte (Auszug)</caption>
 <thead>
 <tr class="header">
 <th style="text-align: center;" data-quarto-table-cell-role="th">Jahr</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">Bezirk-Nr.</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Kategorie</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">Einwohner</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">Dichte (Einw./km²)</th>
 </tr>
@@ -209,14 +227,12 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <tr class="odd">
 <td style="text-align: center;">2000</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">Zentrum</td>
 <td style="text-align: center;">18228.9</td>
 <td style="text-align: center;">5761.902</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">2024</td>
 <td style="text-align: center;">25</td>
-<td style="text-align: center;">Innenstadt-Rand</td>
 <td style="text-align: center;">57116.0</td>
 <td style="text-align: center;">10805.000</td>
 </tr>
@@ -304,14 +320,22 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <li><span style="opacity: 0.25;">Zusammenfassung und Ausblick</span></li>
 </ol>
 </section>
-<section id="zuzüge" class="slide level2">
-<h2>Zuzüge</h2>
+<section id="zuzüge-von-außen" class="slide level2">
+<h2>Zuzüge (von außen)</h2>
 
 <img data-src="presentation_files/figure-revealjs/plot_zuzuege-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
-<section id="zuzüge-1" class="slide level2">
-<h2>Zuzüge</h2>
+<section id="zuzüge-von-außen-1" class="slide level2">
+<h2>Zuzüge (von außen)</h2>
 
 <img data-src="presentation_files/figure-revealjs/plot_zuzuege_highlight-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
+<section id="zuzüge-innerhalb" class="slide level2">
+<h2>Zuzüge (innerhalb)</h2>
+
+<img data-src="presentation_files/figure-revealjs/plot_umzuege-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
+<section id="zuzüge-innerhalb-1" class="slide level2">
+<h2>Zuzüge (innerhalb)</h2>
+
+<img data-src="presentation_files/figure-revealjs/plot_umzuege_highlight-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
 <section id="agenda-2" class="slide level2">
 <h2>Agenda</h2>
 <ol type="1">
@@ -332,11 +356,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <section id="wegzüge-1" class="slide level2">
 <h2>Wegzüge</h2>
 
-<img data-src="presentation_files/figure-revealjs/plot_umzuege-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
-<section id="wegzüge-2" class="slide level2">
-<h2>Wegzüge</h2>
-
-<img data-src="presentation_files/figure-revealjs/plot_umzuege_highlight-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
+<img data-src="presentation_files/figure-revealjs/plot_bar_relativ-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
 <section id="agenda-3" class="slide level2">
 <h2>Agenda</h2>
 <ol type="1">
@@ -361,10 +381,6 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <section id="bevölkerungsentwicklung-2" class="slide level2">
 <h2>Bevölkerungsentwicklung</h2>
 
-<img data-src="presentation_files/figure-revealjs/plot_karte-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
-<section id="bevölkerungsentwicklung-3" class="slide level2">
-<h2>Bevölkerungsentwicklung</h2>
-
 <img data-src="presentation_files/figure-revealjs/plot_vergleich-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
 <section id="agenda-4" class="slide level2">
 <h2>Agenda</h2>
@@ -381,6 +397,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 </section>
 <section id="zusammenfassung" class="slide level2">
 <h2>Zusammenfassung</h2>
+<<<<<<< HEAD
 <p><strong>Limitation</strong>: Daten basieren auf 2 Datasets ab Jahr 2000 und Wechselmatrizen ab 2005</p>
 <p><strong><em>Deutsche Staatsangehörige</em></strong>: Weitestgehend stabiles Niveau mit leicht degressiver Tendenz.<br>
 <strong>Nicht-deutsche Staatsangehörige</strong>: Hohe Volatilität bei gleichzeitigem Anstieg des durchschnittlichen Zuzugsniveaus.<br>
@@ -389,6 +406,22 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <li><p>Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs.&nbsp;Außen)</p></li>
 <li><p>Entwicklung der Bevölkerungsdichte <br> (Einwohner pro <span class="math inline">\(km^2\)</span>)</p></li>
 </ol>
+=======
+<p><strong>Limitation</strong>: Daten basieren auf 2 Datasets ab Jahr 2000 und Wanderungsmatrizen ab 2005</p>
+<ol type="1">
+<li><p>Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs.&nbsp;Nichtdeutsch)</p></li>
+<li><p>Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs.&nbsp;Außen)</p></li>
+<li><p>Entwicklung der Bevölkerungsdichte <br> (Einwohner pro <span class="math inline">\(km^2\)</span>)</p></li>
+</ol>
+</section>
+<section id="zusammenfassung-1" class="slide level2">
+<h2>Zusammenfassung</h2>
+<ol type="1">
+<li><p><strong>Deutsch</strong>: Stabil, leichter Abwärtstrend <br> <strong>Nichtdeutsch</strong>: hohe Volatilität, leicht Aufwärtstrend</p></li>
+<li><p><strong>Insgesamt</strong> stetige Abwanderung bei Peripherie, Stagnation bei Zentrum und Innenstadt-Rand Innenstadt-Rand haben sich <strong>relativ gleichmäßig verteilt</strong>, aber Zentrum und Peripherie <strong>bleiben ca. zur Hälfte im Bezirk</strong></p></li>
+<li><p><strong>Insgesamt</strong> flächendeckender Anstieg der Einwohner pro <span class="math inline">\(km^2\)</span></p></li>
+</ol>
+>>>>>>> 28ab1464d0315950ffe7dcfc29206b9381c110dd
 </section>
 <section id="ausblick" class="slide level2">
 <h2>Ausblick</h2>
@@ -402,8 +435,24 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <div style="font-size: 0.4em; color: grey; text-align: left;">
 <p>Quelle: <a href="https://stadt.muenchen.de/rathaus/projekte/stadtplanung.html">muenchen.de</a>, <a href="https://www.bayerische-staatszeitung.de/staatszeitung/bauen/detailansicht-bauen/artikel/16-900-wohnungen-fehlen.html#topPosition">BZS</a></p>
 </div>
-
 </section>
+<section id="anhang" class="slide level2">
+<h2>Anhang</h2>
+
+<img data-src="presentation_files/figure-revealjs/boxplot_typ_um-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
+<section id="anhang-1" class="slide level2">
+<h2>Anhang</h2>
+
+<img data-src="presentation_files/figure-revealjs/boxplot_dichte_um-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
+<section id="anhang-2" class="slide level2">
+<h2>Anhang</h2>
+
+<img data-src="presentation_files/figure-revealjs/boxplot_himmel_um-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
+<section id="anhang-3" class="slide level2">
+<h2>Anhang</h2>
+
+
+<img data-src="presentation_files/figure-revealjs/plot_sankey_final-1.png" class="quarto-figure quarto-figure-center r-stretch" width="2100"></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="Output/PresentationBilder/LMU_Logo.svg" class="slide-logo"></p>
@@ -594,7 +643,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -744,14 +793,13 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

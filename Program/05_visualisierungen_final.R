@@ -68,9 +68,9 @@ plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_
   scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   labs(
-    title = "Entwicklung der Umzüge innerhalb München (2000-2024)",
+    title = "Entwicklung der Zuzüge innerhalb München (2000-2024)",
     x = "Jahr",
-    y = "Anzahl der Wegzüge",
+    y = "Anzahl der Zuzüge",
     color = "Bezirkstyp"
   ) +
   theme(legend.position = "bottom")
@@ -125,7 +125,7 @@ plot_umzuege_highlight <- plot_umzuege +
             label = "Schwabing-\nFreimann", color = "darkred", fontface = "bold", vjust = 0,
             hjust = 0, size = 3) +
   labs(
-    title = "Umzüge innerhalb Münchens (2000-2024)"
+    title = "Zuzüge innerhalb Münchens (2000-2024)"
   )
 
 print(plot_umzuege_highlight)
