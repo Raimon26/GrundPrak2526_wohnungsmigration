@@ -262,6 +262,16 @@ plot_vergleich
 
 3.  Entwicklung der Bevölkerungsdichte <br> (Einwohner pro $km^2$)
 
+## Zusammenfassung
+
+1. **Deutsch**: Stabil, leichter Abwärtstrend <br> **Nichtdeutsch**: hohe Volatilität, leicht Aufwärtstrend
+
+2. **Insgesamt** stetige Abwanderung bei Peripherie, Stagnation bei Zentrum und Innenstadt-Rand
+Innenstadt-Rand haben sich **relativ gleichmäßig verteilt**, aber
+Zentrum und Peripherie **bleiben ca. zur Hälfte im Bezirk**
+
+3. **Insgesamt** flächendeckender Anstieg der Einwohner pro $km^2$
+
 ## Ausblick
 
 Aktuelle Projekte und Vorhaben:
