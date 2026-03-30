@@ -27,11 +27,12 @@ source("Program/03_eda_tabellen.R")
 ```
 
 ## Fragen unserer Analyse
-1. Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
 
-2. Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs. Außen)
+1.  Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
 
-3. Entwicklung der Bevölkerungsdichte <br> (Einwohner pro $km^2$)
+2.  Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs. Außen)
+
+3.  Entwicklung der Bevölkerungsdichte <br> (Einwohner pro $km^2$)
 
 ## Agenda
 
@@ -135,7 +136,6 @@ boxplot_himmel
 
 plot_bezirkstypen
 ```
-
 
 ## Agenda
 
@@ -248,7 +248,10 @@ plot_vergleich
 ## Zusammenfassung
 **Limitation**: Daten basieren auf 2 Datasets ab Jahr 2000 und Wechselmatrizen ab 2005
 
-1. Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
+
+***Deutsche Staatsangehörige***: Weitestgehend stabiles Niveau mit leicht degressiver Tendenz.\
+**Nicht-deutsche Staatsangehörige**: Hohe Volatilität bei gleichzeitigem Anstieg des durchschnittlichen Zuzugsniveaus.\
+**Wegzüge**: Höhere Abwanderungsdynamik (binnen und außen) in der Peripherie im Vergleich zu zentralen Lagen.
 
 2. Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs. Außen)
 

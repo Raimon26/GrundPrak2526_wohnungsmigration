@@ -13,8 +13,8 @@ packages <- c(
   "sf",         # NEU: Für Geodaten und Karten!
   "dplyr",
   "tidyr",
-  "scales"
-
+  "scales",
+  "ggalluvial"
 )
 
 # 2. Pakete automatisch installieren (falls nötig) und laden
