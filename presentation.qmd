@@ -82,7 +82,31 @@ knitr::kable(
   format = "html",
   align = "c" 
 )
+
 ```
+
+## Datenüberblick
+
+```{r}
+#Wechselmatrix
+library(knitr)
+library(dplyr)
+
+# Erstelle eine beispielhafte Matrix-Struktur
+matrix_skizze <- data.frame(
+  `von/nach` = c("Bezirk 1", "Bezirk 2", "...", "Bezirk 25"),
+  `1` = c("262", "145", "...", "47"),
+  `2` = c("179", "1078", "...", "162"),
+  `...` = c("...", "...", "...", "..."),
+  `25` = c("47", "162", "...", "3825")
+)
+
+# Schöne HTML-Tabelle für die Folie
+kable(matrix_skizze, 
+      align = "c", 
+      caption = "Wanderungsmatrix (pro Jahr)")
+```
+Zeitraum: 2005–2024
 
 ## Datenüberblick
 
@@ -222,7 +246,7 @@ plot_vergleich
 3.  **Zusammenfassung und Ausblick**
 
 ## Zusammenfassung
-**Limitation**: Daten basieren auf 2 Datasets und Wechselmatrizen ab Jahr 2000
+**Limitation**: Daten basieren auf 2 Datasets ab Jahr 2000 und Wechselmatrizen 2025
 
 1. Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
 
