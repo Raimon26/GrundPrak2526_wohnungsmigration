@@ -66,8 +66,9 @@ df_long_sketch <- data.frame(
   Jahr = c(2024, 2023, "...", 2000),
   Bezirk = c(1, 2, "...", 25),
   Bewegung = c("Zuzug (Außen)", "Zuzug (Außen)", "...", "Wegzug (Innen)"),
-  Nationalität = c("Deutsch", "Nichtdeutsch", "...", "Nichtdeutsch"),
-  Anzahl = c(811, 1011, "...", 747)
+  Ausprägung = c("Deutsch", "Nichtdeutsch", "...", "Nichtdeutsch"),
+  Anzahl = c(811, 1011, "...", 747),
+  Bevölkerung = c(15549.8, 48527.4, "...", 35263.3)
 )
 
 # Schöne Darstellung für Quarto
@@ -264,7 +265,7 @@ plot_vergleich
 
 ## Zusammenfassung
 
-1. **Deutsch**: Stabil, leichter Abwärtstrend <br> **Nichtdeutsch**: hohe Volatilität, leicht Aufwärtstrend
+1. **Deutsch**: Stabil, leichter Abwärtstrend <br> **Nichtdeutsch**: hohe Volatilität, leichter Aufwärtstrend
 
 2. **Insgesamt** stetige Abwanderung bei Peripherie, Stagnation bei Zentrum und Innenstadt-Rand
 Innenstadt-Rand haben sich **relativ gleichmäßig verteilt**, aber
