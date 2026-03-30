@@ -58,28 +58,32 @@ source("Program/07_binnenmigration_sankey.R")
 #| message: false
 #| warning: false
   
-# --- 1. DATENSATZ: MOBILITÄT ---
-daten_preview_mob <- indikatoren_mobilitaet %>%
-  dplyr::select(jahr, von_bezirk, bezirk_typ, zuzuege_aussen_insgesamt, umzuege_innen_insgesamt)
+library(knitr)
+library(dplyr)
 
-mob_ends <- dplyr::bind_rows(head(daten_preview_mob, 1), tail(daten_preview_mob, 1))
-
-knitr::kable(
-  mob_ends, 
-  col.names = c("Jahr", "Bezirk-Nr.", "Kategorie", "Zuzüge (Außen)", "Umzüge (Innen)"),
-  caption = "Säule 1: Mobilitätsdaten (Auszug)",
-  format = "html",
-  align = "c" 
+# Wir bilden genau die Struktur ab, die du gerade gepostet hast
+df_long_sketch <- data.frame(
+  Jahr = c(2024, 2023, "...", 2000),
+  Bezirk = c(1, 2, "...", 25),
+  Bewegung = c("Zuzug (Außen)", "Zuzug (Außen)", "...", "Wegzug (Innen)"),
+  Nationalität = c("Deutsch", "Nichtdeutsch", "...", "Nichtdeutsch"),
+  Anzahl = c(811, 1011, "...", 747)
 )
+
+# Schöne Darstellung für Quarto
+kable(df_long_sketch, 
+      align = "c", 
+      caption = "Finales Datenformat (Tidy Data für die Analyse)")
+
 # --- 2. DATENSATZ: DICHTE ---
 daten_preview_dichte <- indikatoren_dichte %>%
-  dplyr::select(jahr, von_bezirk, bezirk_typ, einwohner, dichte)
+  dplyr::select(jahr, von_bezirk, einwohner, dichte)
 
 dichte_ends <- dplyr::bind_rows(head(daten_preview_dichte, 1), tail(daten_preview_dichte, 1))
 
 knitr::kable(
   dichte_ends, 
-  col.names = c("Jahr", "Bezirk-Nr.", "Kategorie", "Einwohner", "Dichte (Einw./km²)"),
+  col.names = c("Jahr", "Bezirk-Nr.", "Einwohner", "Dichte (Einw./km²)"),
   caption = "Säule 2: Bevölkerungsdichte (Auszug)",
   format = "html",
   align = "c" 
@@ -250,7 +254,7 @@ plot_vergleich
 
 ## Zusammenfassung
 
-**Limitation**: Daten basieren auf 2 Datasets ab Jahr 2000 und Wechselmatrizen ab 2005
+**Limitation**: Daten basieren auf 2 Datasets ab Jahr 2000 und Wanderungsmatrizen ab 2005
 
 1.  Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
 
