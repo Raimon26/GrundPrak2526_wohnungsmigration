@@ -6,8 +6,8 @@
 <script src="presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang">
   <title>Wohnungsmigration in München</title>
@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto-60426cfa0718c280d4a950e35f176248.css">
+  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto-97e690a65df25032e636c45403dbb044.css">
   <link href="presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="presentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -164,7 +164,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <h2>Datenüberblick</h2>
 <div class="cell">
 <div class="cell-output-display">
-<table class="caption-top" data-quarto-postprocess="true">
+<table class="caption-top">
 <caption>Säule 1: Mobilitätsdaten (Auszug)</caption>
 <thead>
 <tr class="header">
@@ -194,7 +194,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 </table>
 </div>
 <div class="cell-output-display">
-<table class="caption-top" data-quarto-postprocess="true">
+<table class="caption-top">
 <caption>Säule 2: Bevölkerungsdichte (Auszug)</caption>
 <thead>
 <tr class="header">
@@ -338,7 +338,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 </section>
 <section id="zusammenfassung-1" class="slide level2">
 <h2>Zusammenfassung</h2>
-<p>*<strong>Trend-Konsistenz</strong>: Gleichbleibendes Verteilungsmuster bei Umzügen innerhalb Münchens und Fortzügen aus der Stadt.<br>
+<p><strong>Trend-Konsistenz</strong>: Gleichbleibendes Verteilungsmuster bei Umzügen innerhalb Münchens und Fortzügen aus der Stadt.<br>
 <strong>Bevölkerungswachstum</strong>: Kontinuierlicher Anstieg in der Peripherie bei gleichzeitiger Stagnation im Zentrum und Innenstadt-Rand.<br>
 <strong>Besiedlungsdichte</strong>: Flächendeckender Anstieg der Einwohner pro <span class="math inline">\(km^2\)</span> über den gesamten Untersuchungszeitraum.</p>
 </section>
@@ -543,7 +543,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -693,13 +693,14 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
