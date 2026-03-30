@@ -73,7 +73,7 @@ df_long_sketch <- data.frame(
 # Schöne Darstellung für Quarto
 kable(df_long_sketch, 
       align = "c", 
-      caption = "Finales Datenformat (Tidy Data für die Analyse)")
+      caption = "Säule 1: Mobilität")
 
 # --- 2. DATENSATZ: DICHTE ---
 daten_preview_dichte <- indikatoren_dichte %>%
