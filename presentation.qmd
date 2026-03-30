@@ -222,7 +222,7 @@ plot_vergleich
 3.  **Zusammenfassung und Ausblick**
 
 ## Zusammenfassung
-**Limitation**: Daten basieren auf drei Datasets ab Jahr 2000
+**Limitation**: Daten basieren auf 2 Datasets und Wechselmatrizen ab Jahr 2000
 
 1. Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
 
