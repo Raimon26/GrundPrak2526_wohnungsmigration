@@ -24,6 +24,7 @@ editor: visual
 source("Program/05_visualisierungen_final.R")
 source("Program/06_vergleich_2005_2024.R")
 source("Program/03_eda_tabellen.R")
+source("Program/07_binnenmigration_sankey.R")
 ```
 
 ## Fragen unserer Analyse
@@ -107,6 +108,7 @@ kable(matrix_skizze,
       align = "c", 
       caption = "Wanderungsmatrix (pro Jahr)")
 ```
+
 Zeitraum: 2005–2024
 
 ## Datenüberblick
@@ -148,19 +150,34 @@ plot_bezirkstypen
     -   [Bevölkerungsentwicklung]{style="opacity: 0.25;"}
 3.  [Zusammenfassung und Ausblick]{style="opacity: 0.25;"}
 
-## Zuzüge
+## Zuzüge (von außen)
 
 ```{r plot_zuzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 
 plot_zuzuege
 ```
 
-## Zuzüge
+## Zuzüge (von außen)
 
 ```{r plot_zuzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 
 plot_zuzuege_highlight
 ```
+
+## Zuzüge (innerhalb)
+
+```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
+plot_umzuege
+```
+
+## Zuzüge (innerhalb)
+
+```{r plot_umzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
+plot_umzuege_highlight
+```
+
 
 ## Agenda
 
@@ -182,16 +199,9 @@ plot_wegzuege
 
 ## Wegzüge
 
-```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+```{r plot_bar_relativ, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 
-plot_umzuege
-```
-
-## Wegzüge
-
-```{r plot_umzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-
-plot_umzuege_highlight
+plot_bar_relativ
 ```
 
 
@@ -222,13 +232,6 @@ plot_dichte
 
 ## Bevölkerungsentwicklung
 
-```{r plot_karte, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-
-plot_karte
-```
-
-## Bevölkerungsentwicklung
-
 ```{r plot_vergleich, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 
 plot_vergleich
@@ -246,16 +249,14 @@ plot_vergleich
 3.  **Zusammenfassung und Ausblick**
 
 ## Zusammenfassung
+
 **Limitation**: Daten basieren auf 2 Datasets ab Jahr 2000 und Wechselmatrizen ab 2005
 
+1.  Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
 
-***Deutsche Staatsangehörige***: Weitestgehend stabiles Niveau mit leicht degressiver Tendenz.\
-**Nicht-deutsche Staatsangehörige**: Hohe Volatilität bei gleichzeitigem Anstieg des durchschnittlichen Zuzugsniveaus.\
-**Wegzüge**: Höhere Abwanderungsdynamik (binnen und außen) in der Peripherie im Vergleich zu zentralen Lagen.
+2.  Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs. Außen)
 
-2. Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs. Außen)
-
-3. Entwicklung der Bevölkerungsdichte <br> (Einwohner pro $km^2$)
+3.  Entwicklung der Bevölkerungsdichte <br> (Einwohner pro $km^2$)
 
 ## Ausblick
 
@@ -272,4 +273,30 @@ Aktuelle Projekte und Vorhaben:
 ::: {style="font-size: 0.4em; color: grey; text-align: left;"}
 Quelle: [muenchen.de](https://stadt.muenchen.de/rathaus/projekte/stadtplanung.html), [BZS](https://www.bayerische-staatszeitung.de/staatszeitung/bauen/detailansicht-bauen/artikel/16-900-wohnungen-fehlen.html#topPosition)
 :::
+
+## Anhang
+
+```{r boxplot_typ_um, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+boxplot_typ_um
+```
+
+
+## Anhang
+
+```{r boxplot_dichte_um, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+boxplot_dichte_um
+```
+
+## Anhang
+
+```{r boxplot_himmel_um, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+boxplot_himmel_um
+```
+
+## Anhang
+```{r plot_sankey_final, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+plot_sankey_final
+```
+
+
 
