@@ -1,6 +1,6 @@
 ---
 title: "Wohnungsmigration in München"
-subtitle: "31.03.2026 | Betreuer: Christina Sauer"
+subtitle: "31.03.2026 | Betreuerin: Christina Sauer"
 author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang"
 format:
    revealjs:
@@ -56,7 +56,7 @@ source("Program/03_eda_tabellen.R")
 #| echo: false
 #| message: false
 #| warning: false
-
+  
 # --- 1. DATENSATZ: MOBILITÄT ---
 daten_preview_mob <- indikatoren_mobilitaet %>%
   dplyr::select(jahr, von_bezirk, bezirk_typ, zuzuege_aussen_insgesamt, umzuege_innen_insgesamt)
@@ -83,7 +83,31 @@ knitr::kable(
   format = "html",
   align = "c" 
 )
+
 ```
+
+## Datenüberblick
+
+```{r}
+#Wechselmatrix
+library(knitr)
+library(dplyr)
+
+# Erstelle eine beispielhafte Matrix-Struktur
+matrix_skizze <- data.frame(
+  `von/nach` = c("Bezirk 1", "Bezirk 2", "...", "Bezirk 25"),
+  `1` = c("262", "145", "...", "47"),
+  `2` = c("179", "1078", "...", "162"),
+  `...` = c("...", "...", "...", "..."),
+  `25` = c("47", "162", "...", "3825")
+)
+
+# Schöne HTML-Tabelle für die Folie
+kable(matrix_skizze, 
+      align = "c", 
+      caption = "Wanderungsmatrix (pro Jahr)")
+```
+Zeitraum: 2005–2024
 
 ## Datenüberblick
 
@@ -138,20 +162,6 @@ plot_zuzuege
 plot_zuzuege_highlight
 ```
 
-## Umzüge
-
-```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-
-plot_umzuege
-```
-
-## Umzüge
-
-```{r plot_umzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
-
-plot_umzuege_highlight
-```
-
 ## Agenda
 
 1.  [Datenüberblick]{style="opacity: 0.25;"}
@@ -169,6 +179,21 @@ plot_umzuege_highlight
 
 plot_wegzuege
 ```
+
+## Wegzüge
+
+```{r plot_umzuege, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
+plot_umzuege
+```
+
+## Wegzüge
+
+```{r plot_umzuege_highlight, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
+
+plot_umzuege_highlight
+```
+
 
 ## Agenda
 
@@ -221,18 +246,16 @@ plot_vergleich
 3.  **Zusammenfassung und Ausblick**
 
 ## Zusammenfassung
+**Limitation**: Daten basieren auf 2 Datasets ab Jahr 2000 und Wechselmatrizen ab 2005
 
-**Limitation**: Daten ab Jahr 2000 zur Analyse verfügbar
 
 ***Deutsche Staatsangehörige***: Weitestgehend stabiles Niveau mit leicht degressiver Tendenz.\
 **Nicht-deutsche Staatsangehörige**: Hohe Volatilität bei gleichzeitigem Anstieg des durchschnittlichen Zuzugsniveaus.\
 **Wegzüge**: Höhere Abwanderungsdynamik (binnen und außen) in der Peripherie im Vergleich zu zentralen Lagen.
 
-## Zusammenfassung
+2. Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs. Außen)
 
-**Trend-Konsistenz**: Gleichbleibendes Verteilungsmuster bei Umzügen innerhalb Münchens und Fortzügen aus der Stadt.\
-**Bevölkerungswachstum**: Kontinuierlicher Anstieg in der Peripherie bei gleichzeitiger Stagnation im Zentrum und Innenstadt-Rand.\
-**Besiedlungsdichte**: Flächendeckender Anstieg der Einwohner pro $km^2$ über den gesamten Untersuchungszeitraum.
+3. Entwicklung der Bevölkerungsdichte <br> (Einwohner pro $km^2$)
 
 ## Ausblick
 
@@ -245,3 +268,8 @@ Aktuelle Projekte und Vorhaben:
 -   **Münchener Nordosten**: ab 2030 neues Zukunftsquartier für bis zu 30.000 Menschen
 
 **Herausforderungen**: Trotz dieser Bemühungen ist der Immobilienmarkt sehr angespannt. **Steigende Baukosten**, **hohe Zinsen**, **komplizierte Vorschriften** und **Fachkräftemangel** führen zu langsame Umsetzung.
+
+::: {style="font-size: 0.4em; color: grey; text-align: left;"}
+Quelle: [muenchen.de](https://stadt.muenchen.de/rathaus/projekte/stadtplanung.html), [BZS](https://www.bayerische-staatszeitung.de/staatszeitung/bauen/detailansicht-bauen/artikel/16-900-wohnungen-fehlen.html#topPosition)
+:::
+
