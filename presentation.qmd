@@ -5,6 +5,7 @@ author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang"
 format:
    revealjs:
      theme: [default, customstyle.css]
+     footer: Grundlegendes Praxisprojekt
      title-slide-attributes:
       data-background-image: "Output/PresentationBilder/lmu_siegel.jpg"
       data-background-size: cover
