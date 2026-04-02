@@ -165,76 +165,62 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
-<caption>Säule 1: Mobilität</caption>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 19%">
+<col style="width: 16%">
+<col style="width: 8%">
+<col style="width: 15%">
+<col style="width: 24%">
+</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Jahr</th>
-<th style="text-align: center;">Bezirk</th>
-<th style="text-align: center;">Bewegung</th>
-<th style="text-align: center;">Ausprägung</th>
-<th style="text-align: center;">Anzahl</th>
-<th style="text-align: center;">Bevölkerung</th>
+<th style="text-align: left;">Jahr</th>
+<th style="text-align: left;">Bezirk</th>
+<th style="text-align: left;">Bewegung</th>
+<th style="text-align: left;">Ausprägung</th>
+<th style="text-align: left;">Anzahl</th>
+<th style="text-align: left;">Bevölkerung</th>
+<th style="text-align: left;">Dichte (Einw./km²)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">2024</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">Zuzug (Außen)</td>
-<td style="text-align: center;">Deutsch</td>
-<td style="text-align: center;">811</td>
-<td style="text-align: center;">15549.8</td>
+<td style="text-align: left;">2024</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Zuzug (Außen)</td>
+<td style="text-align: left;">Deutsch</td>
+<td style="text-align: left;">811</td>
+<td style="text-align: left;">15549.8</td>
+<td style="text-align: left;">10805</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">2023</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">Zuzug (Außen)</td>
-<td style="text-align: center;">Nichtdeutsch</td>
-<td style="text-align: center;">1011</td>
-<td style="text-align: center;">48527.4</td>
+<td style="text-align: left;">2023</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Zuzug (Außen)</td>
+<td style="text-align: left;">Nichtdeutsch</td>
+<td style="text-align: left;">1011</td>
+<td style="text-align: left;">48527.4</td>
+<td style="text-align: left;">29304.904</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">2000</td>
-<td style="text-align: center;">25</td>
-<td style="text-align: center;">Wegzug (Innen)</td>
-<td style="text-align: center;">Nichtdeutsch</td>
-<td style="text-align: center;">747</td>
-<td style="text-align: center;">35263.3</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="cell-output-display">
-<table class="caption-top" data-quarto-postprocess="true">
-<caption>Säule 2: Bevölkerungsdichte (Auszug)</caption>
-<thead>
-<tr class="header">
-<th style="text-align: center;" data-quarto-table-cell-role="th">Jahr</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Bezirk-Nr.</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Einwohner</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Dichte (Einw./km²)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">2000</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">18228.9</td>
-<td style="text-align: center;">5761.902</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">2024</td>
-<td style="text-align: center;">25</td>
-<td style="text-align: center;">57116.0</td>
-<td style="text-align: center;">10805.000</td>
+<td style="text-align: left;">2000</td>
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">Wegzug (Innen)</td>
+<td style="text-align: left;">Nichtdeutsch</td>
+<td style="text-align: left;">747</td>
+<td style="text-align: left;">35263.3</td>
+<td style="text-align: left;">5761.902</td>
 </tr>
 </tbody>
 </table>
@@ -249,11 +235,11 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <caption>Wanderungsmatrix (pro Jahr)</caption>
 <thead>
 <tr class="header">
-<th style="text-align: center;">von.nach</th>
-<th style="text-align: center;">X1</th>
-<th style="text-align: center;">X2</th>
+<th style="text-align: center;">von/nach</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
 <th style="text-align: center;">…</th>
-<th style="text-align: center;">X25</th>
+<th style="text-align: center;">25</th>
 </tr>
 </thead>
 <tbody>
@@ -397,7 +383,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 </section>
 <section id="zusammenfassung" class="slide level2">
 <h2>Zusammenfassung</h2>
-<p><strong>Limitation</strong>: Daten basieren auf 2 Datasets ab Jahr 2000 und Wanderungsmatrizen ab 2005</p>
+<p><strong>Limitation</strong>: Datensatz ab Jahr 2000 vs Wanderungsmatrizen ab 2005</p>
 <ol type="1">
 <li><p>Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs.&nbsp;Nichtdeutsch)</p></li>
 <li><p>Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs.&nbsp;Außen)</p></li>
@@ -407,14 +393,14 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <section id="zusammenfassung-1" class="slide level2">
 <h2>Zusammenfassung</h2>
 <ol type="1">
-<li><p><strong>Deutsch</strong>: Stabil, leichter Abwärtstrend <br> <strong>Nichtdeutsch</strong>: hohe Volatilität, leichter Aufwärtstrend</p></li>
+<li><p><strong>Deutsch</strong>: Stabil, insgesamt leichter Abwärtstrend <br> <strong>Nichtdeutsch</strong>: hohe Volatilität, insgesamt leichter Aufwärtstrend</p></li>
 <li><p><strong>Insgesamt</strong> stetige Abwanderung bei Peripherie, Stagnation bei Zentrum und Innenstadt-Rand Innenstadt-Rand haben sich <strong>relativ gleichmäßig verteilt</strong>, aber Zentrum und Peripherie <strong>bleiben ca. zur Hälfte im Bezirk</strong></p></li>
 <li><p><strong>Insgesamt</strong> flächendeckender Anstieg der Einwohner pro <span class="math inline">\(km^2\)</span></p></li>
 </ol>
 </section>
 <section id="ausblick" class="slide level2">
 <h2>Ausblick</h2>
-<p>Aktuelle Projekte und Vorhaben:</p>
+<p>Aktuelle Projekte zu Bevölkerungsentwicklung:</p>
 <ul>
 <li><p><strong>Freiham</strong>: neuer Stadtteil für über 25.000 Menschen</p></li>
 <li><p><strong>Neufreimann</strong>: 5.500 Wohnungen für 15.000 Menschen</p></li>

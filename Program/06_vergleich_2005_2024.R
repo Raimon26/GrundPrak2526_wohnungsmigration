@@ -21,9 +21,29 @@ karte_alle_jahre_temp <- karte_sauber_temp %>%
 karte_vergleich_daten <- karte_alle_jahre_temp %>% 
   filter(jahr %in% c(2000, 2024))
 
+# DIFFERENZ BERECHNEN (Außerhalb des Plots für sauberen Code)
+differenz_daten <- indikatoren_dichte %>%
+  filter(jahr %in% c(2000, 2024)) %>%
+  select(von_bezirk, jahr, dichte) %>%
+  tidyr::pivot_wider(names_from = jahr, names_prefix = "d", values_from = dichte) %>%
+  mutate(
+    diff_wert = d2024 - d2000,
+    label_text = paste0(ifelse(diff_wert > 0, "+", ""), round(diff_wert, 0))
+  )
+
 # 4. PLOT ERSTELLEN
 plot_vergleich <- ggplot(karte_vergleich_daten) +
-  geom_sf(aes(fill = as.numeric(dichte)), color = "white", linewidth = 0.2) + # <-- LA CORRECCIÓN ESTÁ AQUÍ
+  geom_sf(aes(fill = as.numeric(dichte)), color = "white", linewidth = 0.2) +
+  geom_sf_text(
+    data = karte_vergleich_daten %>% 
+      dplyr::filter(jahr == 2024) %>% 
+      dplyr::left_join(differenz_daten, by = c("bezirk_nr" = "von_bezirk")), 
+    aes(label = label_text), 
+    size = 2.0,
+    color = "cyan",
+    fontface = "bold",
+    check_overlap = FALSE
+  ) +
   facet_wrap(~jahr) + 
   scale_fill_viridis_c(
     option = "magma", 
@@ -34,11 +54,16 @@ plot_vergleich <- ggplot(karte_vergleich_daten) +
   ) +
   theme_void() +
   labs(
-    title = "Verdichtung der Stadt München (2000 vs. 2024)",
-    subtitle = "Vergleich der Bevölkerungsdichte (Einw./km²)",
+    title = "Vergleich der Bevölkerungsdichte (Einw./km²)",
     fill = "Dichte"
   ) +
   theme(
+    plot.title = element_text(
+      size = 16, 
+      face = "bold", 
+      hjust = 0.5,
+      margin = margin(b = 10)
+    ),
     legend.position = "bottom",
     strip.text = element_text(size = 14, face = "bold")
   )
@@ -70,8 +95,7 @@ plot_bezirkstypen <- ggplot(karte_mit_daten_temp2) +
   
   theme_void() +
   labs(
-    title = "Strukturelle Gliederung der Münchner Stadtbezirke",
-    subtitle = "Räumliche Kategorisierung für die Mobilitäts- und Dichteanalyse",
+    title = "Räumliche Kategorisierung für die Mobilitäts- und Dichteanalyse",
     fill = "Bezirkstyp"
   ) +
   theme(

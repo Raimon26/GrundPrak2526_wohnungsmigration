@@ -61,7 +61,7 @@ plot_sankey_final <- ggplot(data = fluesse_typ,
   
   # Text für die Blöcke (Wieder nur die sauberen Namen, ohne Fake-Prozente)
   geom_text(stat = "stratum", aes(label = after_stat(stratum)), 
-            color = "white", fontface = "bold", size = 4) +
+            color = "white", fontface = "bold", size = 3) +
   
   # Achsenbeschriftungen
   scale_x_discrete(limits = c("Herkunft (Von)", "Ziel (Nach)"), expand = c(0.15, 0.05)) +
@@ -76,7 +76,7 @@ plot_sankey_final <- ggplot(data = fluesse_typ,
     fill = "Herkunftsregion"
   ) +
   theme(
-    legend.position = "bottom",
+    legend.position = "none",
     plot.title = element_text(face = "bold", size = 16),
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank()
