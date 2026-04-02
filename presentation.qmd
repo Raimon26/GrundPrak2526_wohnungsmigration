@@ -73,7 +73,9 @@ df_long_sketch <- data.frame(
   `Dichte (Einw./km²)` = c(10805.000, 29304.904, "...", 5761.902),
   check.names = FALSE
 )
-kable(df_long_sketch)
+kable(df_long_sketch, 
+      align = "c", 
+      caption = "Datensatz")
 ```
 
 ## Datenüberblick
@@ -86,10 +88,10 @@ library(dplyr)
 #beispielhafte Matrix-Struktur
 matrix_skizze <- data.frame(
   `von/nach` = c("Bezirk 1", "Bezirk 2", "...", "Bezirk 25"),
-  `1` = c("262", "145", "...", "47"),
-  `2` = c("179", "1078", "...", "162"),
+  `Bezirk 1` = c("262", "145", "...", "47"),
+  `Bezirk 2` = c("179", "1078", "...", "162"),
   `...` = c("...", "...", "...", "..."),
-  `25` = c("47", "162", "...", "3825"),
+  `Bezirk 25` = c("47", "162", "...", "3825"),
   check.names = FALSE
 )
 
