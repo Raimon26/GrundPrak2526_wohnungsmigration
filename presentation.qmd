@@ -75,7 +75,7 @@ df_long_sketch <- data.frame(
 )
 kable(df_long_sketch, 
       align = "c", 
-      caption = "Datensatz")
+      caption = "Datensatz (gejoint und vereinfacht)")
 ```
 
 ## Datenüberblick
