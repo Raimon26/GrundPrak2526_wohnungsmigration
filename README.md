@@ -1,130 +1,40 @@
-# GrundPrak2526_wohnungsmigration
+# 📊 Wohnungsmigration in München (2000-2024): Eine explorative Datenanalyse (EDA)
 
-# 📊 Migration in München - Datenanalyse
+## 🎯 Über das Projekt
+Dieses Projekt ist eine umfassende **explorative Datenanalyse (EDA)** der demografischen Entwicklung und Migrationsströme in München über einen Zeitraum von fast 25 Jahren. 
 
-## 🛠️ Nutzung (How to run)
-Bevor Analysen oder Grafiken erstellt werden, muss immer das Skript `env_setup.R` im Hauptverzeichnis ausgeführt werden. (oder source("env_setup.R") aufrufen!)
-Dieses Skript:
-1. Installiert und lädt alle benötigten Pakete (tidyverse, readr, etc.).
-2. Lädt automatisch die sauberen, aufbereiteten Datensätze (`.rds`) aus dem `Data/`-Ordner in das R-Environment.
+Im Fokus der Untersuchung standen exakt drei Kernfragen:
+1. **Zuzüge & Umzüge als Markt-Proxy:** Wie entwickeln sich Zu- und Umzüge in die 25 Stadtbezirke (als Proxy für neu abgeschlossene Mietverhältnisse)? Dabei wurde strikt zwischen Deutschen und Nicht-Deutschen unterschieden, um demografische Ausreißer sichtbar zu machen.
+2. **Abwanderungsdynamik:** Wie entwickeln sich die Wegzüge aus den 25 Stadtbezirken über die Zeit, differenziert nach Bewegungen *innerhalb* und *außerhalb* der Stadtgrenzen?
+3. **Wachstum & Dichte:** Wie stellen sich die generelle Bevölkerungsentwicklung und die Veränderung der Bevölkerungsdichte (Einwohner pro km²) in den einzelnen Bezirken dar?
 
-## 📂 Ordnerstruktur
-* **`Data/`**: Enthält die rohen Excel-/CSV-Dateien des Rathauses sowie die sauberen `.rds`-Dateien (Tidy Data).
-* **`Output/`**: Speicherort für die finalen, hochauflösenden Präsentations-Grafiken (.png).
-* **`env_setup.R`**: Das Herzstück für den Datenimport. (s.o.)
-* **`01_datenbereinigung.R`**: Skript zur Bereinigung der 22 Rohdateien (NAs behandeln, fehlerhafte Summen korrigieren, Pivotierung).
-* **`02_feature_engineering.R`**: Skript zur Kategorisierung der 25 Stadtbezirke (Zentrum/Peripherie, Dichte-Kategorien, Himmelsrichtungen).
-* **`03_eda_tabellen.R`**: Explorative Datenanalyse (EDA) zur ersten Auswertung von Basis-Statistiken und visuellen Identifikation von Ausreißern (Vergleich von 3 verschiedenen Gruppierungen via Boxplots).
-* **`04_geodaten_vorbereitung.R`**: Bereinigung des GeoJSON-Kartenmaterials von München und Verknüpfung (Join) mit unseren sauberen Dichte-Daten für räumliche Visualisierungen (Choropleth Maps).
-* **`05_visualisierungen_final.R`**: Finale Generierung und automatischer Export der Zeitreihen-Plots und der Choropleth Maps mittels ggplot2.
+Dieses Projekt entstand im Rahmen des "Grundlegenden Praxisprojekts" an der LMU (Betreuung: Christina Sauer) von:
+**Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang.**
 
-## 📖 Daten-Wörterbuch (Data Dictionary)
-Um Missverständnisse bei der Analyse zu vermeiden, hier die Definition der wichtigsten Variablen in unseren sauberen Datensätzen:
-* `zuzuege_aussen`: Personen, die von außerhalb Münchens in einen Bezirk gezogen sind.
-* `umzuege_innen`: Personen, die von einem anderen Münchner Bezirk in diesen Bezirk gezogen sind.
-* `wegzuege_aussen`: Personen, die den Bezirk verlassen haben und ganz aus München weggezogen sind.
-* `wegzuege_innen`: Personen, die den Bezirk verlassen haben, aber innerhalb Münchens geblieben sind.
-* `dichte`: Bevölkerungsdichte (Einwohner pro Quadratkilometer).
-* `bezirk_typ`: Geografische/Strukturelle Klassifizierung des Bezirks (Zentrum, Innenstadt-Rand, Peripherie).
-* `dichte_kategorie`: Einteilung der Bezirke in tertiäre Gruppen basierend auf der Bevölkerungsdichte (Geringe, Mittlere, Hohe Dichte).
-* `himmelsrichtung`: Geografische Lage des Bezirks (Nord, Süd, Ost, West, Mitte).
+## 📂 Datenbasis
+Die Analyse stützt sich auf zwei Hauptdatenquellen der Stadt München:
+* **Mobilitäts- und Dichte-Indikatoren (2000–2024):** Generelle Mobilitätsströme sowie die Bevölkerungsdichte für die 25 Münchner Stadtbezirke.
+* **Wechselmatrizen der Binnenmigration (2005–2024):** 20 Origin-Destination-Matrizen (Excel), die exakt aufschlüsseln, wie viele Personen zwischen den spezifischen Bezirken umgezogen sind.
 
----
+## 🛠️ Tech Stack & Methodik (EDA)
+Das Projekt wurde vollständig in **R** umgesetzt, mit einem starken Fokus auf robuste Datenaufbereitung und aussagekräftige Visualisierung (DataViz), ohne Rückgriff auf prädiktive Modelle:
+* **Data Wrangling:** `dplyr`, `tidyr`, `readxl` (Zusammenführung von Excel-Kreuztabellen, Transformation von Wide- zu Long-Formaten).
+* **Feature Engineering:** Methodische Kategorisierung der 25 Bezirke in Strukturtypen (*Zentrum, Innenstadt-Rand, Peripherie*) zur Reduktion von Verzerrungen durch Ausreißer.
+* **Geodatenverarbeitung:** `sf` (Einlesen von GeoJSON-Polygonen für Choropleth-Karten).
+* **Advanced DataViz:** `ggplot2`, `ggalluvial` (Sankey-Diagramme für absolute Binnenströme, 100% Stacked Bar Charts für relative Verteilungen, Facet-Time-Series).
 
-## 🚀 Projektrollen & Verantwortlichkeiten
-### Grundlegendes Praxisprojekt: Migration in München
+## 📈 Key Insights
+Aus der deskriptiven Analyse ergaben sich folgende konsistente Trends:
+* **Nationalität als Differenzierungsfaktor:** Die Zuzüge deutscher Staatsangehöriger weisen ein stabiles, leicht degressives Niveau auf, während die Migration nicht-deutscher Staatsangehöriger hohe Volatilität mit einem insgesamt steigenden Trend zeigt.
+* **Suburbanisierung & Binnenmigration:** Es zeigt sich eine stetige Abwanderungstendenz aus dem Zentrum in die Peripherie. Gleichzeitig zeigt die EDA, dass etwa die Hälfte der Bewohner des Zentrums und der Peripherie bei einem Umzug im eigenen Bezirkstyp bleibt.
+* **Flächendeckende Verdichtung:** Die Bevölkerungsdichte ist über den gesamten Untersuchungszeitraum in nahezu allen 25 Stadtbezirken kontinuierlich gestiegen.
 
-🛠️ 1. Data Wrangler (Daten-Aufbereiter)
-**Mission**: Die Rohdaten bändigen. Das ist die Person, die sich mit NAs und Datumsformaten herumschlägt und dafür sorgt, dass die Struktur stimmt.
-
-**Verantwortung**: Das Skript schreiben, das die Originaldaten einliest und einen sauberen Data Frame ausspuckt. Dieses Skript muss mit einem Klick durchlaufen. Falls die 25 Stadtbezirke in Kategorien eingeteilt werden müssen, erstellt diese Person die entsprechenden Variablen.
-
-🎨 2. Lead Data Visualization (Visueller Architekt)
-**Mission**: Die sauberen Daten in visuelle Geschichten übersetzen. Diese Person sollte von Tuftes Prinzipien besessen sein (Maximierung der Data-Ink-Ratio).
-
-**Verantwortung**: Grafiken entwerfen, die keine Defaults verwenden. Achsen anpassen, barrierefreie Farbpaletten wählen und sicherstellen, dass der Code die Grafiken exakt so generiert, wie sie in die finale Präsentation kommen.
-
-⚖️ 3. Quality Assurance & Methodology (Statistik-Prüfer)
-**Mission**: Den Advocatus Diaboli spielen. Stellt sicher, dass wir aus rein beobachtenden Daten keine kausalen Schlüsse ziehen.
-
-**Verantwortung**: Überprüft die Korrektheit der statistischen Berechnungen, achtet auf konsistente Definitionen (z. B. "Zu- und Umzüge") und ist hauptverantwortlich für das Verfassen des Executive Summarys.
-
-🗣️ 4. Project Manager & Storyteller (Sprecher:in)
-**Mission**: Das Schiff pünktlich in den Hafen bringen und dafür sorgen, dass die Story Sinn ergibt.
-
-**Verantwortung**: Offizieller Kontakt zu den Betreuern. Pflegt das GitHub-Repository und den Zeitplan. Orchestriert die Präsentation, wählt die finalen Grafiken aus und verhindert überladene Folien (Wimmelbilder).
-
-⚠️ Wichtiger Hinweis: Auch wenn wir die Hauptaufgaben so aufteilen, müssen wir alle vier den gesamten Prozess kennen und mündlich präsentieren. Diese Aufteilung dient nur dazu, dass wir uns beim Code nicht in die Quere kommen und klare Verantwortlichkeiten haben.
-
----
-
-# 🛤️ Kritischer Pfad & Paralleles Arbeiten (Migration in München)
-## Phase 1: Die parallele Basisarbeit (Tag 1–4)
-**Ziel: Niemand wartet auf den anderen. Alle bereiten ihre Baustellen vor.**
-
-🧹 Heinz (Data Wrangling): * Dateien: Die 22 Rohdateien + env_setup.R
-
-Bändigt die 22 Rohdateien in R. Startet mit dem env_setup.R, um die Pakete zu laden.
-
-Baut das Skript, das alles einliest, NAs behandelt und das fertige Tidy-Dataframe ausspuckt. (Wichtig: .RData und .Rhistory sofort löschen oder ins .gitignore packen!)
-
-🧮 Harry (Methodik & QA): * Dateien: Codebook / Metadaten der Stadt München.
-
-Arbeitet sich in das Codebook der Stadt ein.
-
-Legt mathematisch fest: Wie definieren wir einen „Ausreißer“ bei den Zu- und Umzügen? (z.B. Interquartilsabstand, Standardabweichung?).
-
-Formuliert den theoretischen Ansatz für die 3 Fragestellungen (ohne Kausalität!).
-
-🎨 Christian (Data Viz): * Dateien: customstyle.css + presentation.html (als Vorschau).
-
-Öffnet RStudio und programmiert theme_munich() mit Dummy-Daten (z.B. iris oder mtcars).
-
-Passt die customstyle.css an und legt Farben (barrierefrei), Schriftgrößen und Achsen-Stile nach Tufte fest. Wenn die echten Daten kommen, müssen wir sie nur noch in dieses fertige Theme einstecken.
-
-🗣️ Dennis (Team Lead & Orga): * Dateien: presentation.qmd + Executive Summary - KoCo19 Kinder.pdf (als Vorlage).
-
-Recherchiert den inhaltlichen Hintergrund: Zeitungsartikel/Reports zum Münchner Mietmarkt (Warum ziehen die Leute nicht mehr um?).
-
-Baut die Grundstruktur in der presentation.qmd auf und nutzt das PDF-Beispiel, um das Layout für das Executive Summary vorzubereiten.
-
-🚩 MEILENSTEIN 1: Der "Clean Dataframe" steht. Heinz übergibt die sauberen Daten an das Team.
-
-## Phase 2: Analyse & Visualisierung (Tag 5–8)
-**Ziel: Die echten Daten werden durch die vorbereiteten Schablonen gejagt.**
-
-🧮 Harry & 🧹 Heinz: * Wenden Harrys Formeln auf Heinz' Daten an. Identifizieren die tatsächlichen Ausreißer und checken die Plausibilität (Können diese Zahlen stimmen?).
-
-🎨 Christian & 🗣️ Dennis: * Dateien: presentation.qmd
-
-Tauschen die Dummy-Daten gegen die echten Daten aus.
-
-Erstellen die 3-4 Hauptgrafiken für die Präsentation (ohne Defaults, absolut clean).
-
-Dennis beginnt, die Ergebnisse in die Story der .qmd-Präsentation (max. 15 Folien) einzubauen.
-
-🚩 MEILENSTEIN 2: Alle Grafiken und statistischen Berechnungen sind final und fehlerfrei.
-
-## Phase 3: Storytelling & Dokumentation (Tag 9–13)
-**Ziel: Das Produkt wird abgabefertig gemacht.**
-
-🎨 Christian: Schreibt den Text für das 1-seitige Executive Summary (orientiert sich strikt an der Executive Summary - KoCo19 Kinder.pdf Vorlage).
-
-🗣️ Dennis: Baut die finalen Folien in Quarto zusammen und glättet die Übergänge.
-
-🧮 Harry: Macht den "Bullshit-Check" auf den Folien (Haben wir irgendwo "signifikant" geschrieben, wo es nicht stimmt? Behaupten wir Kausalität?).
-
-🧹 Heinz: Der ultimative Reproduzierbarkeits-Check. Environment leeren, auf "Run All" klicken und schauen, ob der Code von den 22 Rohdaten über die env_setup.R bis zur fertigen presentation.qmd durchläuft.
-
-🚩 MEILENSTEIN 3: Slides und Summary sind fertig. Keine Änderungen mehr am Code.
-
-## Phase 4: Proben (Tag 14–15)
-**Ziel: Präsentationstechnik optimieren.**
-
-Alle (Heinz, Harry, Christian, Dennis):
-
-Generalprobe 1 (Fokus: Inhalt und Übergänge).
-
-Generalprobe 2 (Fokus: Zeitlimit von 15–20 Minuten exakt treffen).
-
-Frei sprechen ohne Notizen!
+## 🏗️ Projektstruktur
+* `env_setup.R`: Dependency-Management.
+* `01_data_wrangling.R`: Automatisierter Daten-Import und Bereinigung.
+* `02_feature_engineering.R`: Zuweisung von Geografie- und Struktur-Features.
+* `03_eda_tabellen.R`: Explorative Basis-Analyse (Ausreißer via IQR-Methode).
+* `04_geodaten_vorbereitung.R`: Bereinigung der Geometrien.
+* `05_visualisierungen_final.R`: Erstellung der Hauptgrafiken (Zeitreihen, Karten).
+* `06_vergleich_2005_2024.R`: Statischer Vorher/Nachher-Vergleich der Dichte.
+* `07_binnenmigration_sankey.R`: Flussvisualisierung der Binnenmigration.
