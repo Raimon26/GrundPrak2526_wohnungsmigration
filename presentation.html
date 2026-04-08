@@ -165,14 +165,25 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
-<caption>Säule 1: Mobilität</caption>
+<caption>Datensatz (gejoint und vereinfacht)</caption>
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 9%">
+<col style="width: 15%">
+<col style="width: 23%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Jahr</th>
 <th style="text-align: center;">Bezirk</th>
 <th style="text-align: center;">Bewegung</th>
-<th style="text-align: center;">Nationalität</th>
+<th style="text-align: center;">Ausprägung</th>
 <th style="text-align: center;">Anzahl</th>
+<th style="text-align: center;">Bevölkerung</th>
+<th style="text-align: center;">Dichte (Einw./km²)</th>
 </tr>
 </thead>
 <tbody>
@@ -182,6 +193,8 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <td style="text-align: center;">Zuzug (Außen)</td>
 <td style="text-align: center;">Deutsch</td>
 <td style="text-align: center;">811</td>
+<td style="text-align: center;">15549.8</td>
+<td style="text-align: center;">10805</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">2023</td>
@@ -189,8 +202,12 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <td style="text-align: center;">Zuzug (Außen)</td>
 <td style="text-align: center;">Nichtdeutsch</td>
 <td style="text-align: center;">1011</td>
+<td style="text-align: center;">48527.4</td>
+<td style="text-align: center;">29304.904</td>
 </tr>
 <tr class="odd">
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
 <td style="text-align: center;">…</td>
 <td style="text-align: center;">…</td>
 <td style="text-align: center;">…</td>
@@ -203,6 +220,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <td style="text-align: center;">Wegzug (Innen)</td>
 <td style="text-align: center;">Nichtdeutsch</td>
 <td style="text-align: center;">747</td>
+<<<<<<< HEAD
 </tr>
 </tbody>
 </table>
@@ -223,13 +241,10 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <td style="text-align: center;">2000</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">18228.9</td>
+=======
+<td style="text-align: center;">35263.3</td>
+>>>>>>> d6447562c7f3de056362244544bd02cae4a7cc78
 <td style="text-align: center;">5761.902</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">2024</td>
-<td style="text-align: center;">25</td>
-<td style="text-align: center;">57116.0</td>
-<td style="text-align: center;">10805.000</td>
 </tr>
 </tbody>
 </table>
@@ -244,11 +259,11 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <caption>Wanderungsmatrix (pro Jahr)</caption>
 <thead>
 <tr class="header">
-<th style="text-align: center;">von.nach</th>
-<th style="text-align: center;">X1</th>
-<th style="text-align: center;">X2</th>
+<th style="text-align: center;">von/nach</th>
+<th style="text-align: center;">Bezirk 1</th>
+<th style="text-align: center;">Bezirk 2</th>
 <th style="text-align: center;">…</th>
-<th style="text-align: center;">X25</th>
+<th style="text-align: center;">Bezirk 25</th>
 </tr>
 </thead>
 <tbody>
@@ -392,7 +407,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 </section>
 <section id="zusammenfassung" class="slide level2">
 <h2>Zusammenfassung</h2>
-<p><strong>Limitation</strong>: Daten basieren auf 2 Datasets ab Jahr 2000 und Wanderungsmatrizen ab 2005</p>
+<p><strong>Limitation</strong>: Datensatz ab Jahr 2000 vs Wanderungsmatrizen ab 2005</p>
 <ol type="1">
 <li><p>Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs.&nbsp;Nichtdeutsch)</p></li>
 <li><p>Entwicklung der Wegzüge der 25 Münchner Stadtbezirke (Innen vs.&nbsp;Außen)</p></li>
@@ -402,14 +417,14 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
 <section id="zusammenfassung-1" class="slide level2">
 <h2>Zusammenfassung</h2>
 <ol type="1">
-<li><p><strong>Deutsch</strong>: Stabil, leichter Abwärtstrend <br> <strong>Nichtdeutsch</strong>: hohe Volatilität, leicht Aufwärtstrend</p></li>
+<li><p><strong>Deutsch</strong>: Stabil, insgesamt leichter Abwärtstrend <br> <strong>Nichtdeutsch</strong>: hohe Volatilität, insgesamt leichter Aufwärtstrend</p></li>
 <li><p><strong>Insgesamt</strong> stetige Abwanderung bei Peripherie, Stagnation bei Zentrum und Innenstadt-Rand Innenstadt-Rand haben sich <strong>relativ gleichmäßig verteilt</strong>, aber Zentrum und Peripherie <strong>bleiben ca. zur Hälfte im Bezirk</strong></p></li>
 <li><p><strong>Insgesamt</strong> flächendeckender Anstieg der Einwohner pro <span class="math inline">\(km^2\)</span></p></li>
 </ol>
 </section>
 <section id="ausblick" class="slide level2">
 <h2>Ausblick</h2>
-<p>Aktuelle Projekte und Vorhaben:</p>
+<p>Aktuelle Projekte zu Bevölkerungsentwicklung:</p>
 <ul>
 <li><p><strong>Freiham</strong>: neuer Stadtteil für über 25.000 Menschen</p></li>
 <li><p><strong>Neufreimann</strong>: 5.500 Wohnungen für 15.000 Menschen</p></li>
@@ -441,7 +456,7 @@ Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="Output/PresentationBilder/LMU_Logo.svg" class="slide-logo"></p>
 <div class="footer footer-default">
-
+<p>Grundlegendes Praxisprojekt</p>
 </div>
 </div></div>
 

@@ -5,6 +5,7 @@ author: "Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang"
 format:
    revealjs:
      theme: [default, customstyle.css]
+     footer: Grundlegendes Praxisprojekt
      title-slide-attributes:
       data-background-image: "Output/PresentationBilder/lmu_siegel.jpg"
       data-background-size: cover
@@ -61,34 +62,20 @@ source("Program/07_binnenmigration_sankey.R")
 library(knitr)
 library(dplyr)
 
-# Wir bilden genau die Struktur ab, die du gerade gepostet hast
+# Datensatz durch ein simples Dataframe darstellen
 df_long_sketch <- data.frame(
   Jahr = c(2024, 2023, "...", 2000),
   Bezirk = c(1, 2, "...", 25),
   Bewegung = c("Zuzug (Außen)", "Zuzug (Außen)", "...", "Wegzug (Innen)"),
-  Nationalität = c("Deutsch", "Nichtdeutsch", "...", "Nichtdeutsch"),
-  Anzahl = c(811, 1011, "...", 747)
+  Ausprägung = c("Deutsch", "Nichtdeutsch", "...", "Nichtdeutsch"),
+  Anzahl = c(811, 1011, "...", 747),
+  Bevölkerung = c(15549.8, 48527.4, "...", 35263.3),
+  `Dichte (Einw./km²)` = c(10805.000, 29304.904, "...", 5761.902),
+  check.names = FALSE
 )
-
-# Schöne Darstellung für Quarto
 kable(df_long_sketch, 
       align = "c", 
-      caption = "Säule 1: Mobilität")
-
-# --- 2. DATENSATZ: DICHTE ---
-daten_preview_dichte <- indikatoren_dichte %>%
-  dplyr::select(jahr, von_bezirk, einwohner, dichte)
-
-dichte_ends <- dplyr::bind_rows(head(daten_preview_dichte, 1), tail(daten_preview_dichte, 1))
-
-knitr::kable(
-  dichte_ends, 
-  col.names = c("Jahr", "Bezirk-Nr.", "Einwohner", "Dichte (Einw./km²)"),
-  caption = "Säule 2: Bevölkerungsdichte (Auszug)",
-  format = "html",
-  align = "c" 
-)
-
+      caption = "Datensatz (gejoint und vereinfacht)")
 ```
 
 ## Datenüberblick
@@ -98,16 +85,17 @@ knitr::kable(
 library(knitr)
 library(dplyr)
 
-# Erstelle eine beispielhafte Matrix-Struktur
+#beispielhafte Matrix-Struktur
 matrix_skizze <- data.frame(
   `von/nach` = c("Bezirk 1", "Bezirk 2", "...", "Bezirk 25"),
-  `1` = c("262", "145", "...", "47"),
-  `2` = c("179", "1078", "...", "162"),
+  `Bezirk 1` = c("262", "145", "...", "47"),
+  `Bezirk 2` = c("179", "1078", "...", "162"),
   `...` = c("...", "...", "...", "..."),
-  `25` = c("47", "162", "...", "3825")
+  `Bezirk 25` = c("47", "162", "...", "3825"),
+  check.names = FALSE
 )
 
-# Schöne HTML-Tabelle für die Folie
+# HTML-Tabelle für die Folie
 kable(matrix_skizze, 
       align = "c", 
       caption = "Wanderungsmatrix (pro Jahr)")
@@ -235,7 +223,6 @@ plot_dichte
 ```
 
 ## Bevölkerungsentwicklung
-
 ```{r plot_vergleich, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 
 plot_vergleich
@@ -254,7 +241,7 @@ plot_vergleich
 
 ## Zusammenfassung
 
-**Limitation**: Daten basieren auf 2 Datasets ab Jahr 2000 und Wanderungsmatrizen ab 2005
+**Limitation**: Datensatz ab Jahr 2000 vs Wanderungsmatrizen ab 2005
 
 1.  Entwicklung der Zuzüge der 25 Münchner Stadtbezirke (Deutsch vs. Nichtdeutsch)
 
@@ -264,7 +251,7 @@ plot_vergleich
 
 ## Zusammenfassung
 
-1. **Deutsch**: Stabil, leichter Abwärtstrend <br> **Nichtdeutsch**: hohe Volatilität, leicht Aufwärtstrend
+1. **Deutsch**: Stabil, insgesamt leichter Abwärtstrend <br> **Nichtdeutsch**: hohe Volatilität, insgesamt leichter Aufwärtstrend
 
 2. **Insgesamt** stetige Abwanderung bei Peripherie, Stagnation bei Zentrum und Innenstadt-Rand
 Innenstadt-Rand haben sich **relativ gleichmäßig verteilt**, aber
@@ -274,7 +261,7 @@ Zentrum und Peripherie **bleiben ca. zur Hälfte im Bezirk**
 
 ## Ausblick
 
-Aktuelle Projekte und Vorhaben:
+Aktuelle Projekte zu Bevölkerungsentwicklung:
 
 -   **Freiham**: neuer Stadtteil für über 25.000 Menschen
 
