@@ -33,7 +33,7 @@ boxplot_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_au
   geom_boxplot(alpha = 0.7) +
   scale_fill_viridis_d(option = "D", end = 0.8) +
   theme_minimal() +
-  labs(title = "Zuzüge (insgesamt) nach Bezirkstyp", y = "Zuzüge", x = "") +
+  labs(title = "Zuzüge (von außen) nach Bezirkstyp", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
 # 2. Boxplot nach Dichte-Kategorie (Vorschlag der Betreuerin)
@@ -47,14 +47,14 @@ indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
 boxplot_dichte <- ggplot(indikatoren_mobilitaet, aes(x = dichte_kategorie, y = zuzuege_aussen_insgesamt)) +
   geom_boxplot(fill = "lightgrey", alpha = 0.7) +
   theme_minimal() +
-  labs(title = "Zuzüge nach Bevölkerungsdichte", y = "Zuzüge", x = "") +
+  labs(title = "Zuzüge (von außen) nach Bevölkerungsdichte", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
 # 3. Boxplot nach Himmelsrichtung (Nord/Süd/Ost/West/Mitte)
 boxplot_himmel <- ggplot(indikatoren_mobilitaet, aes(x = himmelsrichtung, y = zuzuege_aussen_insgesamt)) +
   geom_boxplot(fill = "lightgrey", alpha = 0.7) +
   theme_minimal() +
-  labs(title = "Zuzüge nach Himmelsrichtung", y = "Zuzüge", x = "") +
+  labs(title = "Zuzüge (von außen) nach Himmelsrichtung", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
 
@@ -67,24 +67,24 @@ print(boxplot_himmel)
 # Umzüge
 # 1. Boxplot nach Zentrum/Peripherie (Unser Original)
 boxplot_typ_um <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = umzuege_innen_insgesamt, fill = bezirk_typ)) +
-  geom_boxplot(alpha = 0.7) +
-  scale_fill_viridis_d(option = "D") +
+  geom_boxplot(alpha = 0.7,) +
+  scale_fill_viridis_d(option = "D", end = 0.8) +
   theme_minimal() +
-  labs(title = "Umzüge nach Bezirkstyp (Zentrum vs. Peripherie)", y = "Umzüge", x = "") +
+  labs(title = "Zuzüge (von innen) nach Bezirkstyp", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
 # 2. Boxplot nach Dichte-Kategorie (Vorschlag der Betreuerin)
 boxplot_dichte_um <- ggplot(indikatoren_mobilitaet, aes(x = dichte_kategorie, y = umzuege_innen_insgesamt)) +
   geom_boxplot(fill = "lightgrey", alpha = 0.7) +
   theme_minimal() +
-  labs(title = "Umzüge nach Bevölkerungsdichte", y = "Umzüge", x = "") +
+  labs(title = "Zuzüge (von innen) nach Bevölkerungsdichte", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
 # 3. Boxplot nach Himmelsrichtung (Nord/Süd/Ost/West/Mitte)
 boxplot_himmel_um <- ggplot(indikatoren_mobilitaet, aes(x = himmelsrichtung, y = umzuege_innen_insgesamt)) +
   geom_boxplot(fill = "lightgrey", alpha = 0.7) +
   theme_minimal() +
-  labs(title = "Umzüge nach Himmelsrichtung", y = "Umzüge", x = "") +
+  labs(title = "Zuzüge (von innen) nach Himmelsrichtung", y = "Zuzüge", x = "") +
   theme(legend.position = "none")
 
 # Zeige alle drei an
