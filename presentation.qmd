@@ -22,10 +22,11 @@ editor: visual
 #| message: false
 #| warning: false
 
+source("Program/03_eda_tabellen.R")
 source("Program/05_visualisierungen_final.R")
 source("Program/06_vergleich_2005_2024.R")
-source("Program/03_eda_tabellen.R")
 source("Program/07_binnenmigration_sankey.R")
+source("Program/08_dichte_boxplots_vergleich.R")
 ```
 
 ## Fragen unserer Analyse
@@ -299,5 +300,9 @@ boxplot_himmel_um
 plot_sankey_final
 ```
 
+## Anhang
+```{r plot_dichte_boxplot, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=10, fig.height=5, fig.dpi=300}
+plot_dichte_boxplot
+```
 
 
