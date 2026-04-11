@@ -38,3 +38,18 @@ Aus der deskriptiven Analyse ergaben sich folgende konsistente Trends:
 * `05_visualisierungen_final.R`: Erstellung der Hauptgrafiken (Zeitreihen, Karten).
 * `06_vergleich_2005_2024.R`: Statischer Vorher/Nachher-Vergleich der Dichte.
 * `07_binnenmigration_sankey.R`: Flussvisualisierung der Binnenmigration.
+
+## 🚀 How To Run
+
+Dieses Projekt ist auf Reproduzierbarkeit ausgelegt. Um die gesamte Analyse lokal auszuführen und alle Visualisierungen zu generieren, gehen Sie wie folgt vor:
+
+**1. Repository klonen oder herunterladen:**
+Laden Sie das Repository als ZIP herunter und entpacken Sie es, oder klonen Sie es via Git.
+
+**2. R-Projekt öffnen:**
+Öffnen Sie die Datei `GrundPrak2526_wohnungsmigration.Rproj` in RStudio. Dies stellt sicher, dass das korrekte Working Directory ("Root") gesetzt ist.
+
+**3. Environment & Dependencies einrichten:**
+Führen Sie als Erstes das Setup-Skript aus, um alle benötigten Pakete zu überprüfen und ggf. zu installieren:
+```R
+source("env_setup.R")
