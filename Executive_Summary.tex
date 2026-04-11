@@ -1,0 +1,45 @@
+\documentclass[11pt,a4paper]{article}
+
+% Paquetes de idioma y codificación
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+% Diseño de página (Márgenes ajustados para ganar espacio vertical)
+\usepackage[left=2.5cm, right=2.5cm, top=2.2cm, bottom=2.2cm]{geometry}
+\usepackage{parskip} % Separación entre párrafos sin sangría
+\usepackage{titlesec} % Formato de títulos
+
+% Ajuste de espacios en los títulos para que respiren un poco más
+\titlespacing*{\section}{0pt}{*2.5}{*1.2}
+\titlespacing*{\subsection}{0pt}{*1.8}{*0.8}
+
+\begin{document}
+
+\noindent\textbf{Heinz Calderón, Christian Lex, Dennis Ley, Haoyang Yang} \hfill \textbf{31.03.2026}
+
+\vspace{1em} % Espacio extra para separar el encabezado del título
+
+\section*{Executive Summary: Wohnungsmigration in München (2000-2024)}
+
+Dieses Projekt untersucht die demografische Entwicklung und die Binnenmigrationsströme der Stadt München über einen Zeitraum von fast 25 Jahren. Die Analyse stützt sich auf Mobilitäts- und Dichte-Indikatoren sowie auf Origin-Destination-Wechselmatrizen, die detailliert die Umzüge zwischen den 25 Stadtbezirken abbilden.
+
+\subsection*{Fragestellungen}
+Die Untersuchung fokussiert sich auf drei Kernaspekte: (i) die zeitliche Entwicklung der Zuzüge und Umzüge (als Proxy für neu abgeschlossene Mietverhältnisse), differenziert nach Nationalität zur Sichtbarmachung spezifischer Ausreißer im Ansiedlungsmuster; (ii) die Abwanderungsdynamik (Wegzüge) innerhalb und außerhalb des Stadtgebiets; sowie (iii) die flächendeckende Veränderung der Bevölkerungsdichte (Einwohner pro km$^2$).
+
+\subsection*{Problematik und Methodik}
+Die Datenaufbereitung erforderte die Integration von 20 jährlichen Wechselmatrizen in ein prozessierbares Long-Format. Eine methodische Herausforderung stellten Datenlücken bei der Siedlungsdichte dar: Während die Mobilitätsdaten ab dem Jahr 2000 vorliegen, wurden die Dichtewerte für die Jahre 2000–2002 durch Rückrechnungen auf Basis konstanter Flächenwerte rekonstruiert.
+
+Um eine fundierte räumliche Analyse zu gewährleisten, wurden verschiedene Gruppierungsansätze (u.a. Himmelsrichtungen und Dichtekategorien) evaluiert. Die finale Entscheidung fiel auf die Einteilung nach \textbf{Stadtstrukturtypen} (Zentrum, Innenstadt-Rand, Peripherie), da diese die sozialräumliche Dynamik Münchens am präzisesten abbildet und strukturelle Trends klar isoliert.
+
+\subsection*{Ergebnisse}
+
+\textbf{(i) Zuzüge und Ausreißer:} Bei deutschen Staatsangehörigen zeigt sich ein stabiles, leicht degressives Niveau. Im Gegensatz dazu weist die nicht-deutsche Migration eine hohe Volatilität bei steigendem Zuzugsniveau auf. Diese Differenzierung identifizierte signifikante Ausreißer (z.B. Schwabing-Freimann/Bayernkaserne oder Obersendling), die massiv durch externe Faktoren geprägt sind. \vspace{0.4em} \\
+\textbf{(ii) Wegzüge und Binnenmigration:} Relative Stacked-Bar-Charts zeigen ein klares Bild der Suburbanisierung aus dem Zentrum in die Peripherie. Ergänzende Sankey-Diagramme im Anhang verdeutlichen das absolute Volumen: Rund die Hälfte der Umziehenden aus Zentrum und Peripherie verbleibt innerhalb ihres jeweiligen Bezirkstyps, was auf eine starke Bindung an den Wohnraum-Typus schließen lässt. \vspace{0.4em} \\
+\textbf{(iii) Dichteentwicklung:} Es ist ein flächendeckender, stetiger Anstieg der Einwohner pro km$^2$ über den gesamten Untersuchungszeitraum in nahezu allen Bezirken festzustellen.
+
+\subsection*{Limitationen und Ausblick}
+
+Methodisch muss berücksichtigt werden, dass die detaillierten Wechselmatrizen der Binnenmigration erst ab 2005 zur Verfügung stehen. Der Ausblick auf Großprojekte wie Freiham oder den Münchner Nordosten unterstreicht die Notwendigkeit dieser Analysen, um den Herausforderungen des angespannten Immobilienmarktes (steigende Baukosten, Zinsen, Fachkräftemangel) zu begegnen.
+
+\end{document}
