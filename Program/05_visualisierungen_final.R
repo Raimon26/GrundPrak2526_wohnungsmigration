@@ -98,7 +98,7 @@ plot_zuzuege_highlight <- plot_zuzuege +
             label = "Schwabing-\nFreimann", color = "darkred", fontface = "bold", vjust = 1.75, 
             hjust = 0.2, size = 3) +
   labs(
-    title = "Zuzüge nach München (2000-2024)",
+    title = "Entwicklung der Zuzüge nach München (2000-2024)",
 )
 
 print(plot_zuzuege_highlight)
@@ -125,7 +125,7 @@ plot_umzuege_highlight <- plot_umzuege +
             label = "Schwabing-\nFreimann", color = "darkred", fontface = "bold", vjust = 0,
             hjust = 0, size = 3) +
   labs(
-    title = "Zuzüge innerhalb Münchens (2000-2024)"
+    title = "Entwicklung der Zuzüge innerhalb Münchens (2000-2024)"
   )
 
 print(plot_umzuege_highlight)
@@ -327,7 +327,7 @@ print(plot_karte)
 # --- BILDER EXPORTIEREN ---
 
 # ==============================================================================
-# 8. PLOTS SPEICHERN (In der von Harry gewünschten Reihenfolge)
+# 8. PLOTS SPEICHERN 
 # ==============================================================================
 
 dir.create("Output", showWarnings = FALSE)
