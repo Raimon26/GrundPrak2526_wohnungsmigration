@@ -1,4 +1,4 @@
-# --- 05_visualisierungen_final.R ---
+#  05_visualisierungen_final.R 
 source("env_setup.R")
 library(dplyr)
 library(tidyr)
@@ -8,7 +8,7 @@ library(scales)
 library(sf)
 
 
-# Wir nutzen unser erstelltes Long-Format!
+# Wir nutzen unser erstelltes Long-Format
 mobilitaet_long_plot <- readRDS("Data/indikatoren_mobilitaet_long_plot.rds")
 
 # Faktor-Variable erstellen für die richtige Anordung in der Legende
@@ -17,8 +17,6 @@ indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
   mutate(bezirk_typ = factor(bezirk_typ, 
                              levels = c("Zentrum", "Innenstadt-Rand", "Peripherie")))
 
-# WICHTIG: Falls du indikatoren_mobil_long schon erstellt hast, 
-# musst du es dort ebenfalls machen oder das Long-Format neu erstellen.
 mobilitaet_long_plot <- mobilitaet_long_plot %>%
   mutate(bezirk_typ = factor(bezirk_typ, 
                              levels = c("Zentrum", "Innenstadt-Rand", "Peripherie")))
@@ -29,19 +27,17 @@ indikatoren_dichte <- indikatoren_dichte %>%
   
 
 
-# 1 & 2. ZEITREIHEN: ZU- UND UMZÜGE (Facet nach Nationalität)
+# 1 & 2 ZEITREIHEN: ZU- UND UMZÜGE (Facet nach Nationalität)
 
 plot_zuzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "zuzuege_aussen"), 
                        aes(x = jahr, y = anzahl_personen)) +
-  # Die 25 Bezirke als graue, leicht transparente Linien im Hintergrund
   geom_line(aes(group = von_bezirk), color = "grey80", alpha = 0.5, linewidth = 0.5) +
-  # Die Durchschnittswerte pro Bezirkstyp als dicke farbige Linien
   stat_summary(aes(color = bezirk_typ), fun = mean, geom = "line", linewidth = 1.2) +
-  facet_wrap(~nationalitaet) + # scales = "free_y" (zum Einzoomen) setzen!
+  facet_wrap(~nationalitaet) + # scales = "free_y" (zum Vergrößern) setzen
   theme_minimal() +
   scale_color_viridis_d(option = "D", end = 0.8) +
   
-  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  # Anfangs- und Endjahr 
   scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   labs(
@@ -56,15 +52,13 @@ print(plot_zuzuege)
 
 plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_innen"), 
                        aes(x = jahr, y = anzahl_personen)) +
-  # Die 25 Bezirke als graue, leicht transparente Linien im Hintergrund
   geom_line(aes(group = von_bezirk), color = "grey80", alpha = 0.5, linewidth = 0.5) +
-  # Die Durchschnittswerte pro Bezirkstyp als dicke farbige Linien
   stat_summary(aes(color = bezirk_typ), fun = mean, geom = "line", linewidth = 1.2) +
-  facet_wrap(~nationalitaet) + # scales = "free_y" (zum Einzoomen) setzen!
+  facet_wrap(~nationalitaet) + # scales = "free_y" (zum Vergrößern) setzen
   theme_minimal() +
   scale_color_viridis_d(option = "D", end = 0.8) +
   
-  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  # Anfangs- und Endjahr
   scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   labs(
@@ -77,15 +71,15 @@ plot_umzuege <- ggplot(mobilitaet_long_plot %>% filter(bewegungsart == "umzuege_
 
 print(plot_umzuege)
 
-# --- HIGHLIGHT-VERSION MIT DIREKTEN LABELS (Der "Direct Labeling" Trick) ---
+#  Plots mit sichtbaren Ausreißern der Zuzüge
 
 plot_zuzuege_highlight <- plot_zuzuege +
-  # Bezirk 12 (Schwabing-Freimann / Bayernkaserne) in Dunkelrot
+  # Bezirk 12 (Schwabing-Freimann / Bayernkaserne)
   geom_line(data = mobilitaet_long_plot %>% 
               filter(bewegungsart == "zuzuege_aussen", von_bezirk == 12), 
             aes(group = von_bezirk), color = "darkred", linewidth = 0.5) +
   
-  # Bezirk 19 (Obersendling / Alte EAE) in Schwarz
+  # Bezirk 19 (Obersendling / Alte Erstaufnahmeeinrichtung)
   geom_line(data = mobilitaet_long_plot %>% 
               filter(bewegungsart == "zuzuege_aussen", von_bezirk == 19), 
             aes(group = von_bezirk), color = "black", linewidth = 0.5) +
@@ -103,20 +97,20 @@ plot_zuzuege_highlight <- plot_zuzuege +
 
 print(plot_zuzuege_highlight)
 
-# --- HIGHLIGHT-VERSION FÜR UMZÜGE (Der "Direct Labeling" Trick) ---
+#  Plots mit sichtbaren Ausreißern der Umzüge
 
 plot_umzuege_highlight <- plot_umzuege +
-  # Bezirk 12 (Schwabing-Freimann / Bayernkaserne) in Dunkelrot
+  # Bezirk 12 (Schwabing-Freimann / Bayernkaserne)
   geom_line(data = mobilitaet_long_plot %>% 
               filter(bewegungsart == "umzuege_innen", von_bezirk == 12), 
             aes(group = von_bezirk), color = "darkred", linewidth = 0.5) +
   
-  # Bezirk 19 (Obersendling / Alte EAE) in Schwarz
+  # Bezirk 19 (Obersendling / Alte Erstaufnahmeeinrichtung)
   geom_line(data = mobilitaet_long_plot %>% 
               filter(bewegungsart == "umzuege_innen", von_bezirk == 19), 
             aes(group = von_bezirk), color = "black", linewidth = 0.5) +
   
-  # Achtung: Y-Koordinaten an die Umzüge-Skala (max ~8000) angepasst!
+  # Anpassung der Umzüge-Skala (max ~8000)
   geom_text(data = data.frame(jahr = 2011, anzahl_personen = 5000, nationalitaet = "Nichtdeutsch"),
             label = "Obersendling", color = "black", fontface = "bold", vjust = 0, 
             hjust = 0, size = 3) +
@@ -131,8 +125,7 @@ plot_umzuege_highlight <- plot_umzuege +
 print(plot_umzuege_highlight)
 
 
-# --- FREE_Y VERSIONEN ERSTELLEN (Der "Zoom-In" Effekt) ---
-# Wir nehmen den fertigen Plot und überschreiben nur den Facet-Wrap!
+#  FREE_Y VERSIONEN ERSTELLEN  
 
 plot_zuzuege_free <- plot_zuzuege + 
   facet_wrap(~nationalitaet, scales = "free_y") 
@@ -141,7 +134,7 @@ plot_umzuege_free <- plot_umzuege +
   facet_wrap(~nationalitaet, scales = "free_y")
 
   
-# 3. BOXPLOT: Verteilung der Zuzüge (Zentrum vs. Peripherie)
+# 3. BOXPLOT: Verteilung der Zuzüge (nach Bezirkstyp)
 plot_zuzuege_typ <- ggplot(indikatoren_mobilitaet, aes(x = bezirk_typ, y = zuzuege_aussen_insgesamt, fill = bezirk_typ)) +
   geom_boxplot(alpha = 0.8, outlier.color = "red", outlier.size = 2) +
   theme_minimal() +
@@ -324,7 +317,7 @@ print(plot_karte)
 
 
 
-# --- BILDER EXPORTIEREN ---
+#  BILDER EXPORTIEREN 
 
 # ==============================================================================
 # 8. PLOTS SPEICHERN 

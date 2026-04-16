@@ -12,7 +12,7 @@ karte_sauber <- karte_muenchen %>%
   group_by(bezirk_nr, sb_name) %>%
   summarise(geometry = st_union(geometry), .groups = "drop")
 
-# Daten für die Karte filtern (Wir nehmen das Jahr 2024 als Basis für die Karte, die Aktuellste) 
+# Daten für die Karte filtern (2024) 
 dichte_2024 <- indikatoren_dichte %>%
   filter(jahr == 2024)
 
@@ -21,5 +21,5 @@ karte_mit_daten <- karte_sauber %>%
 
 saveRDS(karte_mit_daten, "Data/muenchen_karte_fertig.rds")
 
-message("Geodaten erfolgreich bereinigt (25 Bezirke) und gespeichert!")
+message("Geodaten erfolgreich bereinigt (25 Bezirke) und gespeichert")
 
