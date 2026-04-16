@@ -11,7 +11,7 @@ excel_pfade <- list.files(path = "Data/Exceldateien Jahrbuch",
 # 2. Saubere Spaltennamen definieren
 saubere_namen <- c("von_bezirk", paste0("nach_bezirk_", 1:25), "muenchen_gesamt")
 
-# 3. Alle Dateien im "Staubsauger"-Modus einlesen (col_names = FALSE)
+# 3. Alle Dateien einlesen (col_names = FALSE)
 umzuege_gesamt <- excel_pfade %>%
   set_names() %>% 
   map_dfr(~ read_excel(.x, 
@@ -39,60 +39,53 @@ umzuege_clean <- umzuege_gesamt %>%
   mutate(muenchen_gesamt = rowSums(pick(starts_with("nach")))) %>% # 6. Spalten sinnvoll anordnen
   select(jahr, von_bezirk, starts_with("nach"), muenchen_gesamt)
 
-# Das finale, saubere Meisterwerk betrachten!
 glimpse(umzuege_clean) 
 
 
-# 6. Datensätze von Dichte und Mobilität bereinigen
+# Datensätze von Dichte und Mobilität
 
 glimpse(bevoelkerungsdichte)
 glimpse(mobilitaetsziffer)
 
 
-# NEU
-# ==============================================================================
 # 6. DATEN BEREINIGEN UND ZUSAMMENFÜHREN (2000-2024)
-# ==============================================================================
 
-# --- 6.1. Mobilität und Nationalität (Jetzt ab dem Jahr 2000!) ---
+#  6.1. Mobilität und Nationalität 
 
-# Wir laden die Rohdaten und retten die Einwohnerzahl (Basiswert.5)
+# Wir laden die Rohdaten und die Einwohnerzahl (Basiswert.5)
 mobilitaet_roh <- mobilitaetsziffer %>%
   mutate(
     jahr = Jahr,
     von_bezirk = as.numeric(str_extract(Raumbezug, "^\\d{2}"))
   ) %>%
-  # ÄNDERUNG 1: Wir öffnen das Zeitfenster bis 2000
   filter(!is.na(von_bezirk), jahr >= 2000) %>%
   rename(
     zuzuege_aussen = Basiswert.1,  
     umzuege_innen = Basiswert.2,   
     wegzuege_aussen = Basiswert.3, 
     wegzuege_innen = Basiswert.4,
-    einwohner_mob = Basiswert.5    # ÄNDERUNG 2: Wir retten die Bevölkerung!
+    einwohner_mob = Basiswert.5    
   ) %>%
   select(jahr, von_bezirk, Ausprägung, zuzuege_aussen, umzuege_innen, wegzuege_aussen, wegzuege_innen, einwohner_mob)
-
-# Einwohner für die verlorenen Jahre 2000-2004 isolieren (Für den Dichte-Trick)
+# Für einen sauberen Übergang zwischen den zwei Datensätzen ist 2002 bis 2004
+# einbezogen
 pop_2000_2004 <- mobilitaet_roh %>%
   filter(Ausprägung == "insgesamt", jahr >= 2000, jahr <= 2004) %>%
   select(jahr, von_bezirk, einwohner = einwohner_mob)
 
-# Den originalen mobilitaet_clean für deinen Pivot vorbereiten 
-# (Wir werfen einwohner_mob hier weg, damit dein restlicher Code 1:1 funktioniert)
 mobilitaet_clean <- mobilitaet_roh %>%
   select(-einwohner_mob)
 
-# DIE MAGIE: Daten vom Long- ins Wide-Format transformieren (Pivot)
+# Daten vom Long- ins Wide-Format transformieren (Pivot)
 indikatoren_mobilitaet <- mobilitaet_clean %>%
   pivot_wider(
     names_from = Ausprägung, 
     values_from = c(zuzuege_aussen, umzuege_innen, wegzuege_aussen, wegzuege_innen)
   )
 
-# --- 6.2. Bevölkerungsdichte (Der Flächen-Trick für 2000-2004) ---
+#  6.2. Bevölkerungsdichte (2000-2004) 
 
-# 1. Die sicheren Dichte-Daten ab 2005 (wie in deinem originalen Code)
+# 1. Die sicheren Dichte-Daten ab 2005
 dichte_ab_2005 <- bevoelkerungsdichte %>%
   mutate(
     jahr = Jahr,
@@ -103,19 +96,19 @@ dichte_ab_2005 <- bevoelkerungsdichte %>%
   filter(Ausprägung == "insgesamt", !is.na(von_bezirk), jahr >= 2005) %>%
   select(jahr, von_bezirk, dichte, einwohner)
 
-# 2. Konstante Fläche berechnen (Fläche = Einwohner / Dichte, basierend auf dem Jahr 2005)
+# 2. Konstante Fläche berechnen 
 flaeche_konstant <- dichte_ab_2005 %>%
   filter(jahr == 2005) %>%
   mutate(flaeche = einwohner / dichte) %>%
   select(von_bezirk, flaeche)
 
-# 3. Dichte für 2000-2004 berechnen (Dichte = Einwohner aus Mobilität / Konstante Fläche)
+# 3. Dichte für 2000-2004 berechnen
 dichte_2000_2004 <- pop_2000_2004 %>%
   left_join(flaeche_konstant, by = "von_bezirk") %>%
   mutate(dichte = einwohner / flaeche) %>%
   select(jahr, von_bezirk, dichte, einwohner)
 
-# 4. Die rekonstruierten Jahre (2000-2004) mit den ab 2005er Daten verschmelzen
+# 4. Daten zusammenführen
 indikatoren_dichte <- bind_rows(dichte_2000_2004, dichte_ab_2005) %>%
   arrange(von_bezirk, jahr)
 
@@ -128,5 +121,3 @@ write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 
 # Mobilität nach Nationalität (Für Forschungsfragen 1 und 2)
 write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
-
-# probe <- umzuege_clean |> select(-jahr, -von_bezirk,-muenchen_gesamt) |> mutate(hola = rowSums(across(everything())))

@@ -26,7 +26,7 @@ indikatoren_dichte <- indikatoren_dichte %>%
 indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
   mutate(bezirk_typ = kategorisiere_bezirk(von_bezirk))
 
-# Die angereicherten Datensätze speichern (überschreibt die alten Dateien im Data-Ordner)
+# Die angereicherten Datensätze speichern
 write_rds(umzuege_clean, "Data/umzuege_clean.rds")
 write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
 write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
@@ -34,7 +34,7 @@ write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 message("Feature Engineering abgeschlossen: Die Kategorie 'bezirk_typ' wurde in alle Datensätze integriert!")
 
 
-#Kleine Checks zur Überprüfung der Funktionalität unserer Datensätze
+# Kleine Checks zur Überprüfung der Funktionalität unserer Datensätze
 # 1. Irgendein Jahr ausserhalb unseres Ranges? (Sollte zw. 2000 und 2024)
 range(indikatoren_dichte$jahr)
 
@@ -56,10 +56,8 @@ sum(is.na(indikatoren_mobilitaet))
 umzuege_clean |> filter(if_any(everything(), is.na)) |> select(jahr, von_bezirk)
 
 
-# Dataset für Christian (gleiche Daten, aber in Long Format)
 
-# Wir filtern die "insgesamt" Spalten raus, da Chris nur deutsch/nichtdeutsch 
-# für sein facet_wrap braucht.
+# Filterung für Nationalität
 indikatoren_mobilitaet_long_plot <- indikatoren_mobilitaet %>%
   select(jahr, von_bezirk, bezirk_typ, matches("_(deutsch|nichtdeutsch)$")) %>%
   pivot_longer(
@@ -68,16 +66,15 @@ indikatoren_mobilitaet_long_plot <- indikatoren_mobilitaet %>%
     names_pattern = "(.*)_(deutsch|nichtdeutsch)",
     values_to = "anzahl_personen"
   ) %>%
-  # Kleine Kosmetik: Namen schöner machen für die Plot-Titel
   mutate(
     nationalitaet = str_to_title(nationalitaet)
   )
 
 saveRDS(indikatoren_mobilitaet_long_plot, "Data/indikatoren_mobilitaet_long_plot.rds")
 
-message("Datensatz für Christians facet_wrap erfolgreich als .rds gespeichert!")
+message("Datensatz facet_wrap erfolgreich als .rds gespeichert")
 
-# Neue Gruppierung: Wir teilen die Bezirke basierend auf ihrer Dichte in 3 gleich große Gruppen auf
+# Gruppierung der Bezirke nach Dichte
 
 indikatoren_dichte <- indikatoren_dichte %>%
   group_by(jahr) %>%
@@ -92,7 +89,7 @@ indikatoren_dichte <- indikatoren_dichte %>%
   ) %>%
   ungroup() %>% select(-dichte_level)
 
-# Neue Gruppierung: Himmelsrichtungen (Norden, Süden, Osten, Westen, Mitte) ---
+# Gruppierung der Himmelsrichtungen (Norden, Süden, Osten, Westen, Mitte) ---
 
 indikatoren_dichte <- indikatoren_dichte %>%
   mutate(
@@ -111,21 +108,18 @@ indikatoren_dichte <- indikatoren_dichte %>%
     )
   )
 
-# indikatoren_dichte |> filter(himmelsrichtung == "Unbekannt")
-
 
 # Übertragung der neuen Features auf die Mobilitätsdaten
 
 indikatoren_mobilitaet <- indikatoren_mobilitaet %>%
   left_join(
-    # Wir 'selecten' nur die Keys und die neuen Features, um keine doppelten Spalten zu erzeugen
     indikatoren_dichte %>% select(jahr, von_bezirk, dichte_kategorie, himmelsrichtung), 
     by = c("jahr", "von_bezirk")
   )
 
 glimpse(indikatoren_mobilitaet)
 
-# Überschreiben BEIDER Master-Dateien
+# Überschreiben beider Dateien
 write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
 
