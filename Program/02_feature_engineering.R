@@ -1,5 +1,4 @@
 # Skript 02: Features
-# Ziel: Hinzufügen von geografischen und strukturellen Kategorien zu den Bezirken
 
 # Arbeitsumgebung laden (Lädt Pakete und die 3 sauberen Datensätze)
 source("env_setup.R")
