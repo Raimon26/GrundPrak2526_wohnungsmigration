@@ -13,7 +13,7 @@ format:
      transition: slide
      slide-number: c
      logo: "Output/PresentationBilder/LMU_Logo.svg"
-     
+     embed-resources: true
 editor: visual
 ---
 
@@ -171,7 +171,6 @@ plot_umzuege
 plot_umzuege_highlight
 ```
 
-
 ## Agenda
 
 1.  [Datenüberblick]{style="opacity: 0.25;"}
@@ -196,7 +195,6 @@ plot_wegzuege
 
 plot_bar_relativ
 ```
-
 
 ## Agenda
 
@@ -224,6 +222,7 @@ plot_dichte
 ```
 
 ## Bevölkerungsentwicklung
+
 ```{r plot_vergleich, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 
 plot_vergleich
@@ -252,13 +251,11 @@ plot_vergleich
 
 ## Zusammenfassung
 
-1. **Deutsch**: Stabil, insgesamt leichter Abwärtstrend <br> **Nichtdeutsch**: hohe Volatilität, insgesamt leichter Aufwärtstrend
+1.  **Deutsch**: Stabil, insgesamt leichter Abwärtstrend <br> **Nichtdeutsch**: hohe Volatilität, insgesamt leichter Aufwärtstrend
 
-2. **Insgesamt** stetige Abwanderung bei Peripherie, Stagnation bei Zentrum und Innenstadt-Rand
-Innenstadt-Rand haben sich **relativ gleichmäßig verteilt**, aber
-Zentrum und Peripherie **bleiben ca. zur Hälfte im Bezirk**
+2.  **Insgesamt** stetige Abwanderung bei Peripherie, Stagnation bei Zentrum und Innenstadt-Rand Innenstadt-Rand haben sich **relativ gleichmäßig verteilt**, aber Zentrum und Peripherie **bleiben ca. zur Hälfte im Bezirk**
 
-3. **Insgesamt** flächendeckender Anstieg der Einwohner pro $km^2$
+3.  **Insgesamt** flächendeckender Anstieg der Einwohner pro $km^2$
 
 ## Ausblick
 
@@ -282,7 +279,6 @@ Quelle: [muenchen.de](https://stadt.muenchen.de/rathaus/projekte/stadtplanung.ht
 boxplot_typ_um
 ```
 
-
 ## Anhang
 
 ```{r boxplot_dichte_um, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
@@ -296,13 +292,13 @@ boxplot_himmel_um
 ```
 
 ## Anhang
+
 ```{r plot_sankey_final, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=7, fig.height=4,fig.dpi=300}
 plot_sankey_final
 ```
 
 ## Anhang
+
 ```{r plot_dichte_boxplot, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.width=10, fig.height=5, fig.dpi=300}
 plot_dichte_boxplot
 ```
-
-
