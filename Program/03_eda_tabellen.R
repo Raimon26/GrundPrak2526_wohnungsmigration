@@ -1,4 +1,4 @@
-# 03_eda_tabellen.R
+# Skript 03: EDA
 # Ziel: Explorative Datenanalyse (EDA) und Vorbereitung der Ausreißer-Erkennung
 
 #  1. Arbeitsumgebung laden 

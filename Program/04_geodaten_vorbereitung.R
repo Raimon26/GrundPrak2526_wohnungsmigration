@@ -1,4 +1,4 @@
-# 04_geodaten_vorbereitung.R
+# Skript 04: Geodaten
 # Ziel: Karte von München bereinigen und mit unseren Dichte-Daten verknüpfen
 source("env_setup.R")
 library(sf)

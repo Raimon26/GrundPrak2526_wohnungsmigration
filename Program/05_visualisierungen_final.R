@@ -1,4 +1,4 @@
-#  05_visualisierungen_final.R 
+# Skript 05: Visualisierungen
 source("env_setup.R")
 library(dplyr)
 library(tidyr)
@@ -162,7 +162,6 @@ ausreisser_tabelle <- indikatoren_mobilitaet %>%
   select(jahr, von_bezirk, bezirk_typ, zuzuege_aussen_insgesamt) %>%
   arrange(desc(zuzuege_aussen_insgesamt))
 
-# Print der Tabelle zur Kontrolle
 print(ausreisser_tabelle)
 
 
@@ -197,7 +196,7 @@ plot_wegzuege <- ggplot(
   theme_minimal() +
   scale_color_viridis_d(option = "D", end = 0.8) +
   
-  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  # Anfangs- und Endjahr
   scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   labs(
@@ -213,11 +212,10 @@ print(plot_wegzuege)
 
 
 
-# NEU!!
-# 5. Relative BEVÖLKERUNGSENTWICKLUNG über die ZEIT (Chris)
+# 5. Relative Bevölkerungsentwicklung über die Zeit
 
 
-# Index berechnen: Jeder Bezirk startet bei 100 im Jahr 2000
+# Index berechnen: Jeder Bezirk startet bei Jahr 2000 als Basis
 indikatoren_index <- indikatoren_dichte %>%
   group_by(von_bezirk) %>%
   mutate(
@@ -246,10 +244,10 @@ plot_entwicklung_index <- ggplot() +
             aes(x = jahr, y = BEV_INDEX_AVG, color = bezirk_typ), 
             linewidth = 1.2) +
   
-  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  # Anfangs- und Endjahr
   scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
-  # Y-Achse: Start bei 100 (Basisjahr)
+  # Y-Achse: Start bei Basisjahr
   scale_y_continuous(labels = label_number(suffix =  "%")) +
   
   theme_minimal() +
@@ -264,9 +262,7 @@ plot_entwicklung_index <- ggplot() +
 
 print(plot_entwicklung_index)
 
-
-# NEU!! 
-# 6. BEVÖLKERUNGSDICHTE über die Zeit(Chris)
+# 6. Bevlölkerungsdichte über die Zeit
 # 
 # Daten aggregieren für die Durchschnittslinien der Dichte
 typ_dichte_summary <- indikatoren_dichte %>%
@@ -284,7 +280,7 @@ plot_dichte <- ggplot() +
             linewidth = 1.2) +
   theme_minimal() +
   
-  # Anfangs- und Endjahr, sonst 5er Jahres-Schritte auf der Skala 
+  # Anfangs- und Endjahr 
   scale_x_continuous(breaks = c(seq(2000, 2024, by = 5), 2024), limits = c(2000, 2024)) +
   
   scale_color_viridis_d(option = "D", end = 0.8) +
@@ -303,7 +299,6 @@ karte_mit_daten <- readRDS("Data/muenchen_karte_fertig.rds")
 
 plot_karte <- ggplot(karte_mit_daten) +
   geom_sf(aes(fill = dichte), color = "white", linewidth = 0.3) +
-  # Eine schöne Farbpalette wählen (viridis ist perfekt für Dichte)
   scale_fill_viridis_c(option = "magma", direction = -1) + 
   theme_void() +
   labs(
@@ -315,9 +310,6 @@ plot_karte <- ggplot(karte_mit_daten) +
 print(plot_karte)
 
 
-
-
-#  BILDER EXPORTIEREN 
 
 # ==============================================================================
 # 8. PLOTS SPEICHERN 
@@ -345,14 +337,14 @@ ggsave("Output/03_boxplot_zuzuege_typ.png", plot = plot_zuzuege_typ, width = 8, 
 # 4. Wegzüge
 ggsave("Output/04_zeitreihe_wegzuege.png", plot = plot_wegzuege, width = 12, height = 6, dpi = 300, bg = "white")
 
-# 5. Relative Bevölkerungsentwicklung über die Zeit (Chris - Vorübergehend deaktiviert)
+# 5. Relative Bevölkerungsentwicklung über die Zeit
 ggsave("Output/05_bevoelkerungsentwicklung.png", plot = plot_entwicklung_index, width = 10, height = 6, dpi = 300, bg = "white")
 
-# 6. Bevölkerungsdichte (Chris - Vorübergehend deaktiviert)
+# 6. Bevölkerungsdichte
 ggsave("Output/06_bevoelkerungsdichte.png", plot = plot_dichte, width = 10, height = 6, dpi = 300, bg = "white")
 
 # 7. Choropleth Map
 ggsave("Output/07_karte_dichte_2024.png", plot = plot_karte, width = 10, height = 6, dpi = 300, bg = "white")
 
-message("Alle bereiten Plots wurden im Ordner 'Output' gespeichert.")
+message("Alle bereiten Plots wurden im Ordner 'Output' gespeichert")
 
