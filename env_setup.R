@@ -1,23 +1,20 @@
 ### env_setup.R ###
-# WICHTIG: Führe dieses Skript immer als Erstes aus, bevor du an deinen Analysen arbeitest.
-# Am besten direkt oben in deinem Skript mit: source("env_setup.R")
-# Es installiert fehlende Pakete automatisch, lädt sie und importiert unsere sauberen Datensätze.
+# WICHTIG: Führe dieses Skript immer als Erstes aus
 
-# 1. Benötigte Pakete definieren
-# TEAM-INFO: Wenn du für deine Grafiken oder Modelle neue Pakete brauchst (z.B. "leaflet", "sf"), 
-# füge sie einfach hier in diese Liste ein und mache einen Commit!
+# 1. Benötigte Pakete 
+
 packages <- c(
-  "tidyverse",  # Datenmanipulation und ggplot2
-  "readxl",     # Excel-Import
-  "readr",      # RDS- und CSV-Import
-  "sf",         # NEU: Für Geodaten und Karten!
+  "tidyverse",  
+  "readxl",
+  "readr",
+  "sf",        
   "dplyr",
   "tidyr",
   "scales",
   "ggalluvial"
 )
 
-# 2. Pakete automatisch installieren (falls nötig) und laden
+# 2. Pakete automatisch installieren
 for (pkg in packages) {
   if (!require(pkg, character.only = TRUE)) {
     install.packages(pkg)
@@ -25,7 +22,7 @@ for (pkg in packages) {
   }
 }
 
-# Dies lädt automatisch alle .rds Dateien aus dem Ordner "Data/" in unser Environment.
+# Dies lädt automatisch alle .rds Dateien aus dem Ordner "Data/" in Environment.
 
 folder_path <- "Data/"
 rds_files <- list.files(path = folder_path, pattern = "\\.rds$", full.names = TRUE, ignore.case = TRUE)
@@ -40,4 +37,4 @@ for (file in rds_files) {
 
 
 # Erfolgsmeldung in der Konsole ausgeben
-message("Environment erfolgreich eingerichtet! Alle Pakete und sauberen Daten sind geladen. Viel Spaß beim Analysieren!")
+message("Environment erfolgreich eingerichtet! Alle Pakete und sauberen Daten sind geladen.")

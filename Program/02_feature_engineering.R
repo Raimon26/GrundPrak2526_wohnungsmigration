@@ -30,7 +30,7 @@ write_rds(umzuege_clean, "Data/umzuege_clean.rds")
 write_rds(indikatoren_mobilitaet, "Data/indikatoren_mobilitaet.rds")
 write_rds(indikatoren_dichte, "Data/indikatoren_dichte.rds")
 
-message("Feature Engineering abgeschlossen: Die Kategorie 'bezirk_typ' wurde in alle Datensätze integriert!")
+message("Feature Engineering abgeschlossen: Die Kategorie 'bezirk_typ' wurde in alle Datensätze integriert")
 
 
 # Kleine Checks zur Überprüfung der Funktionalität unserer Datensätze

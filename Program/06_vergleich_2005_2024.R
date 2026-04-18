@@ -71,7 +71,7 @@ print(plot_vergleich)
 ggsave("Output/07_karte_vergleich_2000_2024.png", plot = plot_vergleich, 
        width = 12, height = 6, dpi = 300, bg = "white")
 
-message("Der statische Vergleich 2000 vs 2024 liegt im Output-Ordner. Deine 04_Variablen blieben unangetastet!")
+message("Der statische Vergleich 2000 vs 2024 liegt im Output-Ordner.")
 
 
 # 2. CHOROPLETH-KARTE: Bezirkstypen (Zentrum, Innenstadt-Rand, Peripherie)
